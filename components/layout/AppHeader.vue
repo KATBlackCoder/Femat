@@ -28,7 +28,7 @@
         <!-- Right side: Language switcher and mobile menu -->
         <div class="flex items-center space-x-2">
           <LanguageSwitcher />
-
+          <ColorModeButton /> 
           <!-- Mobile menu button -->
           <UButton
             variant="ghost"
@@ -64,6 +64,7 @@
 <script setup lang="ts">
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher.vue";
 import NavigationMenu from "@/components/navigation/NavigationMenu.vue";
+import ColorModeButton from "@/components/layout/ColorModeButton.vue";
 
 const isMobileMenuOpen = ref(false);
 

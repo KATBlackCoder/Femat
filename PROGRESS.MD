@@ -5,17 +5,24 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 **Project Start Date**: January 27, 2025  
 **Current Status**: Phase 1 Complete ✅  
-**Overall Progress**: 15% Complete (1 of 7 phases)
+**Overall Progress**: 15% Complete (1 of 8 phases)
 
 ## Recent UI & Architecture Improvements
 - Extracted Hero, Features, and CTA sections into their own components for better modularity and reuse.
 - Created a Nuxt UI-based `NavigationMenu` component using `<UNavigationMenu>` for idiomatic navigation.
 - Improved `AppHeader.vue` to use Nuxt UI components and patterns.
 - Created a modern, user-friendly error page using Nuxt UI components (`UCard`, `UIcon`, `UButton`).
+- Created content structure and initial markdown files for about, contact, news highlights, and quick links in the content/ directory as the first step of Phase 2.
+- Added NewsHighlightsSection and QuickLinksSection components, and integrated them into the homepage to display content from markdown files as part of Phase 2.
+- Created a modular `CarouselSection.vue` component in `components/layout/` for image galleries, supporting dynamic titles and image arrays via props.
+- Utilized `<NuxtImg>` for responsive, optimized images in the carousel.
+- Integrated two CarouselSection components side by side on the homepage, sourcing images from the assets directory using Nuxt Image.
 
 ## Recent Technical Fixes
 - Renamed the `locales` directory to `i18n` for clarity and convention.
 - Removed `langDir` from `nuxt.config.ts` to resolve i18n locale file resolution issues with @nuxtjs/i18n.
+- **Added a new phase for internationalization (i18n) and localization after the community features phase. All i18n-related tasks are now consolidated in this phase. Roadmap, TODO, and changelog updated accordingly.**
+- **Phase 2 static pages are now implemented as Vue/Nuxt components only (no Nuxt Content/Markdown). Nuxt Content and content modeling are now introduced in Phase 3. Roadmap, TODO, and changelog updated to reflect this change.**
 
 ---
 
@@ -47,23 +54,19 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 2: Core Content & Static Pages (PENDING)
-**Estimated Duration**: 2-3 days  
-**Status**: 🔄 READY TO START  
+## 📋 Phase 2: Core Content & Static Pages (COMPLETED)
+**Duration**: 2-3 days  
+**Status**: ✅ COMPLETED
 
-### Planned Tasks:
-- [ ] Content modeling for basic pages
-- [ ] Homepage enhancements
-- [ ] About FEMAT page (`/about`)
-- [ ] Contact Us page (`/contact`)
-- [ ] Complete internationalization for all content
-- [ ] Enhanced SEO implementation
+### Completed Tasks:
+- [x] Static pages (about, contact) as Vue/Nuxt components only (no Nuxt Content/Markdown)
+- [x] Homepage with hero, features, carousels, and CTA sections, all styled with Nuxt UI components
+- [x] Initial SEO meta tags (title, description) for all static pages
 
 ### Target Deliverables:
-- Static pages with rich content
-- Complete French/English translations
-- Contact forms and information
-- Enhanced SEO metadata
+- Static pages with rich content (Vue/Nuxt components)
+- Homepage with hero, features, carousels, and CTA
+- Enhanced SEO metadata for all static pages
 
 ---
 
@@ -72,7 +75,7 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 **Status**: ⏳ WAITING  
 
 ### Planned Tasks:
-- [ ] Content schema for news and events
+- [ ] Content modeling for news and events (introduce Nuxt Content, content/ directory, Markdown)
 - [ ] News feed page (`/news`)
 - [ ] Events list page (`/events`)
 - [ ] Individual article/event pages
@@ -94,7 +97,20 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 5: Media & Resources (PENDING)
+## 📋 Phase 5: Internationalization (i18n) & Localization (PENDING)
+**Estimated Duration**: 2 days  
+**Status**: ⏳ WAITING  
+
+### Planned Tasks:
+- [ ] Populate and refine all translation files in `i18n/` for both French and English
+- [ ] Internationalize all UI and content (translation keys everywhere)
+- [ ] Test and refine language switching
+- [ ] Locale-specific SEO (meta tags, titles, descriptions)
+- [ ] Accessibility for all locales
+
+---
+
+## 📋 Phase 6: Media & Resources (PENDING)
 **Estimated Duration**: 2-3 days  
 **Status**: ⏳ WAITING  
 
@@ -106,7 +122,7 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 6: Finalization & Deployment (PENDING)
+## 📋 Phase 7: Finalization & Deployment (PENDING)
 **Estimated Duration**: 2-3 days  
 **Status**: ⏳ WAITING  
 
@@ -119,7 +135,7 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 7: Post-Launch & Maintenance (PENDING)
+## 📋 Phase 8: Post-Launch & Maintenance (PENDING)
 **Estimated Duration**: Ongoing  
 **Status**: ⏳ WAITING  
 

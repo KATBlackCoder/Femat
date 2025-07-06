@@ -18,7 +18,7 @@ This foundational phase involves setting up the development environment and inte
     *   [x] Set up Pinia for state management.
     *   [x] Configure `@nuxtjs/i18n` for internationalization (French/English).
     *   [x] Configure `@nuxt/image` for image optimization.
-    *   [x] Configure Nuxt Content for content management.
+    *   [x] Prepare for Nuxt Content integration (to be used in Phase 3).
 *   [x] **Basic Structure:** Create the initial project directory structure (layouts, components, pages, etc.).
 *   [x] **Core Layout:** Develop the main site layout, including a header, footer, and primary navigation bar.
 *   [x] **Language Switcher:** Implement a UI component to allow users to switch between French and English.
@@ -27,23 +27,23 @@ This foundational phase involves setting up the development environment and inte
 
 ### **Phase 2: Core Content & Static Pages**
 
-With the foundation in place, this phase focuses on building the essential static pages that form the backbone of the site.
+With the foundation in place, this phase focuses on building the essential static pages that form the backbone of the site. **Note: These pages are implemented directly as Vue/Nuxt pages/components, not using Nuxt Content or Markdown.**
 
-*   [ ] **Content Modeling:** Define the structure for basic pages within the `content/` directory.
-*   [ ] **Homepage:** Develop the homepage with key sections (hero, news highlights, quick links).
 *   [ ] **Static Pages:** Build the primary static pages:
     *   [ ] About FEMAT (`/about`)
     *   [ ] Contact Us (`/contact`)
-*   [ ] **Internationalization:** Populate the `locales/` files with the necessary translations for all static content and UI elements.
+*   [x] **Homepage:** Develop the homepage with key sections (hero, news highlights, quick links, and image carousels).
+    *   [x] Added `CarouselSection.vue` component in `components/layout/` for modular, reusable image galleries.
+    *   [x] Integrated two CarouselSection components side by side on the homepage, supporting dynamic titles and image arrays via props, and using `<NuxtImg>` for optimized images.
 *   [ ] **Basic SEO:** Implement initial meta tags (title, description) for all pages created in this phase.
 
 ---
 
 ### **Phase 3: Dynamic Features - News & Events**
 
-This phase brings the site to life with dynamic content, focusing on news and upcoming events.
+This phase brings the site to life with dynamic content, and is where **Nuxt Content** is introduced for the first time. All news and events will be managed via Markdown files in the `content/` directory.
 
-*   [ ] **Content Schema:** Define the frontmatter schema for `news` and `events` content types.
+*   [ ] **Content Modeling:** Define the frontmatter schema and structure for `news` and `events` content types in the `content/` directory.
 *   [ ] **List Views:** Create the main listing pages:
     *   [ ] News Feed (`/news`)
     *   [ ] Events List (`/events`)
@@ -57,23 +57,36 @@ This phase brings the site to life with dynamic content, focusing on news and up
 
 This phase focuses on building out the sections dedicated to the core of the federation: its clubs and athletes.
 
-*   [ ] **Content Schema:** Define the schema for `clubs` and `athletes`.
+*   [ ] **Content Schema:** Define the schema for `clubs` and `athletes` (using Nuxt Content).
 *   [ ] **Clubs Directory:** Develop a searchable and filterable directory of all affiliated clubs (`/clubs`).
 *   [ ] **Club Profiles:** Create detailed profile pages for each club (`/clubs/[slug]`).
 *   [ ] **Athlete Profiles:** Build the section for national team and prominent athlete profiles (`/athletes`), including a detail page for each (`/athletes/[slug]`).
 
 ---
 
-### **Phase 5: Media & Resources**
+### **Phase 5: Internationalization (i18n) & Localization**
+
+This new phase focuses on implementing, populating, and refining internationalization (i18n) for all content and UI. All translation files will be completed, language switching will be fully tested, and the site will be reviewed for translation coverage and locale-specific SEO.
+
+*   [ ] **Translation Files:** Populate and refine all translation files in `i18n/` for both French and English.
+*   [ ] **UI & Content Internationalization:** Ensure all user-facing text and content is internationalized and uses translation keys.
+*   [ ] **Language Switching:** Test and refine language switching across the site.
+*   [ ] **Locale-specific SEO:** Implement and verify meta tags, titles, and descriptions for each language.
+*   [ ] **Accessibility:** Ensure language attributes and accessibility features are correct for all locales.
+
+---
+
+### **Phase 6: Media & Resources**
 
 This phase adds rich media content and important documents to the site.
 
 *   [ ] **Gallery:** Develop the photo and video gallery (`/gallery`), ensuring all images are optimized by `@nuxt/image`.
+    *   [ ] Leverage the `CarouselSection.vue` component as the foundation for gallery features and media carousels.
 *   [ ] **Resource Hub:** Create a page (`/resources`) to list and provide downloads for official documents (rules, regulations, etc.).
 
 ---
 
-### **Phase 6: Finalization & Deployment**
+### **Phase 7: Finalization & Deployment**
 
 The final phase before launch involves polishing, testing, and preparing for production.
 
@@ -85,7 +98,7 @@ The final phase before launch involves polishing, testing, and preparing for pro
 
 ---
 
-### **Phase 7: Post-Launch & Maintenance**
+### **Phase 8: Post-Launch & Maintenance**
 
 *   [ ] **Monitoring:** Monitor the live site for any bugs or user-reported issues.
 *   [ ] **Feedback:** Gather feedback from stakeholders and users for future improvements.

@@ -35,6 +35,8 @@ export default defineNuxtConfig({
       redirectOn: 'root'
     }
   },
+  content: {
+  },
   image: {
     dir: 'assets/images'
   }

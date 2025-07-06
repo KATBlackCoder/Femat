@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Renamed the `locales` directory to `i18n` for clarity and convention.
 - Removed `langDir` from `nuxt.config.ts` to resolve i18n locale file resolution issues with @nuxtjs/i18n.
+- **Added a new phase for internationalization (i18n) and localization after the community features phase. All i18n-related tasks are now consolidated in this phase. Roadmap, TODO, and progress documentation updated accordingly.**
+- **Phase 2 static pages are now implemented as Vue/Nuxt components only (no Nuxt Content/Markdown). Nuxt Content and content modeling are now introduced in Phase 3. Roadmap, TODO, and progress documentation updated to reflect this change.**
+- Phase 2: About and Contact static pages are now complete, implemented as Vue/Nuxt components only (no Nuxt Content/Markdown).
+- Phase 2: Homepage now features hero, features, carousels, and CTA sections, all styled with Nuxt UI components.
+- Phase 2: Initial SEO meta tags (title, description) are implemented for all static pages.
+- Removed references to NewsHighlightsSection and QuickLinksSection from Phase 2 (these components and their markdown content are no longer used; dynamic content will be introduced in Phase 3).
+- Updated progress documentation to reflect these changes.
+
+### Added
+- No new components added in this update.
 
 ## [0.1.0] - 2025-01-27
 
