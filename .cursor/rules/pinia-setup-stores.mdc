@@ -1,0 +1,35 @@
+---
+globs: *.ts
+alwaysApply: false
+---
+# Pinia Store Syntax Rule: Use Only Setup Stores
+
+All Pinia stores in this project **must** use the Setup Stores syntax (Composition API style) as described in the [official Pinia documentation](https://pinia.vuejs.org/core-concepts/#Setup-Stores).
+
+## Key Requirements
+- Use `defineStore('name', () => { ... })` for all stores.
+- State must be defined using `ref()` or `reactive()` inside the setup function.
+- Getters must be defined using `computed()`.
+- Actions are regular functions defined in the setup function.
+- **Return all state, getters, and actions** from the setup function for Pinia to pick them up.
+- Do **not** use the Options API syntax (`state`, `getters`, `actions` as object properties).
+- Each store should be in its own file for clarity and code splitting.
+
+## Example
+```ts
+import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
+
+export const useCounterStore = defineStore('counter', () => {
+  const count = ref(0)
+  const double = computed(() => count.value * 2)
+  function increment() {
+    count.value++
+  }
+  return { count, double, increment }
+})
+```
+
+For more details, see the [Pinia Setup Stores documentation](https://pinia.vuejs.org/core-concepts/#Setup-Stores).
+
+**Do not use Option Stores syntax anywhere in this codebase.**

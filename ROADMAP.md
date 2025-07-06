@@ -1,5 +1,7 @@
 # FEMAT Website Development Roadmap
 
+> **Phase 1 Complete:** All foundational setup tasks are finished. The project is ready to begin Phase 2.
+
 ## Introduction
 
 This document outlines the planned development phases for the FEMAT website. It serves as a high-level guide to track progress, from the initial project setup to the final launch and beyond. Each phase represents a major milestone in the development lifecycle.
@@ -10,16 +12,16 @@ This document outlines the planned development phases for the FEMAT website. It 
 
 This foundational phase involves setting up the development environment and integrating all the core technologies selected for the project.
 
-*   [ ] **Project Scaffolding:** Initialize the Nuxt.js project.
-*   [ ] **Technology Integration:**
-    *   [ ] Integrate Nuxt UI & Tailwind CSS for the user interface.
-    *   [ ] Set up Pinia for state management.
-    *   [ ] Configure `@nuxtjs/i18n` for internationalization (French/English).
-    *   [ ] Configure `@nuxt/image` for image optimization.
-    *   [ ] Configure Nuxt Content for content management.
-*   [ ] **Basic Structure:** Create the initial project directory structure (layouts, components, pages, etc.).
-*   [ ] **Core Layout:** Develop the main site layout, including a header, footer, and primary navigation bar.
-*   [ ] **Language Switcher:** Implement a UI component to allow users to switch between French and English.
+*   [x] **Project Scaffolding:** Initialize the Nuxt.js project.
+*   [x] **Technology Integration:**
+    *   [x] Integrate Nuxt UI & Tailwind CSS for the user interface.
+    *   [x] Set up Pinia for state management.
+    *   [x] Configure `@nuxtjs/i18n` for internationalization (French/English).
+    *   [x] Configure `@nuxt/image` for image optimization.
+    *   [x] Configure Nuxt Content for content management.
+*   [x] **Basic Structure:** Create the initial project directory structure (layouts, components, pages, etc.).
+*   [x] **Core Layout:** Develop the main site layout, including a header, footer, and primary navigation bar.
+*   [x] **Language Switcher:** Implement a UI component to allow users to switch between French and English.
 
 ---
 

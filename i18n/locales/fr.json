@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "news": "Actualités",
+    "events": "Événements",
+    "athletes": "Athlètes",
+    "clubs": "Clubs",
+    "gallery": "Galerie",
+    "resources": "Ressources",
+    "contact": "Contact"
+  },
+  "common": {
+    "language": "Langue",
+    "read_more": "Lire la suite",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "no_results": "Aucun résultat trouvé"
+  },
+  "meta": {
+    "site_name": "FEMAT - Fédération Malienne de Taekwondo",
+    "site_description": "Site officiel de la Fédération Malienne de Taekwondo. Découvrez les actualités, événements, athlètes et clubs de Taekwondo au Mali."
+  },
+  "footer": {
+    "copyright": "© 2025 FEMAT. Tous droits réservés.",
+    "follow_us": "Suivez-nous"
+  }
+} 
