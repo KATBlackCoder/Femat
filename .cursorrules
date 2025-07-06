@@ -1,0 +1,124 @@
+# FEMAT Website Development Rules
+
+## Project Overview
+FEMAT (Fédération Malienne de Taekwondo) website is a modern, multilingual web application built with Nuxt.js. It serves as the official online presence for the federation, providing information about news, events, athletes, clubs, and resources related to Taekwondo in Mali.
+
+## Technology Stack Requirements
+
+### Core Framework
+- Use Nuxt.js as the primary framework
+- Follow Nuxt.js best practices and directory structure
+- Implement SSR (Server-Side Rendering) for SEO optimization
+- Use TypeScript for all JavaScript files
+- Use Vue 3's `<script setup lang="ts">` syntax for all components
+- Prefer Composition API over Options API
+
+### UI & Styling
+- Use Nuxt UI (free version) for all UI components
+- Use Tailwind CSS for styling (avoid custom CSS when possible)
+- Follow the color palette inspired by the Malian flag:
+  - Primary: Green (`#14B8A6`), Yellow (`#FBBF24`), Red (`#EF4444`)
+  - Neutrals: White, grays, and black for text and backgrounds
+- Use Inter or Poppins as the primary font family
+- Ensure all UI elements are responsive and mobile-friendly
+- Use Nuxt UI's built-in dark mode support
+
+### State Management
+- Use Pinia with Setup Stores syntax (`defineStore()` with Composition API)
+- Organize stores by feature/domain (e.g., news, events, athletes, clubs)
+- Keep store logic simple and focused on specific domains
+- Avoid redundant state that can be derived from existing state
+
+### Content Management
+- Use Nuxt Content for all content management
+- Store content in Markdown (`.md`) files in the `content/` directory
+- Organize content by type (e.g., news, events, athletes, clubs)
+- Use frontmatter for metadata
+- Leverage Nuxt Content's query API for filtering and sorting
+- Use MDC syntax for embedding Vue components in Markdown when needed
+
+### Internationalization
+- Use @nuxtjs/i18n for multilingual support
+- Initially support French (primary) and English languages
+- Store translations in JSON files in the `locales/` directory
+- Use namespaced translation keys organized by feature
+- Implement language detection and switching
+- Ensure all user-facing text is internationalized (no hardcoded strings)
+- Set up SEO metadata for each language
+
+### Image Handling
+- Use @nuxt/image for all image optimization
+- Store images in the `public/` directory, organized by type
+- Use responsive image sizes with appropriate breakpoints
+- Implement lazy loading for images
+- Use modern image formats (WebP, AVIF) with appropriate fallbacks
+- Optimize all images before adding them to the repository
+
+### Performance & SEO
+- Implement proper meta tags for SEO
+- Use canonical URLs for all pages
+- Implement proper OpenGraph and Twitter card metadata
+- Ensure Lighthouse score of 90+ for all metrics
+- Implement proper sitemap generation
+- Ensure proper handling of 404 pages
+
+## Architecture Guidelines
+
+### Code Organization
+- Follow the standard Nuxt.js directory structure
+- Use the following directories as specified:
+  - `assets/`: For unscoped assets like images, fonts, and stylesheets
+  - `components/`: For reusable Vue components
+  - `content/`: For all website content managed by Nuxt Content
+  - `layouts/`: For defining the main layouts of the application
+  - `locales/`: For translation files used by @nuxtjs/i18n
+  - `pages/`: For the application's views and routing
+  - `server/`: For backend logic if using Nuxt's server capabilities
+  - `composables/`: For Vue 3 composables (reusable stateful logic)
+  - `store/`: For Pinia stores to manage global application state
+- Organize components by feature/domain when possible
+- Use proper naming conventions:
+  - PascalCase for component files
+  - kebab-case for routes
+  - camelCase for JavaScript/TypeScript variables and functions
+
+### Data Flow
+- Components should get data from Pinia stores or page props
+- Use Nuxt Content's query API for content retrieval
+- Implement proper loading states for async data
+- Handle errors gracefully with user-friendly messages
+- Use Vue's Suspense for handling async components when appropriate
+
+### Feature Implementation
+- Implement features according to the design document
+- Ensure all features work in both languages
+- Document all user-facing changes
+- Follow the component design patterns established in the project
+
+## Development Workflow
+- Always analyze `package.json` before starting any task to check for existing dependencies
+- Before suggesting or implementing new features that require additional dependencies, verify they aren't already installed
+- Always check the project structure for existing files and folders before creating new ones
+- When implementing new features, verify if similar files or components already exist that can be reused or extended
+- Follow the established file naming conventions and directory structure when creating new files
+- Write tests for critical business logic
+- Keep documentation up-to-date with code changes
+- Follow the established error handling patterns
+
+## UI/UX Standards
+- Ensure all pages are responsive and work well on mobile, tablet, and desktop
+- Maintain a consistent look and feel using Nuxt UI components
+- Ensure all user-facing text can be internationalized
+- Use appropriate loading states and transitions
+- Implement proper form validation
+- Ensure all interactive elements have appropriate hover, focus, and active states
+- Ensure proper accessibility (ARIA attributes, keyboard navigation, etc.)
+- Follow a mobile-first approach to responsive design
+
+## Deployment Guidelines
+- Code will be hosted on GitHub
+- Deployment will use a CI/CD pipeline
+- Preferred platforms: NuxtHub, Vercel, or Netlify
+- Every push to the `main` branch will trigger a new deployment
+- Ensure proper environment variable handling
+- Implement proper error logging and monitoring 
