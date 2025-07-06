@@ -70,15 +70,15 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 3: Dynamic Features - News & Events (PENDING)
+## 📋 Phase 3: Dynamic Features - News & Events (IN PROGRESS)
 **Estimated Duration**: 3-4 days  
-**Status**: ⏳ WAITING  
+**Status**: 🚧 IN PROGRESS  
 
-### Planned Tasks:
-- [ ] Content modeling for news and events (introduce Nuxt Content, content/ directory, Markdown)
-- [ ] News feed page (`/news`)
-- [ ] Events list page (`/events`)
-- [ ] Individual article/event pages
+### Tasks:
+- [ ] Content modeling for news and events (frontmatter schema, sample Markdown files)
+- [ ] News feed page (`/news`) using Nuxt Content query API
+- [ ] Events list page (`/events`) using Nuxt Content query API
+- [ ] Individual article/event pages (`/news/[slug]`, `/events/[slug]`)
 - [ ] Filtering and search functionality
 - [ ] Event calendar implementation
 

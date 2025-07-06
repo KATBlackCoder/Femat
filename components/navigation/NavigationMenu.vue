@@ -1,19 +1,20 @@
 <template>
-  <UNavigationMenu :items="items" class="w-full justify-center" />
+  <UNavigationMenu collapsed :items="items" />
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const items = ref<NavigationMenuItem[]>([
-  { label: 'Accueil', to: '/' },
-  { label: 'À propos', to: '/about' },
-  { label: 'Actualités', to: '/news' },
-  { label: 'Événements', to: '/events' },
-  { label: 'Athlètes', to: '/athletes' },
-  { label: 'Clubs', to: '/clubs' },
-  { label: 'Galerie', to: '/gallery' },
-  { label: 'Contact', to: '/contact' }
+  { label: 'Accueil', to: '/', icon: 'i-lucide-home' },
+  { label: 'À propos', to: '/about', icon: 'i-lucide-info' },
+  { label: 'Actualités', to: '/news', icon: 'i-lucide-newspaper' },
+  { label: 'Événements', to: '/events', icon: 'i-lucide-calendar' },
+  { label: 'Athlètes', to: '/athletes', icon: 'i-lucide-user' },
+  { label: 'Clubs', to: '/clubs', icon: 'i-lucide-users' },
+  { label: 'Galerie', to: '/gallery', icon: 'i-lucide-image' },
+  { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' }
 ])
 </script>
 

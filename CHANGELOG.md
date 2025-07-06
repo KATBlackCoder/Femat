@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Phase 2: Initial SEO meta tags (title, description) are implemented for all static pages.
 - Removed references to NewsHighlightsSection and QuickLinksSection from Phase 2 (these components and their markdown content are no longer used; dynamic content will be introduced in Phase 3).
 - Updated progress documentation to reflect these changes.
+- Phase 3 (Dynamic Features - News & Events) is now in progress: content modeling, list/detail views, filtering, and event calendar implementation have started.
+- Phase 2 is now fully complete: all static pages and homepage are done, with initial SEO implemented.
 
 ### Added
 - No new components added in this update.

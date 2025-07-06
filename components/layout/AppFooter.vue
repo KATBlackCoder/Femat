@@ -14,24 +14,15 @@
               Fédération Malienne de Taekwondo - Promouvoir et développer le Taekwondo au Mali avec excellence et intégrité.
             </p>
             <div class="flex space-x-4">
-              <!-- Social links placeholder -->
+              <!-- Facebook link -->
               <UButton 
                 variant="ghost" 
                 size="sm" 
                 icon="i-simple-icons-facebook"
                 class="text-gray-600 hover:text-blue-600 dark:text-gray-400"
-              />
-              <UButton 
-                variant="ghost" 
-                size="sm" 
-                icon="i-simple-icons-twitter"
-                class="text-gray-600 hover:text-blue-400 dark:text-gray-400"
-              />
-              <UButton 
-                variant="ghost" 
-                size="sm" 
-                icon="i-simple-icons-instagram"
-                class="text-gray-600 hover:text-pink-600 dark:text-gray-400"
+                :to="'https://www.facebook.com/taekwondomali'"
+                target="_blank"
+                rel="noopener"
               />
             </div>
           </div>
@@ -56,7 +47,7 @@
             <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Contact</h3>
             <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <p>Bamako, Mali</p>
-              <p>contact@femat.ml</p>
+              <p>femat3@yahoo.fr</p>
               <p>+223 XX XX XX XX</p>
             </div>
           </div>

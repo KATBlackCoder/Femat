@@ -25,7 +25,7 @@ All foundational tasks have been completed successfully:
 
 The FEMAT website foundation is now ready for Phase 2 development!
 
-# Phase 2: Core Content & Static Pages
+# Phase 2: Core Content & Static Pages (COMPLETE)
 
 - [x] **Static Pages:** Build the primary static pages as Vue/Nuxt components (not using Nuxt Content or Markdown):
     - [x] About FEMAT (`/about`)
@@ -54,15 +54,19 @@ This phase focuses on building the essential static content and pages as Vue/Nux
 
 Once these tasks are complete, the site will have a solid content foundation and be ready for dynamic features in Phase 3.
 
-# Phase 3: Dynamic Features - News & Events
+# Phase 3: Dynamic Features - News & Events (IN PROGRESS)
 
-- [ ] **Content Modeling:** Introduce Nuxt Content and define the structure for `news` and `events` content types in the `content/` directory (Markdown + frontmatter).
-- [ ] **List Views:** Create the main listing pages:
-    - [ ] News Feed (`/news`)
-    - [ ] Events List (`/events`)
-- [ ] **Detail Views:** Create the templates for displaying a single news article (`/news/[slug]`) and a single event (`/events/[slug]`).
-- [ ] **Filtering:** Implement controls to filter news and events (e.g., by category or date).
-- [ ] **Event Calendar:** Create a calendar view to visualize upcoming competitions and seminars.
+- [ ] **Content Modeling:**
+    - [ ] Define frontmatter schema for `news` and `events` (Markdown + frontmatter)
+    - [ ] Create sample Markdown files in `content/news/` and `content/events/`
+- [ ] **List Views:**
+    - [ ] Create `/news` and `/events` pages using Nuxt Content query API
+- [ ] **Detail Views:**
+    - [ ] Create templates for displaying a single news article (`/news/[slug]`) and a single event (`/events/[slug]`)
+- [ ] **Filtering:**
+    - [ ] Implement controls to filter news and events (e.g., by category or date)
+- [ ] **Event Calendar:**
+    - [ ] Create a calendar view to visualize upcoming competitions and seminars
 
 # Phase 4: Community Features - Clubs & Athletes
 

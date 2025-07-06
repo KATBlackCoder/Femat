@@ -20,43 +20,17 @@
           </span>
         </NuxtLink>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center space-x-2">
+        <!-- Navigation (Nuxt UI handles responsiveness) -->
+        <nav class="flex-1 flex justify-center">
           <NavigationMenu />
         </nav>
 
-        <!-- Right side: Language switcher and mobile menu -->
+        <!-- Right side: Language switcher and color mode -->
         <div class="flex items-center space-x-2">
           <LanguageSwitcher />
-          <ColorModeButton /> 
-          <!-- Mobile menu button -->
-          <UButton
-            variant="ghost"
-            size="sm"
-            icon="i-heroicons-bars-3-20-solid"
-            class="md:hidden"
-            @click="isMobileMenuOpen = !isMobileMenuOpen"
-          />
+          <ColorModeButton />
         </div>
       </div>
-
-      <!-- Mobile Navigation -->
-      <USlideover v-model="isMobileMenuOpen" side="left" class="md:hidden">
-        <div class="p-4 space-y-2">
-          <UButton
-            v-for="item in navigationItems"
-            :key="item.name"
-            :to="item.href"
-            variant="link"
-            color="neutral"
-            block
-            class="justify-start"
-            @click="isMobileMenuOpen = false"
-          >
-            {{ item.name }}
-          </UButton>
-        </div>
-      </USlideover>
     </UContainer>
   </header>
 </template>
@@ -65,17 +39,4 @@
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher.vue";
 import NavigationMenu from "@/components/navigation/NavigationMenu.vue";
 import ColorModeButton from "@/components/layout/ColorModeButton.vue";
-
-const isMobileMenuOpen = ref(false);
-
-const navigationItems = [
-  { name: "Accueil", href: "/" },
-  { name: "À propos", href: "/about" },
-  { name: "Actualités", href: "/news" },
-  { name: "Événements", href: "/events" },
-  { name: "Athlètes", href: "/athletes" },
-  { name: "Clubs", href: "/clubs" },
-  { name: "Galerie", href: "/gallery" },
-  { name: "Contact", href: "/contact" },
-];
 </script>

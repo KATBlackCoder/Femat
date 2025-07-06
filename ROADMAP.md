@@ -29,13 +29,13 @@ This foundational phase involves setting up the development environment and inte
 
 With the foundation in place, this phase focuses on building the essential static pages that form the backbone of the site. **Note: These pages are implemented directly as Vue/Nuxt pages/components, not using Nuxt Content or Markdown.**
 
-*   [ ] **Static Pages:** Build the primary static pages:
-    *   [ ] About FEMAT (`/about`)
-    *   [ ] Contact Us (`/contact`)
-*   [x] **Homepage:** Develop the homepage with key sections (hero, news highlights, quick links, and image carousels).
+*   [x] **Static Pages:** Build the primary static pages:
+    *   [x] About FEMAT (`/about`)
+    *   [x] Contact Us (`/contact`)
+*   [x] **Homepage:** Develop the homepage with key sections (hero, features, carousels, and CTA), all styled with Nuxt UI components.
     *   [x] Added `CarouselSection.vue` component in `components/layout/` for modular, reusable image galleries.
     *   [x] Integrated two CarouselSection components side by side on the homepage, supporting dynamic titles and image arrays via props, and using `<NuxtImg>` for optimized images.
-*   [ ] **Basic SEO:** Implement initial meta tags (title, description) for all pages created in this phase.
+*   [x] **Basic SEO:** Implement initial meta tags (title, description) for all pages created in this phase.
 
 ---
 
