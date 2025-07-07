@@ -43,28 +43,17 @@ With the foundation in place, this phase focuses on building the essential stati
 
 This phase brings the site to life with dynamic content, and is where **Nuxt Content** is introduced for the first time. All news and events will be managed via Markdown files in the `content/` directory.
 
-*   [ ] **Content Modeling:** Define the frontmatter schema and structure for `news` and `events` content types in the `content/` directory.
-*   [ ] **List Views:** Create the main listing pages:
-    *   [ ] News Feed (`/news`)
-    *   [ ] Events List (`/events`)
-*   [ ] **Detail Views:** Create the templates for displaying a single news article (`/news/[slug]`) and a single event (`/events/[slug]`).
-*   [ ] **Filtering:** Implement controls to filter news and events (e.g., by category or date).
-*   [ ] **Event Calendar:** Create a calendar view to visualize upcoming competitions and seminars.
+*   [x] **Content Modeling:** Define the frontmatter schema and structure for `news` and `events` content types in the `content/` directory.
+*   [x] **List Views:** Create the main listing pages:
+    *   [x] News Feed (`/news`)
+    *   [x] Events List (`/events`)
+*   [x] **Detail Views:** Create the templates for displaying a single news article (`/news/[slug]`) and a single event (`/events/[slug]`).
+*   [x] **Card Visuals:** All news and event cards now have centered images for visual consistency.
+*   [x] **Event Calendar:** Implemented a calendar-centric UI for event browsing on the events page using the EventCalendar component. Users can now browse events by month and year directly from the calendar, replacing the old event grid.
 
 ---
 
-### **Phase 4: Community Features - Clubs & Athletes**
-
-This phase focuses on building out the sections dedicated to the core of the federation: its clubs and athletes.
-
-*   [ ] **Content Schema:** Define the schema for `clubs` and `athletes` (using Nuxt Content).
-*   [ ] **Clubs Directory:** Develop a searchable and filterable directory of all affiliated clubs (`/clubs`).
-*   [ ] **Club Profiles:** Create detailed profile pages for each club (`/clubs/[slug]`).
-*   [ ] **Athlete Profiles:** Build the section for national team and prominent athlete profiles (`/athletes`), including a detail page for each (`/athletes/[slug]`).
-
----
-
-### **Phase 5: Internationalization (i18n) & Localization**
+### **Phase 4: Internationalization (i18n) & Localization**
 
 This new phase focuses on implementing, populating, and refining internationalization (i18n) for all content and UI. All translation files will be completed, language switching will be fully tested, and the site will be reviewed for translation coverage and locale-specific SEO.
 
@@ -76,7 +65,7 @@ This new phase focuses on implementing, populating, and refining internationaliz
 
 ---
 
-### **Phase 6: Media & Resources**
+### **Phase 5: Media & Resources**
 
 This phase adds rich media content and important documents to the site.
 
@@ -86,7 +75,7 @@ This phase adds rich media content and important documents to the site.
 
 ---
 
-### **Phase 7: Finalization & Deployment**
+### **Phase 6: Finalization & Deployment**
 
 The final phase before launch involves polishing, testing, and preparing for production.
 
@@ -98,8 +87,20 @@ The final phase before launch involves polishing, testing, and preparing for pro
 
 ---
 
-### **Phase 8: Post-Launch & Maintenance**
+### **Phase 7: Post-Launch & Maintenance**
 
 *   [ ] **Monitoring:** Monitor the live site for any bugs or user-reported issues.
 *   [ ] **Feedback:** Gather feedback from stakeholders and users for future improvements.
-*   [ ] **Content Strategy:** Plan for the regular addition of new content to keep the site fresh and engaging. 
+*   [ ] **Content Strategy:** Plan for the regular addition of new content to keep the site fresh and engaging.
+*   [ ] **Planned Enhancement:** Implement controls to filter news and events (e.g., by category or date) as a future improvement after deployment.
+
+---
+
+### **Phase 8: Community Features - Clubs & Athletes (Planned Post-Launch)**
+
+This phase will be tackled after the initial deployment. It focuses on building out the sections dedicated to the core of the federation: its clubs and athletes.
+
+*   [ ] **Content Schema:** Define the schema for `clubs` and `athletes` (using Nuxt Content).
+*   [ ] **Clubs Directory:** Develop a searchable and filterable directory of all affiliated clubs (`/clubs`).
+*   [ ] **Club Profiles:** Create detailed profile pages for each club (`/clubs/[slug]`).
+*   [ ] **Athlete Profiles:** Build the section for national team and prominent athlete profiles (`/athletes`), including a detail page for each (`/athletes/[slug]`). 

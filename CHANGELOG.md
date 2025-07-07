@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated progress documentation to reflect these changes.
 - Phase 3 (Dynamic Features - News & Events) is now in progress: content modeling, list/detail views, filtering, and event calendar implementation have started.
 - Phase 2 is now fully complete: all static pages and homepage are done, with initial SEO implemented.
+- Content modeling for news and events (frontmatter schema, sample Markdown files) is complete in Phase 3.
+- News feed page (`/news`) using Nuxt Content query API is complete in Phase 3.
+- Implemented idiomatic detail views for news and events (`/news/[slug]`, `/events/[slug]`) with Nuxt UI back button for navigation.
+- Refactored news and event detail pages to use reusable, fully componentized detail components.
+- All news and event cards now have centered images for improved visual consistency.
+- **CarouselSection.vue now supports per-image custom width/height. Homepage carousels (presidents/partners) use this feature for improved image layout and flexibility.**
+- The events page now uses the EventCalendar component as the main event browsing UI, replacing the old event grid. This is a major UX improvement for event discovery and navigation.
 
 ### Added
 - No new components added in this update.

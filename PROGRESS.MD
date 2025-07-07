@@ -17,6 +17,8 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 - Created a modular `CarouselSection.vue` component in `components/layout/` for image galleries, supporting dynamic titles and image arrays via props.
 - Utilized `<NuxtImg>` for responsive, optimized images in the carousel.
 - Integrated two CarouselSection components side by side on the homepage, sourcing images from the assets directory using Nuxt Image.
+- - The events page now features a calendar-centric UI for event browsing, improving discoverability and UX.
+- **CarouselSection now supports per-image custom width/height, allowing flexible sizing for each image. Homepage carousels (presidents/partners) now use this for improved layout and visual consistency.**
 
 ## Recent Technical Fixes
 - Renamed the `locales` directory to `i18n` for clarity and convention.
@@ -62,6 +64,9 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 - [x] Static pages (about, contact) as Vue/Nuxt components only (no Nuxt Content/Markdown)
 - [x] Homepage with hero, features, carousels, and CTA sections, all styled with Nuxt UI components
 - [x] Initial SEO meta tags (title, description) for all static pages
+- [x] Added `CarouselSection.vue` component for modular image galleries, supporting dynamic titles and image arrays via props, and using `<NuxtImg>` for optimized images.
+- [x] Integrated two CarouselSection components side by side on the homepage, displaying images from the assets directory.
+- [x] **CarouselSection now supports per-image custom width/height, and homepage carousels use this for better image control.**
 
 ### Target Deliverables:
 - Static pages with rich content (Vue/Nuxt components)
@@ -75,29 +80,18 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 **Status**: 🚧 IN PROGRESS  
 
 ### Tasks:
-- [ ] Content modeling for news and events (frontmatter schema, sample Markdown files)
-- [ ] News feed page (`/news`) using Nuxt Content query API
-- [ ] Events list page (`/events`) using Nuxt Content query API
-- [ ] Individual article/event pages (`/news/[slug]`, `/events/[slug]`)
-- [ ] Filtering and search functionality
-- [ ] Event calendar implementation
+- [x] Content modeling for news and events (frontmatter schema, sample Markdown files)
+- [x] News feed page (`/news`) using Nuxt Content query API
+- [x] Events list page (`/events`) using Nuxt Content query API
+- [x] Individual article/event pages (`/news/[slug]`, `/events/[slug]`)
+    - Both detail pages are now fully componentized with reusable detail components.
+- [x] All news and event cards now have centered images for visual consistency.
+- [x] **CarouselSection technical improvement: per-image custom width/height now supported and used on homepage carousels.**
+- [x] Event calendar implementation: The events page now uses the EventCalendar component as the main event browsing UI, replacing the old event grid. Users can browse events by month and year directly from the calendar.
 
 ---
 
-## 📋 Phase 4: Community Features - Clubs & Athletes (PENDING)
-**Estimated Duration**: 3-4 days  
-**Status**: ⏳ WAITING  
-
-### Planned Tasks:
-- [ ] Clubs directory (`/clubs`)
-- [ ] Club profile pages
-- [ ] Athletes section (`/athletes`)
-- [ ] Athlete profile pages
-- [ ] Search and filtering for clubs/athletes
-
----
-
-## 📋 Phase 5: Internationalization (i18n) & Localization (PENDING)
+## 📋 Phase 4: Internationalization (i18n) & Localization (PENDING)
 **Estimated Duration**: 2 days  
 **Status**: ⏳ WAITING  
 
@@ -110,7 +104,7 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 6: Media & Resources (PENDING)
+## 📋 Phase 5: Media & Resources (PENDING)
 **Estimated Duration**: 2-3 days  
 **Status**: ⏳ WAITING  
 
@@ -122,7 +116,7 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 7: Finalization & Deployment (PENDING)
+## 📋 Phase 6: Finalization & Deployment (PENDING)
 **Estimated Duration**: 2-3 days  
 **Status**: ⏳ WAITING  
 
@@ -135,7 +129,7 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 8: Post-Launch & Maintenance (PENDING)
+## 📋 Phase 7: Post-Launch & Maintenance (PENDING)
 **Estimated Duration**: Ongoing  
 **Status**: ⏳ WAITING  
 
@@ -145,6 +139,20 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 - [ ] Content strategy implementation
 - [ ] Performance monitoring
 - [ ] Regular updates and maintenance
+- [ ] **Planned Enhancement:** Implement controls to filter news and events (e.g., by category or date) as a future improvement after deployment.
+
+---
+
+## 📋 Phase 8: Community Features - Clubs & Athletes (Planned Post-Launch)
+**Estimated Duration**: 3-4 days  
+**Status**: ⏳ WAITING  
+
+### Planned Tasks:
+- [ ] Clubs directory (`/clubs`)
+- [ ] Club profile pages
+- [ ] Athletes section (`/athletes`)
+- [ ] Athlete profile pages
+- [ ] Search and filtering for clubs/athletes
 
 ---
 

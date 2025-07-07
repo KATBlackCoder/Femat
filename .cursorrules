@@ -30,7 +30,7 @@ FEMAT (Fédération Malienne de Taekwondo) website is a modern, multilingual web
 - Avoid redundant state that can be derived from existing state
 
 ### Content Management
-- Use Nuxt Content for all content management
+- Use Nuxt Content v3 ([docs](https://content.nuxt.com/docs/getting-started)) for all content management
 - Store content in Markdown (`.md`) files in the `content/` directory
 - Organize content by type (e.g., news, events, athletes, clubs)
 - Use frontmatter for metadata

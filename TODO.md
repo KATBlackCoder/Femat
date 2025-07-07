@@ -41,6 +41,7 @@ The FEMAT website foundation is now ready for Phase 2 development!
         7. Test the homepage on mobile and desktop for layout and accessibility.
     - [x] Added `CarouselSection.vue` component for modular image galleries, supporting dynamic titles and image arrays via props, and using `<NuxtImg>` for optimized images.
     - [x] Integrated two CarouselSection components side by side on the homepage, displaying images from the assets directory.
+    - [x] **CarouselSection now supports per-image custom width/height, allowing flexible image sizing for each carousel item. Homepage carousels (presidents/partners) now use this feature for improved visual consistency.**
 - [x] **Basic SEO:** Implement initial meta tags (title, description) for all pages created in this phase.
 
 ## 🚧 Phase 2 Summary
@@ -56,26 +57,22 @@ Once these tasks are complete, the site will have a solid content foundation and
 
 # Phase 3: Dynamic Features - News & Events (IN PROGRESS)
 
-- [ ] **Content Modeling:**
-    - [ ] Define frontmatter schema for `news` and `events` (Markdown + frontmatter)
-    - [ ] Create sample Markdown files in `content/news/` and `content/events/`
-- [ ] **List Views:**
-    - [ ] Create `/news` and `/events` pages using Nuxt Content query API
-- [ ] **Detail Views:**
-    - [ ] Create templates for displaying a single news article (`/news/[slug]`) and a single event (`/events/[slug]`)
-- [ ] **Filtering:**
-    - [ ] Implement controls to filter news and events (e.g., by category or date)
-- [ ] **Event Calendar:**
-    - [ ] Create a calendar view to visualize upcoming competitions and seminars
+- [x] **Content Modeling:**
+    - [x] Define frontmatter schema for `news` and `events` (Markdown + frontmatter)
+    - [x] Create sample Markdown files in `content/news/` and `content/events/`
+- [x] **List Views:**
+    - [x] Create `/news` page using Nuxt Content query API
+    - [x] Create `/events` page using Nuxt Content query API
+- [x] **Detail Views:**
+    - [x] Create templates for displaying a single news article (`/news/[slug]`) and a single event (`/events/[slug]`)
+        - Both detail pages are now fully componentized with reusable detail components.
+- [x] **Card Visuals:**
+    - [x] All news and event cards now have centered images for visual consistency.
+- [x] **CarouselSection technical improvement: per-image custom width/height now supported and used on homepage carousels.**
+- [x] **Event Calendar:**
+    - [x] Created a calendar-centric event browsing experience on the events page using the EventCalendar component. The old event grid is now replaced by the calendar UI for all event exploration.
 
-# Phase 4: Community Features - Clubs & Athletes
-
-- [ ] **Content Schema:** Define the schema for `clubs` and `athletes` (using Nuxt Content).
-- [ ] **Clubs Directory:** Develop a searchable and filterable directory of all affiliated clubs (`/clubs`).
-- [ ] **Club Profiles:** Create detailed profile pages for each club (`/clubs/[slug]`).
-- [ ] **Athlete Profiles:** Build the section for national team and prominent athlete profiles (`/athletes`), including a detail page for each (`/athletes/[slug]`).
-
-# Phase 5: Internationalization (i18n) & Localization
+# Phase 4: Internationalization (i18n) & Localization
 
 - [ ] **Translation Files:** Populate and refine all translation files in `i18n/` for both French and English.
 - [ ] **UI & Content Internationalization:** Ensure all user-facing text and content is internationalized and uses translation keys.
@@ -83,13 +80,13 @@ Once these tasks are complete, the site will have a solid content foundation and
 - [ ] **Locale-specific SEO:** Implement and verify meta tags, titles, and descriptions for each language.
 - [ ] **Accessibility:** Ensure language attributes and accessibility features are correct for all locales.
 
-# Phase 6: Media & Resources
+# Phase 5: Media & Resources
 
 - [ ] **Gallery:** Develop the photo and video gallery (`/gallery`), ensuring all images are optimized by `@nuxt/image`.
     - [ ] Leverage the `CarouselSection.vue` component as the foundation for gallery features and media carousels.
 - [ ] **Resource Hub:** Create a page (`/resources`) to list and provide downloads for official documents (rules, regulations, etc.).
 
-# Phase 7: Finalization & Deployment
+# Phase 6: Finalization & Deployment
 
 - [ ] **Responsive Testing:** Conduct a thorough review of the entire site on a wide range of devices (mobile, tablet, desktop).
 - [ ] **Performance Audit:** Run Lighthouse tests and optimize for a score of 90+ across all metrics.
@@ -97,8 +94,16 @@ Once these tasks are complete, the site will have a solid content foundation and
 - [ ] **CI/CD Setup:** Configure the deployment pipeline on the chosen hosting provider (NuxtHub, Vercel, or Netlify) from the GitHub repository.
 - [ ] **Launch!**
 
-# Phase 8: Post-Launch & Maintenance
+# Phase 7: Post-Launch & Maintenance
 
 - [ ] **Monitoring:** Monitor the live site for any bugs or user-reported issues.
 - [ ] **Feedback:** Gather feedback from stakeholders and users for future improvements.
 - [ ] **Content Strategy:** Plan for the regular addition of new content to keep the site fresh and engaging.
+- [ ] **Planned Enhancement:** Implement controls to filter news and events (e.g., by category or date) as a future improvement after deployment.
+
+# Phase 8: Community Features - Clubs & Athletes (Planned Post-Launch)
+
+- [ ] **Content Schema:** Define the schema for `clubs` and `athletes` (using Nuxt Content).
+- [ ] **Clubs Directory:** Develop a searchable and filterable directory of all affiliated clubs (`/clubs`).
+- [ ] **Club Profiles:** Create detailed profile pages for each club (`/clubs/[slug]`).
+- [ ] **Athlete Profiles:** Build the section for national team and prominent athlete profiles (`/athletes`), including a detail page for each (`/athletes/[slug]`).

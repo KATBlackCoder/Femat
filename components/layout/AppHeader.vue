@@ -6,13 +6,15 @@
       <div class="flex h-16 items-center justify-between">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center space-x-2">
-          <UAvatar
-            size="md"
-            class="bg-gradient-to-br from-teal-500 to-emerald-600"
-            :alt="'FEMAT Logo'"
-          >
-            <span class="text-white font-bold text-sm">F</span>
-          </UAvatar>
+          <NuxtImg
+            src="/femat.jpg"
+            alt="FEMAT Logo"
+            width="40"
+            height="40"
+            class="rounded-full object-cover"
+            format="webp"
+            loading="lazy"
+          />
           <span
             class="hidden font-bold text-gray-900 dark:text-white sm:inline-block"
           >

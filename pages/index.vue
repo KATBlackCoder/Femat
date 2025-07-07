@@ -18,7 +18,7 @@
           <CarouselSection title="Nos Présidents" :items="presidentsImages" />
         </div>
         <div class="flex-1">
-          <CarouselSection title="Nos Partenaires" />
+          <CarouselSection title="Nos Partenaires" :items="partnersImages" :width="200" :height="200" />
         </div>
       </div>
     </UCard>
@@ -37,17 +37,25 @@ import CarouselSection from '~/components/layout/CarouselSection.vue'
 // Presidents Images
 const presidentsImageModules = import.meta.glob('~/assets/images/presidents/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' })
 // Map to relative paths for Nuxt Image (strip '/_nuxt/assets/images/')
-const presidentsImages = (Object.values(presidentsImageModules) as string[]).map((url) => {
+const presidentsImages = (Object.values(presidentsImageModules) as string[]).map((url, idx) => {
   const match = url.match(/\/assets\/images\/(.*)$/)
-  return match ? match[1] : url
+  const src = match ? match[1] : url
+  // Example: set custom size for the first image
+  if (idx === 0) return { src, width: 300, height: 400 }
+  return src
 })
 
 // Partners Images
-//const partnersImageModules = import.meta.glob('~/assets/images/partners/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' })
-//const partnersImages = Object.values(partnersImageModules).map((url: string) => {
-//  const match = url.match(/\/assets\/images\/(.*)$/)
-//  return match ? match[1] : url
-//})
+const partnersImageModules = import.meta.glob('~/assets/images/partners/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' })
+const partnersImages = (Object.values(partnersImageModules) as string[]).map((url, idx) => {
+  const match = url.match(/\/assets\/images\/(.*)$/)
+  const src = match ? match[1] : url
+  // Example: set custom size for the second image
+  if (idx === 3) return { src, width: 300, height: 200 }
+  if (idx === 4) return { src, width: 500, height: 200 }
+  if (idx === 5) return { src, width: 430, height: 260 }
+  return src
+})
 
 // SEO Meta tags
 useSeoMeta({
