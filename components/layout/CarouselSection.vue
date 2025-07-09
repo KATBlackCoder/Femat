@@ -39,7 +39,7 @@ type CarouselImage = string | { src: string; width?: number; height?: number }
 const props = defineProps({
   title: {
     type: String,
-    default: "Galerie d'images"
+    default: 'Image Gallery'
   },
   items: {
     type: Array as PropType<CarouselImage[]>,

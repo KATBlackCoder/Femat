@@ -17,7 +17,7 @@
         </div>
         <p class="mt-2 text-muted">{{ event.description }}</p>
       </div>
-      <div v-if="event.organizer" class="mt-2 text-xs text-muted">Organized by {{ event.organizer }}</div>
+      <div v-if="event.organizer" class="mt-2 text-xs text-muted">{{ $t('events.organized_by', { organizer: event.organizer }) }}</div>
     </div>
   </UCard>
 </template>

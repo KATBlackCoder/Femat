@@ -3,19 +3,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { NavigationMenuItem } from '@nuxt/ui'
+import { computed } from 'vue'
+import { useI18n, useLocalePath } from '#imports'
+import { useNavLinks } from '@/composables/useNavLinks'
 
-const items = ref<NavigationMenuItem[]>([
-  { label: 'Accueil', to: '/', icon: 'i-lucide-home' },
-  { label: 'À propos', to: '/about', icon: 'i-lucide-info' },
-  { label: 'Actualités', to: '/news', icon: 'i-lucide-newspaper' },
-  { label: 'Événements', to: '/events', icon: 'i-lucide-calendar' },
-  { label: 'Athlètes', to: '/athletes', icon: 'i-lucide-user' },
-  { label: 'Clubs', to: '/clubs', icon: 'i-lucide-users' },
-  { label: 'Galerie', to: '/gallery', icon: 'i-lucide-image' },
-  { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' }
-])
+const { t } = useI18n()
+const localePath = useLocalePath()
+const items = computed(() =>
+  useNavLinks()
+    .filter(link => !['nav.privacy', 'nav.terms'].includes(link.label))
+    .map(link => ({
+      label: t(link.label),
+      to: localePath(link.href),
+      icon: link.icon
+    }))
+)
 </script>
 
 <style>

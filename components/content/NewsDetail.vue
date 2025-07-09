@@ -5,7 +5,7 @@
       <div class="mb-6 text-muted text-sm flex gap-4 items-center">
         <span>{{ formatDate(news.date) }}</span>
         <UBadge v-if="news.category" color="primary" variant="soft">{{ news.category }}</UBadge>
-        <span v-if="news.author">By {{ news.author }}</span>
+        <span v-if="news.author">{{ $t('news.by_author', { author: news.author }) }}</span>
       </div>
       <NuxtImg v-if="news.image" :src="news.image" class="rounded-lg mb-6 w-full max-w-2xl" width="800" height="400" />
       <ContentRenderer :value="news" class="prose max-w-2xl" />
@@ -13,14 +13,14 @@
         <template #leading>
           <UIcon name="i-heroicons-arrow-left" />
         </template>
-        Retour
+        {{ $t('common.back') }}
       </UButton>
     </template>
     <template v-else>
       <div class="text-center py-24">
-        <h2 class="text-2xl font-bold mb-2 text-error">Article not found</h2>
-        <p class="text-muted mb-4">The news article you are looking for does not exist.</p>
-        <NuxtLink to="/news" class="text-primary hover:underline">Back to news</NuxtLink>
+        <h2 class="text-2xl font-bold mb-2 text-error">{{ $t('news.not_found.title') }}</h2>
+        <p class="text-muted mb-4">{{ $t('news.not_found.description') }}</p>
+        <NuxtLink to="/news" class="text-primary hover:underline">{{ $t('news.not_found.back_link') }}</NuxtLink>
       </div>
     </template>
   </UContainer>

@@ -11,14 +11,14 @@
     <!-- Carousel Sections Side by Side -->
     <UCard class="mb-8">
       <template #header>
-        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Galeries</h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">{{ $t('nav.gallery') }}</h2>
       </template>
       <div class="flex flex-col md:flex-row gap-8">
         <div class="flex-1">
-          <CarouselSection title="Nos Présidents" :items="presidentsImages" />
+          <CarouselSection :title="$t('home.gallery.presidents')" :items="presidentsImages" />
         </div>
         <div class="flex-1">
-          <CarouselSection title="Nos Partenaires" :items="partnersImages" :width="200" :height="200" />
+          <CarouselSection :title="$t('home.gallery.partners')" :items="partnersImages" :width="200" :height="200" />
         </div>
       </div>
     </UCard>
@@ -33,6 +33,8 @@ import HeroSection from '~/components/home/HeroSection.vue'
 import FeaturesSection from '~/components/home/FeaturesSection.vue'
 import CtaSection from '~/components/home/CtaSection.vue'
 import CarouselSection from '~/components/layout/CarouselSection.vue'
+
+const { t } = useI18n()
 
 // Presidents Images
 const presidentsImageModules = import.meta.glob('~/assets/images/presidents/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' })
@@ -59,11 +61,7 @@ const partnersImages = (Object.values(partnersImageModules) as string[]).map((ur
 
 // SEO Meta tags
 useSeoMeta({
-  title: 'FEMAT - Fédération Malienne de Taekwondo',
-  description: 'Site officiel de la Fédération Malienne de Taekwondo. Découvrez les actualités, événements, athlètes et clubs de Taekwondo au Mali.',
-  ogTitle: 'FEMAT - Fédération Malienne de Taekwondo',
-  ogDescription: 'Site officiel de la Fédération Malienne de Taekwondo. Découvrez les actualités, événements, athlètes et clubs de Taekwondo au Mali.',
-  ogType: 'website'
+  title: t('nav.home')
 })
 </script>
 

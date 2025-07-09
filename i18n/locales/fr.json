@@ -8,7 +8,9 @@
     "clubs": "Clubs",
     "gallery": "Galerie",
     "resources": "Ressources",
-    "contact": "Contact"
+    "contact": "Contact",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
   },
   "common": {
     "language": "Langue",
@@ -27,7 +29,99 @@
     "site_description": "Site officiel de la Fédération Malienne de Taekwondo. Découvrez les actualités, événements, athlètes et clubs de Taekwondo au Mali."
   },
   "footer": {
+    "description": "Fédération Malienne de Taekwondo - Promouvoir et développer le Taekwondo au Mali avec excellence et intégrité.",
+    "quick_links": "Liens rapides",
+    "contact": "Contact",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
     "copyright": "© 2025 FEMAT. Tous droits réservés.",
     "follow_us": "Suivez-nous"
+  },
+  "home": {
+    "hero": {
+      "title": "Fédération Malienne de Taekwondo",
+      "subtitle": "Promouvoir et développer le Taekwondo au Mali avec excellence et intégrité",
+      "cta_about": "Découvrir FEMAT",
+      "cta_club": "Trouver un club"
+    },
+    "features": {
+      "title": "Notre Mission",
+      "subtitle": "Développer le Taekwondo au Mali en offrant des opportunités de formation, de compétition et de développement personnel à tous les niveaux.",
+      "formation": {
+        "title": "Formation",
+        "desc": "Programmes de formation pour athlètes, entraîneurs et arbitres de tous niveaux."
+      },
+      "competitions": {
+        "title": "Compétitions",
+        "desc": "Organisation de tournois nationaux et participation aux compétitions internationales."
+      },
+      "community": {
+        "title": "Communauté",
+        "desc": "Rassembler la communauté du Taekwondo malien et promouvoir les valeurs du sport."
+      }
+    },
+    "cta": {
+      "title": "Rejoignez la famille FEMAT",
+      "subtitle": "Que vous soyez débutant ou expert, jeune ou moins jeune, il y a une place pour vous dans notre communauté.",
+      "button": "Nous contacter"
+    },
+    "gallery": {
+      "presidents": "Nos Présidents",
+      "partners": "Nos Partenaires"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "thank_you": "Merci de contacter la FEMAT",
+    "intro": "À la FEMAT, nous sommes là pour soutenir tous nos membres. Que vous ayez des questions sur l'adhésion, les événements, les programmes de formation ou autre, nous serions ravis de vous répondre.",
+    "get_in_touch": "Entrer en contact",
+    "address_label": "Adresse physique :",
+    "address": "Fédération Malienne de Taekwondo Palais des Sports, ACI 2000 Bamako, Mali",
+    "address_short": "Bamako, Mali",
+    "email_label": "Email :",
+    "email_value": "femat3{'@'}yahoo.fr",
+    "phone_label": "Téléphone :",
+    "phone_value": "+223 75 94 17 81",
+    "stay_connected": "Restez connecté et suivez-nous sur les réseaux sociaux pour les actualités, événements et temps forts.",
+    "facebook": "Facebook",
+    "staff_directory": "Annuaire du personnel FEMAT",
+    "president": "Président :",
+    "secretary": "Secrétaire Général :",
+    "technical_director": "Directeur Technique :",
+    "media": "Médias & Communication :"
+  },
+  "about": {
+    "title": "À propos de la FEMAT",
+    "history_title": "Histoire",
+    "history_text": "La Fédération Malienne de Taekwondo (FEMAT) a été fondée pour promouvoir et développer le taekwondo au Mali. Au fil des ans, elle est devenue une communauté dynamique d'athlètes, d'entraîneurs et de clubs à travers le pays.",
+    "mission_title": "Mission",
+    "mission_text": "La mission de la FEMAT est de favoriser l'excellence dans le taekwondo, de soutenir les athlètes à tous les niveaux et de représenter le Mali lors des compétitions nationales et internationales.",
+    "structure_title": "Structure",
+    "structure_text": "La fédération est organisée avec un conseil d'administration, diverses commissions et des clubs affiliés à travers le Mali, assurant une gouvernance efficace et un soutien au sport."
+  },
+  "news": {
+    "by_author": "Par {author}",
+    "not_found": {
+      "title": "Article non trouvé",
+      "description": "L'article que vous recherchez n'existe pas.",
+      "back_link": "Retour aux actualités"
+    }
+  },
+  "events": {
+    "calendar": {
+      "title": "Calendrier des événements",
+      "no_events": "Aucun événement ce mois-ci."
+    },
+    "organized_by": "Organisé par {organizer}",
+    "not_found": {
+      "title": "Événement non trouvé",
+      "description": "L'événement que vous recherchez n'existe pas.",
+      "back_link": "Retour auxévénements"
+    }
+  },
+  "error": {
+    "title": "Nous ne trouvons pas la page que vous recherchez.",
+    "message": "Nous sommes désolés, mais la page que vous essayez d'accéder est introuvable. Elle a peut-être été déplacée, renommée ou supprimée. Veuillez vérifier l'URL ou essayez de rechercher la page via le menu de navigation ou retourner à l'accueil. Merci de votre compréhension.",
+    "back_home": "Retour à l'accueil"
   }
 } 

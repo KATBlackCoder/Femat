@@ -26,9 +26,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All news and event cards now have centered images for improved visual consistency.
 - **CarouselSection.vue now supports per-image custom width/height. Homepage carousels (presidents/partners) use this feature for improved image layout and flexibility.**
 - The events page now uses the EventCalendar component as the main event browsing UI, replacing the old event grid. This is a major UX improvement for event discovery and navigation.
+- Refactored navigation links to use a single composable (useNavLinks) for both NavigationMenu and AppFooter.
+- Content queries are now locale-aware, ensuring the correct language is displayed for news and events by filtering based on the URL path.
+- Updated content collection configuration to recursively scan for Markdown files in locale-specific subdirectories.
+
+### Fixed
+- Fixed a bug in the i18n locale files where email addresses containing the `@` symbol were causing "Invalid linked format" errors.
 
 ### Added
-- No new components added in this update.
+- Home page (Hero, Features, CTA) is now fully internationalized. All user-facing text in these sections uses translation keys, and both English and French locales are populated.
+- Footer is now fully internationalized. All user-facing text and quick links use translation keys, and both English and French locales are populated.
+- Contact page is now fully internationalized: all user-facing text uses translation keys, and both English and French locales are populated.
+- About page is now fully internationalized: all user-facing text uses translation keys, and both English and French locales are populated.
+- Error page is now fully internationalized: all user-facing text uses translation keys, and both English and French locales are populated.
+- News and Events sections are now fully internationalized, including list pages, detail pages, and all related components (`NewsCard`, `EventCalendar`, etc.).
+- Implemented global, locale-specific SEO meta tags (`useSeoMeta`) in `app.vue` and added page-specific titles for all pages.
+- Internationalized contact information in the footer and contact page.
 
 ## [0.1.0] - 2025-01-27
 

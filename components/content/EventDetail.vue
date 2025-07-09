@@ -5,7 +5,7 @@
       <div class="mb-6 text-muted text-sm flex gap-4 items-center flex-wrap">
         <span>{{ formatDateRange(event.startDate, event.endDate) }}</span>
         <UBadge v-if="event.category" color="primary" variant="soft">{{ event.category }}</UBadge>
-        <span v-if="event.organizer">Organized by {{ event.organizer }}</span>
+        <span v-if="event.organizer">{{ $t('events.organized_by', { organizer: event.organizer }) }}</span>
         <span v-if="event.location">
           <UIcon name="i-heroicons-map-pin" class="inline-block mr-1 text-primary" />{{ event.location }}
         </span>
@@ -17,14 +17,14 @@
         <template #leading>
           <UIcon name="i-heroicons-arrow-left" />
         </template>
-        Retour
+        {{ $t('common.back') }}
       </UButton>
     </template>
     <template v-else>
       <div class="text-center py-24">
-        <h2 class="text-2xl font-bold mb-2 text-error">Event not found</h2>
-        <p class="text-muted mb-4">The event you are looking for does not exist.</p>
-        <NuxtLink to="/events" class="text-primary hover:underline">Back to events</NuxtLink>
+        <h2 class="text-2xl font-bold mb-2 text-error">{{ $t('events.not_found.title') }}</h2>
+        <p class="text-muted mb-4">{{ $t('events.not_found.description') }}</p>
+        <NuxtLink to="/events" class="text-primary hover:underline">{{ $t('events.not_found.back_link') }}</NuxtLink>
       </div>
     </template>
   </UContainer>

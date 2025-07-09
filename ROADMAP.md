@@ -57,11 +57,17 @@ This phase brings the site to life with dynamic content, and is where **Nuxt Con
 
 This new phase focuses on implementing, populating, and refining internationalization (i18n) for all content and UI. All translation files will be completed, language switching will be fully tested, and the site will be reviewed for translation coverage and locale-specific SEO.
 
-*   [ ] **Translation Files:** Populate and refine all translation files in `i18n/` for both French and English.
-*   [ ] **UI & Content Internationalization:** Ensure all user-facing text and content is internationalized and uses translation keys.
-*   [ ] **Language Switching:** Test and refine language switching across the site.
-*   [ ] **Locale-specific SEO:** Implement and verify meta tags, titles, and descriptions for each language.
-*   [ ] **Accessibility:** Ensure language attributes and accessibility features are correct for all locales.
+*   [x] **Home Page Internationalization:** Hero, Features, and CTA sections are now fully internationalized. All user-facing text in these sections uses translation keys, and both English and French locales are populated.
+*   [x] **Footer Internationalization:** Footer fully internationalized (all user-facing text and quick links use translation keys, both locales populated).
+*   [x] **Navigation Links DRY Refactor:** Refactored navigation links to use a single composable (useNavLinks) for both navigation menu and footer.
+*   [x] **Contact Page Internationalization:** Contact page fully internationalized (all user-facing text uses translation keys, both locales populated).
+*   [x] **About Page Internationalization:** About page fully internationalized (all user-facing text uses translation keys, both locales populated).
+*   [x] **Error Page Internationalization:** Error page fully internationalized (all user-facing text uses translation keys, both locales populated).
+*   [x] **Translation Files:** Populate and refine all translation files in `i18n/` for both French and English for remaining sections.
+*   [x] **UI & Content Internationalization:** Ensure all user-facing text and content is internationalized and uses translation keys.
+*   [x] **Language Switching:** Test and refine language switching across the site.
+*   [x] **Locale-specific SEO:** Implement and verify meta tags, titles, and descriptions for each language.
+*   [x] **Accessibility:** Ensure language attributes and accessibility features are correct for all locales.
 
 ---
 
@@ -91,7 +97,7 @@ The final phase before launch involves polishing, testing, and preparing for pro
 
 *   [ ] **Monitoring:** Monitor the live site for any bugs or user-reported issues.
 *   [ ] **Feedback:** Gather feedback from stakeholders and users for future improvements.
-*   [ ] **Content Strategy:** Plan for the regular addition of new content to keep the site fresh and engaging.
+*   [ ] **Content Strategy:** Plan for the regular addition of new content to keep the site fresh and engaging. 
 *   [ ] **Planned Enhancement:** Implement controls to filter news and events (e.g., by category or date) as a future improvement after deployment.
 
 ---

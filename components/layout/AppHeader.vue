@@ -5,7 +5,7 @@
     <UContainer>
       <div class="flex h-16 items-center justify-between">
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center space-x-2">
+        <NuxtLink :to="localePath('/')" class="flex items-center space-x-2">
           <NuxtImg
             src="/femat.jpg"
             alt="FEMAT Logo"
@@ -30,7 +30,7 @@
         <!-- Right side: Language switcher and color mode -->
         <div class="flex items-center space-x-2">
           <LanguageSwitcher />
-          <ColorModeButton />
+          <ColorModeButton /> 
         </div>
       </div>
     </UContainer>
@@ -41,4 +41,7 @@
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher.vue";
 import NavigationMenu from "@/components/navigation/NavigationMenu.vue";
 import ColorModeButton from "@/components/layout/ColorModeButton.vue";
+import { useLocalePath } from '#imports'
+
+const localePath = useLocalePath()
 </script>

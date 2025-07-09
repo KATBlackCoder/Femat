@@ -8,7 +8,9 @@
     "clubs": "Clubs",
     "gallery": "Gallery",
     "resources": "Resources",
-    "contact": "Contact"
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
   },
   "common": {
     "language": "Language",
@@ -27,7 +29,99 @@
     "site_description": "Official website of the Mali Taekwondo Federation. Discover news, events, athletes and Taekwondo clubs in Mali."
   },
   "footer": {
+    "description": "Malian Taekwondo Federation – Promoting and developing Taekwondo in Mali with excellence and integrity.",
+    "quick_links": "Quick Links",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
     "copyright": "© 2025 FEMAT. All rights reserved.",
     "follow_us": "Follow us"
+  },
+  "home": {
+    "hero": {
+      "title": "Malian Taekwondo Federation",
+      "subtitle": "Promote and develop Taekwondo in Mali with excellence and integrity",
+      "cta_about": "Discover FEMAT",
+      "cta_club": "Find a club"
+    },
+    "features": {
+      "title": "Our Mission",
+      "subtitle": "Develop Taekwondo in Mali by offering training, competition, and personal development opportunities at all levels.",
+      "formation": {
+        "title": "Training",
+        "desc": "Training programs for athletes, coaches, and referees of all levels."
+      },
+      "competitions": {
+        "title": "Competitions",
+        "desc": "Organization of national tournaments and participation in international competitions."
+      },
+      "community": {
+        "title": "Community",
+        "desc": "Bring together the Malian Taekwondo community and promote the values of the sport."
+      }
+    },
+    "cta": {
+      "title": "Join the FEMAT family",
+      "subtitle": "Whether you are a beginner or expert, young or old, there is a place for you in our community.",
+      "button": "Contact us"
+    },
+    "gallery": {
+      "presidents": "Our Presidents",
+      "partners": "Our Partners"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "thank_you": "Thank you for contacting FEMAT",
+    "intro": "At FEMAT, we're here to support all of our members. Whether you have questions about membership, events, training programs, or anything else, we'd love to hear from you.",
+    "get_in_touch": "Get in Touch",
+    "address_label": "Physical Address:",
+    "address": "Fédération Malienne de Taekwondo Palais des Sports, ACI 2000 Bamako, Mali",
+    "address_short": "Bamako, Mali",
+    "email_label": "Email:",
+    "email_value": "femat3{'@'}yahoo.fr",
+    "phone_label": "Phone:",
+    "phone_value": "+223 75 94 17 81",
+    "stay_connected": "Stay connected and follow us on social media for updates, events, and highlights.",
+    "facebook": "Facebook",
+    "staff_directory": "FEMAT Staff Directory",
+    "president": "President:",
+    "secretary": "Secretary General:",
+    "technical_director": "Technical Director:",
+    "media": "Media & Communications:"
+  },
+  "about": {
+    "title": "About FEMAT",
+    "history_title": "History",
+    "history_text": "The Fédération Malienne de Taekwondo (FEMAT) was founded to promote and develop Taekwondo in Mali. Over the years, it has grown into a vibrant community of athletes, coaches, and clubs across the country.",
+    "mission_title": "Mission",
+    "mission_text": "FEMAT's mission is to foster excellence in Taekwondo, support athletes at all levels, and represent Mali in national and international competitions.",
+    "structure_title": "Structure",
+    "structure_text": "The federation is organized with a board of directors, various commissions, and affiliated clubs throughout Mali, ensuring effective governance and support for the sport."
+  },
+  "news": {
+    "by_author": "By {author}",
+    "not_found": {
+      "title": "Article not found",
+      "description": "The news article you are looking for does not exist.",
+      "back_link": "Back to news"
+    }
+  },
+  "events": {
+    "calendar": {
+      "title": "Event Calendar",
+      "no_events": "No events this month."
+    },
+    "organized_by": "Organized by {organizer}",
+    "not_found": {
+      "title": "Event not found",
+      "description": "The event you are looking for does not exist.",
+      "back_link": "Back to events"
+    }
+  },
+  "error": {
+    "title": "We can't seem to find the page you are looking for.",
+    "message": "We apologize, but the page you are trying to access cannot be found. It may have been moved, renamed, or deleted. Please check the URL for any errors, or try searching for the page using the navigation menu or go back to the home page. Thank you for your understanding.",
+    "back_home": "Back to Home"
   }
 } 

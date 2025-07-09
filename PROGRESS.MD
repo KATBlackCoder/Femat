@@ -4,8 +4,8 @@
 This document tracks the development progress of the FEMAT (Fédération Malienne de Taekwondo) website project.
 
 **Project Start Date**: January 27, 2025  
-**Current Status**: Phase 1 Complete ✅  
-**Overall Progress**: 15% Complete (1 of 8 phases)
+**Current Status**: Phase 5 In Progress 🚧  
+**Overall Progress**: 50% Complete (4 of 8 phases)
 
 ## Recent UI & Architecture Improvements
 - Extracted Hero, Features, and CTA sections into their own components for better modularity and reuse.
@@ -25,6 +25,19 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 - Removed `langDir` from `nuxt.config.ts` to resolve i18n locale file resolution issues with @nuxtjs/i18n.
 - **Added a new phase for internationalization (i18n) and localization after the community features phase. All i18n-related tasks are now consolidated in this phase. Roadmap, TODO, and changelog updated accordingly.**
 - **Phase 2 static pages are now implemented as Vue/Nuxt components only (no Nuxt Content/Markdown). Nuxt Content and content modeling are now introduced in Phase 3. Roadmap, TODO, and changelog updated to reflect this change.**
+- Navigation links are now DRY: both NavigationMenu and AppFooter use a single useNavLinks composable for their links.
+- Content queries are now locale-aware, ensuring the correct language is displayed for news and events.
+- Fixed a bug with i18n where email addresses with `@` symbols were causing parsing errors.
+
+## Recent Internationalization Progress
+- Home page (Hero, Features, CTA) is now fully internationalized. All user-facing text in these sections uses translation keys, and both English and French locales are populated. This marks a major milestone in Phase 4 (i18n & Localization).
+- Footer is now fully internationalized. All user-facing text and quick links use translation keys, and both English and French locales are populated. This marks another milestone in Phase 4 (i18n & Localization).
+- Contact page is now fully internationalized: all user-facing text uses translation keys, and both English and French locales are populated.
+- About page is now fully internationalized: all user-facing text uses translation keys, and both English and French locales are populated.
+- Error page is now fully internationalized: all user-facing text uses translation keys, and both English and French locales are populated.
+- News and Events sections (list and detail pages) are now fully internationalized.
+- All remaining hardcoded strings have been replaced with translation keys.
+- Locale-specific SEO has been implemented site-wide using `useSeoMeta`.
 
 ---
 
@@ -75,9 +88,9 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 3: Dynamic Features - News & Events (IN PROGRESS)
+## ✅ Phase 3: Dynamic Features - News & Events (COMPLETED)
 **Estimated Duration**: 3-4 days  
-**Status**: 🚧 IN PROGRESS  
+**Status**: ✅ COMPLETED  
 
 ### Tasks:
 - [x] Content modeling for news and events (frontmatter schema, sample Markdown files)
@@ -91,22 +104,22 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 
 ---
 
-## 📋 Phase 4: Internationalization (i18n) & Localization (PENDING)
+## ✅ Phase 4: Internationalization (i18n) & Localization (COMPLETED)
 **Estimated Duration**: 2 days  
-**Status**: ⏳ WAITING  
+**Status**: ✅ COMPLETED  
 
 ### Planned Tasks:
-- [ ] Populate and refine all translation files in `i18n/` for both French and English
-- [ ] Internationalize all UI and content (translation keys everywhere)
-- [ ] Test and refine language switching
-- [ ] Locale-specific SEO (meta tags, titles, descriptions)
-- [ ] Accessibility for all locales
+- [x] Populate and refine all translation files in `i18n/` for both French and English
+- [x] Internationalize all UI and content (translation keys everywhere)
+- [x] Test and refine language switching
+- [x] Locale-specific SEO (meta tags, titles, descriptions)
+- [x] Accessibility for all locales
 
 ---
 
-## 📋 Phase 5: Media & Resources (PENDING)
+## 📋 Phase 5: Media & Resources (IN PROGRESS)
 **Estimated Duration**: 2-3 days  
-**Status**: ⏳ WAITING  
+**Status**: 🚧 IN PROGRESS  
 
 ### Planned Tasks:
 - [ ] Photo/video gallery (`/gallery`)

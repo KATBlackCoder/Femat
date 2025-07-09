@@ -55,7 +55,7 @@ This phase focuses on building the essential static content and pages as Vue/Nux
 
 Once these tasks are complete, the site will have a solid content foundation and be ready for dynamic features in Phase 3.
 
-# Phase 3: Dynamic Features - News & Events (IN PROGRESS)
+# Phase 3: Dynamic Features - News & Events (COMPLETE)
 
 - [x] **Content Modeling:**
     - [x] Define frontmatter schema for `news` and `events` (Markdown + frontmatter)
@@ -72,15 +72,35 @@ Once these tasks are complete, the site will have a solid content foundation and
 - [x] **Event Calendar:**
     - [x] Created a calendar-centric event browsing experience on the events page using the EventCalendar component. The old event grid is now replaced by the calendar UI for all event exploration.
 
-# Phase 4: Internationalization (i18n) & Localization
+# Phase 4: Internationalization (i18n) & Localization (COMPLETE)
 
-- [ ] **Translation Files:** Populate and refine all translation files in `i18n/` for both French and English.
-- [ ] **UI & Content Internationalization:** Ensure all user-facing text and content is internationalized and uses translation keys.
-- [ ] **Language Switching:** Test and refine language switching across the site.
-- [ ] **Locale-specific SEO:** Implement and verify meta tags, titles, and descriptions for each language.
-- [ ] **Accessibility:** Ensure language attributes and accessibility features are correct for all locales.
+- [x] **Home Page Internationalization:**
+    - [x] All user-facing text in Hero, Features, and CTA sections now uses translation keys ($t). Both English and French locales are populated for these sections.
+- [x] **Footer Internationalization:**
+    - [x] Footer fully internationalized (all user-facing text and quick links use translation keys, both locales populated).
+- [x] **Navigation Links DRY Refactor:**
+    - [x] Refactored navigation links to use a single composable (useNavLinks) for DRYness in nav and footer.
+- [x] **Translation Files:**
+    - [x] Populate and refine all translation files in `i18n/locales/en.json` and `i18n/locales/fr.json` for all sections.
+- [x] **About Page Internationalization:**
+    - [x] About page fully internationalized (all user-facing text uses translation keys, both locales populated).
+- [x] **Contact Page Internationalization:**
+    - [x] Contact page fully internationalized (all user-facing text uses translation keys, both locales populated).
+- [x] **Error Page Internationalization:**
+    - [x] Error page fully internationalized (all user-facing text uses translation keys, both locales populated).
+- [x] **UI & Content Internationalization:**
+    - [x] Replace all hardcoded UI text in all components/pages with `$t()` or `t()`.
+    - [x] Internationalize content queries to be locale-aware.
+- [x] **Language Switching:**
+    - [x] Test and refine language switching across the site.
+- [x] **Locale-specific SEO:**
+    - [x] Implement and verify meta tags, titles, and descriptions for each language using `useSeoMeta`.
+- [x] **Accessibility:**
+    - [x] Ensure language attributes and accessibility features are correct for all locales (ARIA, alt text, etc.).
+- [x] **Review:**
+    - [x] Scan for any untranslated or hardcoded strings and fix as needed.
 
-# Phase 5: Media & Resources
+# Phase 5: Media & Resources (IN PROGRESS)
 
 - [ ] **Gallery:** Develop the photo and video gallery (`/gallery`), ensuring all images are optimized by `@nuxt/image`.
     - [ ] Leverage the `CarouselSection.vue` component as the foundation for gallery features and media carousels.

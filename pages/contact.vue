@@ -1,39 +1,34 @@
 <template>
   <UContainer class="py-12">
-    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-primary">Contact Us</h1>
+    <h1 class="text-3xl text-center md:text-4xl font-bold mb-4 text-primary">{{ $t('contact.title') }}</h1>
     <UCard class="mb-8">
       <template #header>
         <h2 class="text-xl font-bold text-primary">
-          Thank you for contacting FEMAT
+          {{ $t('contact.thank_you') }}
         </h2>
       </template>
       <p class="text-muted mb-2">
-        At FEMAT, we're here to support all of our members. Whether you have
-        questions about membership, events, training programs, or anything else,
-        we'd love to hear from you.
+        {{ $t('contact.intro') }}
       </p>
     </UCard>
     <div class="grid md:grid-cols-2 gap-8 mb-10">
       <UCard>
         <template #header>
-          <h3 class="text-lg font-bold text-primary">Get in Touch</h3>
+          <h3 class="text-lg font-bold text-primary">{{ $t('contact.get_in_touch') }}</h3>
         </template>
         <div class="space-y-2">
           <p class="text-neutral-700 dark:text-neutral-300">
-            <span class="font-semibold">Physical Address:</span> Siège de la
-            Fédération Malienne de Taekwondo Palais des Sports, ACI 2000 Bamako,
-            Mali
+            <span class="font-semibold">{{ $t('contact.address_label') }}</span> {{ $t('contact.address') }}
           </p>
           <p class="text-neutral-700 dark:text-neutral-300">
-            <span class="font-semibold">Email:</span> femat3@yahoo.fr
+            <span class="font-semibold">{{ $t('contact.email_label') }}</span> {{ $t('contact.email_value') }}
           </p>
           <p class="text-neutral-700 dark:text-neutral-300">
-            <span class="font-semibold">Phone:</span> +22375941781
+            <span class="font-semibold">{{ $t('contact.phone_label') }}</span> {{ $t('contact.phone_value') }}
           </p>
         </div>
         <p class="mt-4 text-muted">
-          Stay connected and follow us on social media for updates, events, and
-          highlights.
+          {{ $t('contact.stay_connected') }}
         </p>
         <div class="flex gap-4 mt-2">
           <UButton 
@@ -44,22 +39,22 @@
             icon="i-simple-icons-facebook"
             target="_blank"
             rel="noopener"
-          >Facebook</UButton>
+          >{{ $t('contact.facebook') }}</UButton>
         </div>
       </UCard>
       <UCard>
         <template #header>
-          <h3 class="text-lg font-bold text-primary">FEMAT Staff Directory</h3>
+          <h3 class="text-lg font-bold text-primary">{{ $t('contact.staff_directory') }}</h3>
         </template>
         <ul class="space-y-2">
           <li>
             <p class="text-neutral-700 dark:text-neutral-300">
-              <span class="font-semibold">President:</span> Alioune Badara Traoré
+              <span class="font-semibold">{{ $t('contact.president') }}</span> Alioune Badara Traoré
             </p>
           </li>
           <li>
             <p class="text-neutral-700 dark:text-neutral-300">
-              <span class="font-semibold">Secretary General:</span> Fatoumata
+              <span class="font-semibold">{{ $t('contact.secretary') }}</span> Fatoumata
               Koné —
               <a
                 href="mailto:secretary@femat.ml"
@@ -70,7 +65,7 @@
           </li>
           <li>
             <p class="text-neutral-700 dark:text-neutral-300">
-              <span class="font-semibold">Technical Director:</span> Amadou
+              <span class="font-semibold">{{ $t('contact.technical_director') }}</span> Amadou
               Diarra —
               <a
                 href="mailto:tech@femat.ml"
@@ -81,7 +76,7 @@
           </li>
           <li>
             <p class="text-neutral-700 dark:text-neutral-300">
-              <span class="font-semibold">Media & Communications:</span> Mariam
+              <span class="font-semibold">{{ $t('contact.media') }}</span> Mariam
               Coulibaly —
               <a
                 href="mailto:media@femat.ml"
@@ -97,5 +92,9 @@
 </template>
 
 <script setup lang="ts">
-// No form import needed
+const { t } = useI18n()
+
+useSeoMeta({
+  title: t('nav.contact')
+})
 </script>

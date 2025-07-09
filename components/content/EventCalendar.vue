@@ -2,7 +2,7 @@
   <div>
     <UCard class="mb-6">
       <template #header>
-        <h2 class="text-2xl text-center font-bold text-primary">Calendrier des événements</h2>
+        <h2 class="text-2xl text-center font-bold text-primary">{{ $t('events.calendar.title') }}</h2>
       </template>
       <UCalendar v-model="selectedDate" color="primary" size="xl">
         <template #day="{ day }">
@@ -42,7 +42,7 @@
       </UCard>
     </div>
     <div v-else class="text-muted text-center mt-8">
-      Aucun événement ce mois-ci.
+      {{ $t('events.calendar.no_events') }}
     </div>
   </div>
 </template>
@@ -63,11 +63,14 @@ interface EventItem {
   path: string
 }
 
+const { locale } = useI18n()
 const today = new Date()
 const selectedDate = shallowRef(new CalendarDate(today.getFullYear(), today.getMonth() + 1, today.getDate()))
 
 const { data: events } = await useAsyncData('events-calendar', () =>
-  queryCollection('events').all()
+  queryCollection('events')
+    .where('path', 'LIKE', `/events/${locale.value}/%`)
+    .all()
 )
 
 const eventsByDate = computed(() => {

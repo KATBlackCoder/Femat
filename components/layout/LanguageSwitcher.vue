@@ -1,37 +1,29 @@
 <template>
-  <UDropdownMenu :items="languageItems" :popper="{ placement: 'bottom-start' }">
     <UButton 
       variant="ghost" 
       size="sm"
-      :label="currentLang"
-      trailing-icon="i-heroicons-chevron-down-20-solid"
+    :label="currentLabel"
       class="font-medium"
+    trailing-icon="i-heroicons-language"
+    @click="switchLanguage"
     />
-  </UDropdownMenu>
 </template>
 
 <script setup lang="ts">
-// Temporary simple implementation - will be enhanced once i18n is fully configured
-const currentLang = ref('Français')
+import { useI18n } from '#imports'
+import { computed } from 'vue'
 
-const languageItems = computed(() => [
-  [
-    {
-      label: 'Français',
-      click: () => {
-        currentLang.value = 'Français'
-        // TODO: Implement actual language switching once i18n is working
-      },
-      disabled: currentLang.value === 'Français'
-    },
-    {
-      label: 'English',
-      click: () => {
-        currentLang.value = 'English'
-        // TODO: Implement actual language switching once i18n is working
-      },
-      disabled: currentLang.value === 'English'
-    }
-  ]
-])
+const { locale, setLocale } = useI18n()
+
+const labels: Record<string, string> = {
+  fr: 'Français',
+  en: 'English'
+}
+
+const currentLabel = computed(() => labels[locale.value] || locale.value)
+
+function switchLanguage() {
+  // Toggle between 'fr' and 'en' using setLocale for proper i18n handling
+  setLocale(locale.value === 'fr' ? 'en' : 'fr')
+}
 </script> 

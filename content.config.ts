@@ -4,7 +4,7 @@ export default defineContentConfig({
   collections: {
     news: defineCollection({
       type: 'page',
-      source: 'news/*.md',
+      source: 'news/**/*.md',
       // Optionally, add schema validation:
       schema: z.object({
         title: z.string(),
@@ -17,7 +17,7 @@ export default defineContentConfig({
     }),
     events: defineCollection({
       type: 'page',
-      source: 'events/*.md',
+      source: 'events/**/*.md',
       schema: z.object({
         title: z.string(),
         startDate: z.string(),

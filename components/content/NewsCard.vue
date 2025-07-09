@@ -14,7 +14,7 @@
         </div>
         <p class="mt-2 text-muted">{{ news.summary }}</p>
       </div>
-      <div v-if="news.author" class="mt-2 text-xs text-muted">By {{ news.author }}</div>
+      <div v-if="news.author" class="mt-2 text-xs text-muted">{{ $t('news.by_author', { author: news.author }) }}</div>
     </div>
   </UCard>
 </template>
