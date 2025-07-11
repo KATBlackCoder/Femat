@@ -10,7 +10,8 @@
 - **Deployment:** NuxtHub, Vercel, or Netlify (CI/CD from GitHub)
 
 ## Directory Structure
-- `assets/` — Images, fonts, stylesheets
+- `assets/` — Global assets like fonts and primary stylesheets that are processed by the build tool.
+- `public/` — Publicly served, static assets. All content-related images (for carousels, galleries, content pages) must be placed here to be correctly processed by `@nuxt/image`.
 - `components/` — Reusable Vue components, organized by feature/domain:
   - *Note: The subfolders under `components/` (such as `layout/`, `home/`, `navigation/`, etc.) are flexible. You can add, change, or remove these subfolders as the project evolves and requirements change.*
   - `layout/` — Global layout (header, footer, nav)

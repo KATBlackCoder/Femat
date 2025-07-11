@@ -102,12 +102,35 @@ Once these tasks are complete, the site will have a solid content foundation and
 
 # Phase 5: Media & Resources (IN PROGRESS)
 
-- [ ] **Gallery:** Develop the photo and video gallery (`/gallery`), ensuring all images are optimized by `@nuxt/image`.
-    - [ ] Leverage the `CarouselSection.vue` component as the foundation for gallery features and media carousels.
-- [ ] **Resource Hub:** Create a page (`/resources`) to list and provide downloads for official documents (rules, regulations, etc.).
+- [x] **Content Modeling:**
+    - [x] Define a `galleries` collection in `content.config.ts` with fields for `title`, `description`, and an `images` array (with `src`, `alt`, `caption`).
+    - [x] Define a `resources` collection in `content.config.ts` with fields for `title`, `description`, and `file` path.
+- [x] **Gallery Feature:**
+    - [x] Create `content/galleries/` directory with `en/` and `fr/` subdirectories for Markdown-based galleries.
+    - [x] Develop a `pages/gallery/index.vue` page to display a list of all available photo galleries.
+    - [x] Create a `GalleryCard.vue` component for the gallery list page (to serve as the summary "poster" for a gallery).
+    - [x] Develop a `pages/gallery/[slug].vue` detail page to display a single, complete gallery.
+    - [x] Create a new `components/content/GalleryCarousel.vue` component to be used on the gallery detail page.
+        - [x] This new component will be specialized for displaying images with captions, separate from the simpler `CarouselSection.vue`.
+        - [x] This approach avoids modifying `CarouselSection.vue` and `pages/index.vue`, ensuring the homepage carousels remain unaffected.
+    - [x] Internationalize all UI components and content queries for the gallery.
+- [x] **Resource Hub Feature:**
+    - [x] Create `content/resources/` directory with `en/` and `fr/` subdirectories.
+    - [x] Develop a `pages/resources/index.vue` page to list all downloadable documents.
+    - [x] Style the resource list using Nuxt UI components for a clean, user-friendly interface.
+- [x] **Image Optimization & Asset Unification:**
+    - [x] Unified all site images into the `/public` directory to work consistently with `<NuxtImg>`.
+    - [x] Removed the `image.dir` configuration from `nuxt.config.ts` and deleted the now-unused `useAssetImages.ts` composable.
+    - [x] All images, including those in galleries and carousels, are now processed and optimized by `@nuxt/image`.
 
 # Phase 6: Finalization & Deployment
 
+- [x] **Legal Pages:**
+    - [x] Create static content pages for Privacy Policy (`/privacy-policy`) and Terms of Service (`/terms-of-service`).
+    - [x] Add placeholder content for both pages.
+    - [x] Internationalize both pages (FR/EN).
+    - [x] Add links to these pages in the website footer.
+- [ ] **Code Quality Refactor:** To improve code robustness and maintainability, separate TypeScript logic from Vue components. Move business logic and state management into dedicated composables (following the `useNavLinks.ts` pattern) or Pinia stores.
 - [ ] **Responsive Testing:** Conduct a thorough review of the entire site on a wide range of devices (mobile, tablet, desktop).
 - [ ] **Performance Audit:** Run Lighthouse tests and optimize for a score of 90+ across all metrics.
 - [ ] **Accessibility Review:** Ensure the site meets modern accessibility standards (WCAG).

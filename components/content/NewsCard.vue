@@ -5,7 +5,7 @@
     </template>
     <div class="flex-1 flex flex-col justify-between">
       <div>
-        <NuxtLink :to="news.path" class="text-xl font-bold text-primary hover:underline">
+        <NuxtLink :to="newsLink" class="text-xl font-bold text-primary hover:underline">
           {{ news.title }}
         </NuxtLink>
         <div class="flex items-center gap-2 mt-1">
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 
-defineProps({
+const props = defineProps({
   news: {
     type: Object as PropType<{
       title: string
@@ -34,6 +34,13 @@ defineProps({
     }>,
     required: true
   }
+})
+
+const localePath = useLocalePath()
+
+const newsLink = computed(() => {
+  const slug = props.news.path.split('/').pop()
+  return localePath(`/news/${slug}`)
 })
 
 function formatDate(date: string) {

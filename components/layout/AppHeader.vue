@@ -7,7 +7,7 @@
         <!-- Logo -->
         <NuxtLink :to="localePath('/')" class="flex items-center space-x-2">
           <NuxtImg
-            src="/femat.jpg"
+            src="/images/femat.jpg"
             alt="FEMAT Logo"
             width="40"
             height="40"

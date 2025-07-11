@@ -88,7 +88,19 @@
     "president": "Président :",
     "secretary": "Secrétaire Général :",
     "technical_director": "Directeur Technique :",
-    "media": "Médias & Communication :"
+    "media": "Médias & Communication :",
+    "contact": {
+      "title": "Nous Contacter",
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Envoyer le Message",
+      "success": "Message envoyé avec succès !",
+      "error": "Une erreur est survenue. Veuillez réessayer."
+    },
+    "gallery": {
+      "no_galleries_found": "Aucune galerie trouvée pour le moment."
+    }
   },
   "about": {
     "title": "À propos de la FEMAT",
@@ -119,9 +131,60 @@
       "back_link": "Retour auxévénements"
     }
   },
+  "gallery": {
+    "no_galleries_found": "Aucune galerie trouvée.",
+    "back_to_galleries": "Retour à toutes les galeries",
+    "gallery_not_found": "Galerie non trouvée"
+  },
+  "resources": {
+    "title": "Ressources",
+    "description": "Retrouvez les documents officiels, les livres de règles et d'autres fichiers importants de la fédération.",
+    "download_button": "Télécharger",
+    "no_resources_found": "Aucune ressource trouvée."
+  },
   "error": {
-    "title": "Nous ne trouvons pas la page que vous recherchez.",
-    "message": "Nous sommes désolés, mais la page que vous essayez d'accéder est introuvable. Elle a peut-être été déplacée, renommée ou supprimée. Veuillez vérifier l'URL ou essayez de rechercher la page via le menu de navigation ou retourner à l'accueil. Merci de votre compréhension.",
+    "title": "Page non trouvée",
+    "message": "Désolé, la page que vous recherchez n'existe pas.",
     "back_home": "Retour à l'accueil"
+  },
+  "privacy_policy": {
+    "title": "Politique de Confidentialité",
+    "last_updated": "Dernière mise à jour : 15 mai 2025",
+    "introduction": {
+      "title": "Introduction",
+      "text": "Ceci est un placeholder pour l'introduction de votre politique de confidentialité. Elle doit expliquer ce que la politique couvre et pourquoi elle est importante."
+    },
+    "information_we_collect": {
+      "title": "Informations que nous collectons",
+      "text": "Ceci est un placeholder. Décrivez les types d'informations que vous collectez auprès des utilisateurs, telles que les données personnelles, les données d'utilisation, etc."
+    },
+    "how_we_use_information": {
+      "title": "Comment nous utilisons vos informations",
+      "text": "Ceci est un placeholder. Expliquez comment vous utilisez les informations que vous collectez, par exemple pour fournir des services, communiquer et analyser."
+    },
+    "contact_us": {
+      "title": "Nous Contacter",
+      "text": "Ceci est un placeholder. Fournissez des informations de contact pour les utilisateurs qui ont des questions sur la politique de confidentialité."
+    }
+  },
+  "terms_of_service": {
+    "title": "Conditions d'Utilisation",
+    "last_updated": "Dernière mise à jour : 15 mai 2025",
+    "agreement": {
+      "title": "Acceptation des conditions",
+      "text": "Ceci est un placeholder pour votre acceptation des conditions. En utilisant notre site, vous acceptez ces conditions."
+    },
+    "use_of_site": {
+      "title": "Utilisation du site",
+      "text": "Ceci est un placeholder. Décrivez les utilisations autorisées et interdites de votre site web."
+    },
+    "governing_law": {
+      "title": "Droit applicable",
+      "text": "Ceci est un placeholder. Spécifiez la juridiction et les lois qui régissent les conditions d'utilisation."
+    },
+    "contact_us": {
+      "title": "Nous Contacter",
+      "text": "Ceci est un placeholder. Fournissez des informations de contact pour les utilisateurs ayant des questions sur les conditions."
+    }
   }
 } 

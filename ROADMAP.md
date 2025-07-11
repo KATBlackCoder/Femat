@@ -75,9 +75,10 @@ This new phase focuses on implementing, populating, and refining internationaliz
 
 This phase adds rich media content and important documents to the site.
 
-*   [ ] **Gallery:** Develop the photo and video gallery (`/gallery`), ensuring all images are optimized by `@nuxt/image`.
-    *   [ ] Leverage the `CarouselSection.vue` component as the foundation for gallery features and media carousels.
-*   [ ] **Resource Hub:** Create a page (`/resources`) to list and provide downloads for official documents (rules, regulations, etc.).
+*   [x] **Gallery:** Develop the photo and video gallery (`/gallery`), ensuring all images are optimized by `@nuxt/image`.
+    *   [x] Created a specialized `GalleryCarousel.vue` component to handle rich gallery data (captions), keeping it separate from the simpler `CarouselSection.vue` used on the homepage.
+    *   [x] Unified all image assets into the `/public` directory for consistent handling with Nuxt Image, removing previous constraints from `nuxt.config.ts`.
+*   [x] **Resource Hub:** Create a page (`/resources`) to list and provide downloads for official documents (rules, regulations, etc.).
 
 ---
 
@@ -85,6 +86,8 @@ This phase adds rich media content and important documents to the site.
 
 The final phase before launch involves polishing, testing, and preparing for production.
 
+*   [x] **Legal Pages:** Create static content pages for Privacy Policy and Terms of Service.
+*   [ ] **Code Quality Refactor:** Separate business logic from Vue components into composables and stores to improve code quality and maintainability.
 *   [ ] **Responsive Testing:** Conduct a thorough review of the entire site on a wide range of devices (mobile, tablet, desktop).
 *   [ ] **Performance Audit:** Run Lighthouse tests and optimize for a score of 90+ across all metrics.
 *   [ ] **Accessibility Review:** Ensure the site meets modern accessibility standards (WCAG).

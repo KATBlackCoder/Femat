@@ -28,6 +28,30 @@ export default defineContentConfig({
         category: z.string().optional(),
         organizer: z.string().optional()
       })
+    }),
+    galleries: defineCollection({
+      type: 'page',
+      source: 'galleries/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        coverImage: z.string(),
+        images: z.array(z.object({
+          src: z.string(),
+          alt: z.string(),
+          caption: z.string().optional()
+        }))
+      })
+    }),
+    resources: defineCollection({
+      type: 'page',
+      source: 'resources/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        category: z.string().optional(),
+        file: z.string() // Path to the downloadable file in /public
+      })
     })
   }
 })

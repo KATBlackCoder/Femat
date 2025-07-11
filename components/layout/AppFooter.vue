@@ -5,7 +5,7 @@
           <!-- Logo and description -->
           <div class="md:col-span-2">
             <div class="flex items-center space-x-2 mb-4">
-              <NuxtImg src="/femat.jpg" alt="FEMAT Logo" class="h-8 w-auto rounded-lg" />
+              <NuxtImg src="/images/femat.jpg" alt="FEMAT Logo" class="h-8 w-auto rounded-lg" />
               <span class="font-bold text-gray-900 dark:text-white">FEMAT</span>
             </div>
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-md">

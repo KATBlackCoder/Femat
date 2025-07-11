@@ -119,9 +119,60 @@
       "back_link": "Back to events"
     }
   },
+  "gallery": {
+    "no_galleries_found": "No galleries found.",
+    "back_to_galleries": "Back to all galleries",
+    "gallery_not_found": "Gallery not found"
+  },
+  "resources": {
+    "title": "Resources",
+    "description": "Find official documents, rulebooks, and other important files from the federation.",
+    "download_button": "Download",
+    "no_resources_found": "No resources found."
+  },
   "error": {
-    "title": "We can't seem to find the page you are looking for.",
-    "message": "We apologize, but the page you are trying to access cannot be found. It may have been moved, renamed, or deleted. Please check the URL for any errors, or try searching for the page using the navigation menu or go back to the home page. Thank you for your understanding.",
+    "title": "Page not found",
+    "message": "Sorry, the page you are looking for does not exist.",
     "back_home": "Back to Home"
+  },
+  "privacy_policy": {
+    "title": "Privacy Policy",
+    "last_updated": "Last updated: May 15, 2025",
+    "introduction": {
+      "title": "Introduction",
+      "text": "This is a placeholder for the introduction to your privacy policy. It should explain what the policy covers and why it's important."
+    },
+    "information_we_collect": {
+      "title": "Information We Collect",
+      "text": "This is a placeholder. Describe the types of information you collect from users, such as personal data, usage data, etc."
+    },
+    "how_we_use_information": {
+      "title": "How We Use Your Information",
+      "text": "This is a placeholder. Explain how you use the information you collect, such as for providing services, communication, and analytics."
+    },
+    "contact_us": {
+      "title": "Contact Us",
+      "text": "This is a placeholder. Provide contact information for users who have questions about the privacy policy."
+    }
+  },
+  "terms_of_service": {
+    "title": "Terms of Service",
+    "last_updated": "Last updated: May 15, 2025",
+    "agreement": {
+      "title": "Agreement to Terms",
+      "text": "This is a placeholder for your agreement to terms. By using our site, you agree to these terms."
+    },
+    "use_of_site": {
+      "title": "Use of the Site",
+      "text": "This is a placeholder. Describe the permitted and prohibited uses of your website."
+    },
+    "governing_law": {
+      "title": "Governing Law",
+      "text": "This is a placeholder. Specify the jurisdiction and laws that govern the terms of service."
+    },
+    "contact_us": {
+      "title": "Contact Us",
+      "text": "This is a placeholder. Provide contact information for users with questions about the terms."
+    }
   }
 } 

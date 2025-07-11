@@ -11,7 +11,7 @@
     <!-- Carousel Sections Side by Side -->
     <UCard class="mb-8">
       <template #header>
-        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">{{ $t('nav.gallery') }}</h2>
+        <h2 class="text-2xl md:text-3xl text-center font-bold text-primary mb-4">{{ $t('nav.gallery') }}</h2>
       </template>
       <div class="flex flex-col md:flex-row gap-8">
         <div class="flex-1">
@@ -36,28 +36,22 @@ import CarouselSection from '~/components/layout/CarouselSection.vue'
 
 const { t } = useI18n()
 
-// Presidents Images
-const presidentsImageModules = import.meta.glob('~/assets/images/presidents/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' })
-// Map to relative paths for Nuxt Image (strip '/_nuxt/assets/images/')
-const presidentsImages = (Object.values(presidentsImageModules) as string[]).map((url, idx) => {
-  const match = url.match(/\/assets\/images\/(.*)$/)
-  const src = match ? match[1] : url
-  // Example: set custom size for the first image
-  if (idx === 0) return { src, width: 300, height: 400 }
-  return src
-})
+// Presidents Images - now using direct paths from /public
+const presidentsImages = [
+  { src: '/images/presidents/1.jpg', width: 300, height: 400 },
+  '/images/presidents/2.jpg',
+  '/images/presidents/3.png'
+]
 
-// Partners Images
-const partnersImageModules = import.meta.glob('~/assets/images/partners/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' })
-const partnersImages = (Object.values(partnersImageModules) as string[]).map((url, idx) => {
-  const match = url.match(/\/assets\/images\/(.*)$/)
-  const src = match ? match[1] : url
-  // Example: set custom size for the second image
-  if (idx === 3) return { src, width: 300, height: 200 }
-  if (idx === 4) return { src, width: 500, height: 200 }
-  if (idx === 5) return { src, width: 430, height: 260 }
-  return src
-})
+// Partners Images - now using direct paths from /public
+const partnersImages = [
+  '/images/partners/pa1.png',
+  '/images/partners/pa2.png',
+  '/images/partners/pa3.png',
+  { src: '/images/partners/pa4.png', width: 300, height: 200 },
+  { src: '/images/partners/pa5.png', width: 500, height: 200 },
+  { src: '/images/partners/pa6.jpg', width: 430, height: 260 }
+]
 
 // SEO Meta tags
 useSeoMeta({

@@ -29,9 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored navigation links to use a single composable (useNavLinks) for both NavigationMenu and AppFooter.
 - Content queries are now locale-aware, ensuring the correct language is displayed for news and events by filtering based on the URL path.
 - Updated content collection configuration to recursively scan for Markdown files in locale-specific subdirectories.
+- Updated all Nuxt Content queries to use the modern `queryCollection` API, ensuring compatibility with the latest version. This fixed data fetching on the new gallery page.
+- **Unified image asset strategy by moving all images to the `/public` directory. Removed the `image.dir` configuration from `nuxt.config.ts` and deprecated the `useAssetImages.ts` composable.**
 
 ### Fixed
 - Fixed a bug in the i18n locale files where email addresses containing the `@` symbol were causing "Invalid linked format" errors.
+- **Fixed a critical bug where images in the gallery and carousels would not load due to an incorrect path configuration in `nuxt.config.ts`. All images now load correctly.**
 
 ### Added
 - Home page (Hero, Features, CTA) is now fully internationalized. All user-facing text in these sections uses translation keys, and both English and French locales are populated.
@@ -42,6 +45,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - News and Events sections are now fully internationalized, including list pages, detail pages, and all related components (`NewsCard`, `EventCalendar`, etc.).
 - Implemented global, locale-specific SEO meta tags (`useSeoMeta`) in `app.vue` and added page-specific titles for all pages.
 - Internationalized contact information in the footer and contact page.
+- Implemented the gallery list page (`/gallery`), which displays a grid of `GalleryCard` components for each available gallery.
+- **Added a full gallery feature, including a detail page (`/gallery/[slug]`) and a new, specialized `GalleryCarousel.vue` component to display images with captions. This follows a clean architecture that separates the gallery from the simpler homepage carousels.**
+- **Added a Resource Hub (`/resources`) to provide a centralized location for downloading official documents. The page is fully internationalized and uses Nuxt UI for a clean interface.**
+- **Added legal pages (`/privacy-policy`, `/terms-of-service`) with placeholder content and internationalization. Footer links are now active.**
 
 ## [0.1.0] - 2025-01-27
 

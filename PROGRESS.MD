@@ -28,6 +28,8 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 - Navigation links are now DRY: both NavigationMenu and AppFooter use a single useNavLinks composable for their links.
 - Content queries are now locale-aware, ensuring the correct language is displayed for news and events.
 - Fixed a bug with i18n where email addresses with `@` symbols were causing parsing errors.
+- **Updated all Nuxt Content data fetching to use the modern `queryCollection` API, replacing the deprecated `queryContent` and ensuring compatibility with the latest version.**
+- **Unified image asset strategy by moving all images to the `/public` directory. This resolved `<NuxtImg>` pathing issues by removing the conflicting `image.dir` configuration from `nuxt.config.ts` and deprecating the `useAssetImages.ts` composable.**
 
 ## Recent Internationalization Progress
 - Home page (Hero, Features, CTA) is now fully internationalized. All user-facing text in these sections uses translation keys, and both English and French locales are populated. This marks a major milestone in Phase 4 (i18n & Localization).
@@ -121,11 +123,22 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 **Estimated Duration**: 2-3 days  
 **Status**: 🚧 IN PROGRESS  
 
+### Completed Tasks
+- [x] **Content Modeling**: Defined `galleries` and `resources` collections in `content.config.ts` and created corresponding content directories with sample files.
+- [x] **Gallery Feature**:
+    - [x] **Architecture**: Decided to create a new, specialized `GalleryCarousel.vue` to handle rich gallery data (images with captions), keeping it separate from the simpler `CarouselSection.vue` used on the homepage. This avoids bloating the layout component and keeps concerns separate.
+    - [x] **List Page**: Implemented `pages/gallery/index.vue` with a grid of `GalleryCard` components.
+    - [x] **Detail Page**: Implemented `pages/gallery/[slug].vue` to display a single gallery using the new `GalleryCarousel.vue`.
+    - [x] **Data Fetching**: All content queries use the modern, locale-aware `queryCollection` API.
+    - [x] **Internationalization**: The entire gallery feature is fully internationalized.
+- [x] **Image Asset Unification**:
+    - [x] Fixed a critical bug preventing gallery images from loading by unifying the site's image asset strategy.
+    - [x] All images are now located in the `/public` directory to ensure compatibility with `<NuxtImg>`.
+    - [x] Removed the restrictive `image.dir` configuration from `nuxt.config.ts` and deleted the `useAssetImages.ts` composable.
+    - [x] All media assets are now correctly optimized by `@nuxt/image`.
+
 ### Planned Tasks:
-- [ ] Photo/video gallery (`/gallery`)
-- [ ] Resource hub (`/resources`)
-- [ ] Document downloads
-- [ ] Image optimization implementation
+- [x] Implement the Resource Hub (`/resources`) with document listings.
 
 ---
 
@@ -134,6 +147,8 @@ This document tracks the development progress of the FEMAT (Fédération Malienn
 **Status**: ⏳ WAITING  
 
 ### Planned Tasks:
+- [x] Create static content pages for Privacy Policy and Terms of Service.
+- [ ] Code Quality Refactor
 - [ ] Comprehensive responsive testing
 - [ ] Performance optimization (Lighthouse 90+)
 - [ ] Accessibility review (WCAG compliance)
