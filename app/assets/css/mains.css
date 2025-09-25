@@ -4,45 +4,6 @@
 @theme {
   /* Fonts FEMAT */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
-  /* Couleurs du drapeau malien - Vert Mali */
-  --color-mali-50: #f0fdf4;
-  --color-mali-100: #dcfce7;
-  --color-mali-200: #bbf7d0;
-  --color-mali-300: #86efac;
-  --color-mali-400: #4ade80;
-  --color-mali-500: #22c55e;
-  --color-mali-600: #16a34a;
-  --color-mali-700: #15803d;
-  --color-mali-800: #166534;
-  --color-mali-900: #14532d;
-  --color-mali-950: #052e16;
-  
-  /* Couleurs du drapeau malien - Jaune Mali */
-  --color-mali-yellow-50: #fefce8;
-  --color-mali-yellow-100: #fef3c7;
-  --color-mali-yellow-200: #fde68a;
-  --color-mali-yellow-300: #fcd34d;
-  --color-mali-yellow-400: #fbbf24;
-  --color-mali-yellow-500: #f59e0b;
-  --color-mali-yellow-600: #d97706;
-  --color-mali-yellow-700: #b45309;
-  --color-mali-yellow-800: #92400e;
-  --color-mali-yellow-900: #78350f;
-  --color-mali-yellow-950: #451a03;
-  
-  /* Couleurs du drapeau malien - Rouge Mali */
-  --color-mali-red-50: #fef2f2;
-  --color-mali-red-100: #fee2e2;
-  --color-mali-red-200: #fecaca;
-  --color-mali-red-300: #fca5a5;
-  --color-mali-red-400: #f87171;
-  --color-mali-red-500: #ef4444;
-  --color-mali-red-600: #dc2626;
-  --color-mali-red-700: #b91c1c;
-  --color-mali-red-800: #991b1b;
-  --color-mali-red-900: #7f1d1d;
-  --color-mali-red-950: #450a0a;
 }
 
 /* Styles globaux FEMAT */
@@ -50,35 +11,10 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Classes utilitaires FEMAT avec Tailwind */
-.text-mali-green {
-  @apply text-mali-500;
-}
-
-.text-mali-yellow {
-  @apply text-mali-yellow-500;
-}
-
-.text-mali-red {
-  @apply text-mali-red-500;
-}
-
-.bg-mali-green {
-  @apply bg-mali-500;
-}
-
-.bg-mali-yellow {
-  @apply bg-mali-yellow-500;
-}
-
-.bg-mali-red {
-  @apply bg-mali-red-500;
-}
-
-/* Gradient drapeau malien */
+/* Gradient drapeau malien avec couleurs Tailwind par défaut */
 .bg-mali-gradient {
   background: linear-gradient(135deg, 
-    theme('colors.mali.500') 0%, 
-    theme('colors.mali-yellow.500') 50%, 
-    theme('colors.mali-red.500') 100%);
+    theme('colors.green.500') 0%, 
+    theme('colors.yellow.500') 50%, 
+    theme('colors.red.500') 100%);
 }

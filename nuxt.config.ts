@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   css: ['~/assets/css/mains.css'],
-  // Configuration NuxtUI v4
+  // Configuration NuxtUI v4 - couleurs par défaut
   ui: {
     theme: {
       colors: [
@@ -18,22 +18,9 @@ export default defineNuxtConfig({
         'warning',
         'error',
         'info',
-        'mali',
-        'mali-yellow',
-        'mali-red'
+        'neutral'
       ]
     }
-  },
-  // Configuration du mode couleur
-  colorMode: {
-    preference: 'light',
-    fallback: 'light',
-    hid: 'nuxt-color-mode-script',
-    globalName: '__NUXT_COLOR_MODE__',
-    componentName: 'ColorScheme',
-    classPrefix: '',
-    classSuffix: '',
-    storageKey: 'nuxt-color-mode'
   },
   // Configuration des images
   image: {

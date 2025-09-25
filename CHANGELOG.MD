@@ -2,6 +2,30 @@
 
 Toutes les modifications notables de ce projet seront documentées dans ce fichier.
 
+## [0.3.0] - 2024-01-15
+
+### Added
+- **Architecture composants** : EventCard (atomique) + EventsGrid (moléculaire) créés
+- **Composants réutilisables** : EventCard avec props configurables (variant, size, showActions, buttonLayout)
+- **Grille événements** : EventsGrid avec props avancées (gridColumns, cardVariant, buttonLayout, emptyMessage)
+- **Page d'accueil complète** : Hero section + grille événements avec données d'exemple
+- **Props configurables** : Architecture modulaire avec composants hautement réutilisables
+- **Dark mode complet** : Support dark mode dans tous les composants
+- **Empty state** : Message personnalisable quand aucun événement
+
+### Changed
+- **EventCard.vue** : Refactorisé pour utiliser UCard/UButton au lieu de FematCard/FematButton
+- **EventsGrid.vue** : Utilise maintenant EventCard au lieu de dupliquer le code
+- **Thème simplifié** : Suppression des couleurs personnalisées mali, utilisation des couleurs Tailwind par défaut
+- **Configuration couleurs** : app.config.ts avec couleurs sémantiques (green, blue, emerald, orange, red, sky, gray)
+- **Architecture** : Principe atomique → moléculaire respecté (EventCard utilisé par EventsGrid)
+- **CSS** : Suppression du CSS personnalisé lourd, utilisation des classes Tailwind standard
+
+### Fixed
+- **Code dupliqué** : Suppression de 100+ lignes de code dupliqué dans EventsGrid
+- **Dépendances obsolètes** : Suppression des références à FematCard/FematButton supprimés
+- **Architecture** : Hiérarchie des composants corrigée selon les bonnes pratiques
+
 ## [0.2.0] - 2024-01-15
 
 ### Added

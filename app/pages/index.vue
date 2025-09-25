@@ -1,168 +1,119 @@
 <template>
-  <div>
+  <UPage>
     <!-- Hero Section -->
-    <section class="bg-mali-gradient py-16 md:py-24">
+    <UPageHeader>
       <UContainer>
-        <div class="text-center text-white">
-          <div class="flex justify-center mb-8">
+        <div class="text-center py-1">
+          <!-- Logo FEMAT -->
+          <div class="mb-8">
             <NuxtImg 
               src="/logo_femat.webp" 
               alt="Logo FEMAT" 
               width="120" 
               height="120"
-              class="rounded-lg shadow-2xl"
+              class="mx-auto rounded-xl shadow-lg"
             />
           </div>
-          <h1 class="text-4xl md:text-6xl font-bold mb-4">
-            Fédération Malienne de Taekwondo
+          
+          <!-- Titre principal -->
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            Bienvenue à la 
+            <span class="text-primary">FEMAT</span>
           </h1>
-          <p class="text-xl md:text-2xl mb-8 opacity-90">
-            Excellence • Respect • Discipline
+          
+          <!-- Sous-titre -->
+          <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+            Fédération Malienne de Taekwondo<br>
+            <span class="text-lg text-gray-500 dark:text-gray-400">Excellence • Respect • Persévérance</span>
           </p>
+          
+          <!-- Actions -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <UButton size="lg" color="primary" variant="solid" class="text-white">
+            <UButton 
+              color="primary" 
+              size="xl"
+              to="/events"
+              icon="i-lucide-calendar"
+              class="font-semibold"
+            >
+              Voir les événements
+            </UButton>
+            <UButton 
+              color="secondary"
+              variant="outline" 
+              size="xl"
+              to="/about"
+              icon="i-lucide-info"
+            >
               Découvrir la FEMAT
             </UButton>
-            <UButton size="lg" color="primary" variant="outline" class="text-white border-white">
-              Nos Événements
-            </UButton>
           </div>
         </div>
       </UContainer>
-    </section>
+    </UPageHeader>
 
-    <!-- Section Actualités -->
-    <section class="py-16">
-      <UContainer>
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-mali-green mb-4">
-            Actualités
-          </h2>
-          <p class="text-lg text-gray-600">
-            Restez informé des dernières nouvelles de la FEMAT
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <UCard v-for="i in 3" :key="i" class="hover:shadow-lg transition-shadow">
-            <template #header>
-              <h3 class="text-lg font-semibold">Actualité {{ i }}</h3>
-            </template>
-            <p class="text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <template #footer>
-              <UButton color="primary" variant="ghost" size="sm">
-                Lire la suite
-              </UButton>
-            </template>
-          </UCard>
-        </div>
-      </UContainer>
-    </section>
-
-    <!-- Section Événements -->
-    <section class="py-16 bg-gray-50">
-      <UContainer>
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-mali-green mb-4">
-            Prochains Événements
-          </h2>
-          <p class="text-lg text-gray-600">
-            Compétitions, stages et formations
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <UCard v-for="i in 2" :key="i" class="hover:shadow-lg transition-shadow">
-            <template #header>
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold">Événement {{ i }}</h3>
-                <UBadge color="warning">Prochain</UBadge>
-              </div>
-            </template>
-            <p class="text-gray-600 mb-4">
-              Description de l'événement avec tous les détails importants.
-            </p>
-            <div class="flex items-center text-sm text-gray-500 mb-4">
-              <UIcon name="i-heroicons-calendar" class="mr-2" />
-              <span>15 Janvier 2024</span>
-              <UIcon name="i-heroicons-map-pin" class="ml-4 mr-2" />
-              <span>Bamako, Mali</span>
-            </div>
-            <template #footer>
-              <UButton color="primary" variant="solid" size="sm">
-                S'inscrire
-              </UButton>
-            </template>
-          </UCard>
-        </div>
-      </UContainer>
-    </section>
-
-    <!-- Section Test des composants (pour développement) -->
-    <section class="py-16" v-if="showDevSection">
-      <UContainer>
-        <UCard>
-          <template #header>
-            <h2 class="text-2xl font-bold text-center">Test Composants NuxtUI v4</h2>
-          </template>
-          
-          <div class="space-y-6">
-            <!-- Test des boutons avec thème FEMAT -->
-            <div>
-              <h3 class="text-lg font-semibold mb-3">Boutons - Thème FEMAT</h3>
-              <div class="flex flex-wrap gap-2">
-                <UButton color="primary" variant="solid">Primary</UButton>
-                <UButton color="success" variant="outline">Success</UButton>
-                <UButton color="error" variant="ghost">Error</UButton>
-                <UButton color="warning" variant="soft">Warning</UButton>
-              </div>
-            </div>
-
-            <!-- Test des badges -->
-            <div>
-              <h3 class="text-lg font-semibold mb-3">Badges</h3>
-              <div class="flex flex-wrap gap-2">
-                <UBadge color="primary">Primary</UBadge>
-                <UBadge color="success">Success</UBadge>
-                <UBadge color="error">Error</UBadge>
-                <UBadge color="warning">Warning</UBadge>
-              </div>
-            </div>
-
-            <!-- Test des alertes -->
-            <div>
-              <h3 class="text-lg font-semibold mb-3">Alertes</h3>
-              <div class="space-y-2">
-                <UAlert color="info" title="Information" description="Message d'information" />
-                <UAlert color="success" title="Succès" description="Opération réussie" />
-                <UAlert color="error" title="Erreur" description="Une erreur s'est produite" />
-                <UAlert color="warning" title="Attention" description="Message d'avertissement" />
-              </div>
-            </div>
-          </div>
-        </UCard>
-      </UContainer>
-    </section>
-  </div>
+    <UPageBody>
+      <!-- Section événements -->
+      <UPageSection>
+        <UContainer>
+          <EventsGrid 
+            :events="events"
+            title="Prochains Événements"
+            subtitle="Découvrez nos prochaines compétitions et stages"
+            :grid-columns="3"
+            card-variant="elevated"
+            button-layout="full"
+          />
+        </UContainer>
+      </UPageSection>
+    </UPageBody>
+  </UPage>
 </template>
 
 <script setup lang="ts">
+import EventsGrid from '~/components/features/events/EventsGrid.vue'
+// Données d'exemple pour les événements
+const events = [
+  {
+    id: '1',
+    title: 'Championnat National 2024',
+    description: 'Le plus grand événement de taekwondo du Mali avec plus de 500 participants venus de tout le pays.',
+    type: 'compétition' as const,
+    date: '2024-03-15',
+    location: 'Palais des Sports, Bamako',
+    participants: 500,
+    registrationOpen: true,
+    image: '/logo_femat.webp'
+  },
+  {
+    id: '2', 
+    title: 'Stage Technique Avancé',
+    description: 'Formation intensive pour les ceintures noires avec Maître Kim.',
+    type: 'stage' as const,
+    date: '2024-02-20',
+    location: 'Dojang Central',
+    participants: 25,
+    registrationOpen: true
+  },
+  {
+    id: '3',
+    title: 'Formation Arbitres',
+    description: 'Formation officielle pour devenir arbitre de taekwondo certifié.',
+    type: 'formation' as const,
+    date: '2024-02-10',
+    location: 'Centre de Formation FEMAT',
+    participants: 30,
+    registrationOpen: false
+  }
+]
+
+
 // Configuration de la page
 useHead({
-  title: 'Accueil',
+  title: 'FEMAT - Fédération Malienne de Taekwondo',
   meta: [
-    { name: 'description', content: 'Site officiel de la Fédération Malienne de Taekwondo - FEMAT' }
+    { name: 'description', content: 'Site officiel de la Fédération Malienne de Taekwondo. Découvrez nos événements, actualités et rejoignez notre communauté.' }
   ]
 })
-
-// Section de développement (masquée en production)
-const showDevSection = ref(false)
-
-// Toggle pour afficher la section de développement
-const toggleDevSection = () => {
-  showDevSection.value = !showDevSection.value
-}
 </script>
+

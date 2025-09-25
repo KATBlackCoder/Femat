@@ -17,17 +17,8 @@
       </div>
     </template>
 
-    <template #center>
-      <!-- Liens rapides -->
-      <div class="flex flex-wrap justify-center gap-6 text-sm">
-        <NuxtLink to="/about" class="text-gray-600 hover:text-mali-500 transition-colors">
-          À propos
-        </NuxtLink>
-        <NuxtLink to="/contact" class="text-gray-600 hover:text-mali-500 transition-colors">
-          Contact
-        </NuxtLink>
-      </div>
-    </template>
+    <!-- Navigation au centre (slot default) -->
+    <UNavigationMenu :items="navigationItems" variant="link" />
 
     <template #right>
       <!-- Informations de contact -->
@@ -54,5 +45,27 @@
 </template>
 
 <script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
+
 const currentYear = new Date().getFullYear()
+
+// Éléments de navigation pour le footer
+const navigationItems: NavigationMenuItem[] = [
+  {
+    label: 'À propos',
+    to: '/about'
+  },
+  {
+    label: 'Contact',
+    to: '/contact'
+  },
+  {
+    label: 'Événements',
+    to: '/events'
+  },
+  {
+    label: 'Actualités',
+    to: '/news'
+  }
+]
 </script>
