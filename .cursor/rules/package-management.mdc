@@ -1,0 +1,165 @@
+---
+alwaysApply: true
+description: "Règles de gestion des packages pour le projet FEMAT - Vérification obligatoire du package.json"
+---
+
+# Règles de Gestion des Packages FEMAT
+
+## Obligation de Vérification
+
+**IMPORTANT** : Avant d'installer ou de modifier des packages, vous DEVEZ obligatoirement :
+
+1. **Vérifier [package.json](mdc:package.json)** - Consulter les dépendances existantes
+2. **Analyser les conflits** - Vérifier la compatibilité des versions
+3. **Respecter l'architecture** - S'assurer que le package s'intègre dans la stack FEMAT
+4. **Documenter les changements** - Mettre à jour [PROGRESS.MD](mdc:PROGRESS.MD) et [CHANGELOG.MD](mdc:CHANGELOG.MD)
+
+## Stack FEMAT Actuelle
+
+### **Dépendances Principales**
+```json
+{
+  "dependencies": {
+    "@nuxt/content": "^3.7.1",    // CMS et contenu éditorial
+    "@nuxt/image": "^1.11.0",     // Optimisation d'images
+    "@nuxt/ui": "^4.0.0",         // Design system
+    "@pinia/nuxt": "^0.11.2",     // State management (Phase 5+)
+    "nuxt": "^4.1.2",             // Framework principal
+    "pinia": "^3.0.3",            // Store (Phase 5+)
+    "vue": "^3.5.21"              // Framework frontend
+  }
+}
+```
+
+### **Technologies Approuvées**
+- **Frontend** : Nuxt 4 + Vue 3 + NuxtUI v4
+- **Content** : Nuxt Content + Nuxt Studio
+- **Database** : Supabase (PostgreSQL) - Phase 5+
+- **Auth** : Nuxt Supabase - Phase 5+
+- **State** : Pinia - Phase 5+
+- **Deploy** : Vercel
+
+## Règles d'Installation
+
+### **Avant d'installer un package**
+1. **Lire [package.json](mdc:package.json)** - Vérifier les dépendances existantes
+2. **Vérifier la compatibilité** - S'assurer que le package est compatible avec Nuxt 4
+3. **Analyser l'impact** - Comprendre l'effet sur l'architecture FEMAT
+4. **Consulter la documentation** - Vérifier les bonnes pratiques
+
+### **Packages à éviter**
+- **Packages obsolètes** - Non maintenus ou incompatibles
+- **Alternatives Nuxt** - Utiliser les modules Nuxt officiels
+- **Conflits de versions** - Vérifier la compatibilité des versions
+- **Packages lourds** - Privilégier les solutions légères
+
+### **Packages recommandés**
+- **Modules Nuxt officiels** - @nuxtjs/*, @nuxt/*
+- **Composants NuxtUI** - Utiliser les composants existants
+- **Supabase** - @nuxtjs/supabase pour la base de données
+- **Vercel** - Optimisations pour le déploiement
+
+## Processus d'Installation
+
+### **Étapes obligatoires**
+1. **Vérifier [package.json](mdc:package.json)** - Lire les dépendances actuelles
+2. **Analyser le besoin** - Le package est-il vraiment nécessaire ?
+3. **Rechercher des alternatives** - Existe-t-il une solution Nuxt native ?
+4. **Tester la compatibilité** - Vérifier avec Nuxt 4 + Vue 3
+5. **Installer avec précaution** - Utiliser `pnpm add` avec version spécifique
+6. **Tester l'intégration** - Vérifier que tout fonctionne
+7. **Documenter** - Mettre à jour [PROGRESS.MD](mdc:PROGRESS.MD) et [CHANGELOG.MD](mdc:CHANGELOG.MD)
+
+### **Commandes recommandées**
+```bash
+# Vérifier les dépendances existantes
+cat package.json
+
+# Installer avec version spécifique
+pnpm add package-name@version
+
+# Vérifier les conflits
+pnpm audit
+
+# Tester l'intégration
+pnpm dev
+```
+
+## Gestion des Versions
+
+### **Stratégie de versioning**
+- **Versions exactes** - Éviter les versions flottantes
+- **Compatibilité Nuxt** - Vérifier la compatibilité avec Nuxt 4
+- **Mises à jour progressives** - Tester avant de mettre à jour
+- **Documentation** - Noter les changements de versions
+
+### **Versions critiques**
+- **Nuxt** : ^4.1.2 (framework principal)
+- **Vue** : ^3.5.21 (framework frontend)
+- **NuxtUI** : ^4.0.0 (design system)
+- **Pinia** : ^3.0.3 (state management - Phase 5+)
+- **Supabase** : À ajouter en Phase 5
+
+## Sécurité et Performance
+
+### **Vérifications de sécurité**
+- **Audit des packages** - `pnpm audit`
+- **Vulnérabilités** - Vérifier les CVE
+- **Maintenance** - Packages régulièrement mis à jour
+- **Source** - Packages de sources fiables
+
+### **Optimisations performance**
+- **Taille des bundles** - Éviter les packages lourds
+- **Tree shaking** - Utiliser les imports ES6
+- **Lazy loading** - Chargement à la demande
+- **CDN** - Utiliser les CDN quand possible
+
+## Documentation des Changements
+
+### **PROGRESS.MD**
+- **Package ajouté** - Nom, version, raison
+- **Impact technique** - Effet sur l'architecture
+- **Tests effectués** - Vérifications de compatibilité
+
+### **CHANGELOG.MD**
+- **Version** - Numéro de version du package
+- **Type** - Added, Changed, Removed
+- **Description** - Détails de l'ajout
+- **Impact** - Effet sur le projet
+
+## Exemples de Bonnes Pratiques
+
+### **✅ Bon**
+```bash
+# Vérifier package.json d'abord
+cat package.json
+
+# Installer avec version spécifique
+pnpm add @nuxtjs/supabase@latest
+
+# Tester l'intégration
+pnpm dev
+```
+
+### **❌ Mauvais**
+```bash
+# Installer sans vérifier
+pnpm add random-package
+
+# Utiliser des versions flottantes
+pnpm add package@^1.0.0
+
+# Ignorer les conflits
+pnpm install --force
+```
+
+## Sanctions
+
+⚠️ **ATTENTION** : Toute installation de package sans vérification de [package.json](mdc:package.json) est considérée comme non conforme et doit être corrigée immédiatement.
+
+## Références
+
+- [package.json](mdc:package.json) - Dépendances actuelles
+- [TODO.md](mdc:TODO.md) - Plan de développement
+- [architecture.md](mdc:architecture.md) - Architecture technique
+- [femat-project.mdc](mdc:.cursor/rules/femat-project.mdc) - Règles de développement

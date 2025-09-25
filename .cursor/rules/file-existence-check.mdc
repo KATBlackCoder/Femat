@@ -1,0 +1,191 @@
+---
+alwaysApply: true
+description: "Règles de vérification d'existence des fichiers et dossiers avant création"
+---
+
+# Vérification d'Existence des Fichiers et Dossiers
+
+## Obligation de Vérification
+
+**IMPORTANT** : Avant de créer un fichier ou dossier, vous DEVEZ obligatoirement :
+
+1. **Vérifier l'existence** - Utiliser `read_file` ou `list_dir` pour vérifier si le fichier/dossier existe déjà
+2. **Analyser la structure** - Comprendre l'organisation actuelle du projet
+3. **Éviter les doublons** - Ne pas créer de fichiers/dossiers qui existent déjà
+4. **Respecter l'architecture** - Suivre la structure définie dans [architecture.md](mdc:architecture.md)
+
+## Processus de Vérification
+
+### Avant de créer un fichier
+```bash
+# 1. Vérifier l'existence avec les outils CachyOS
+ls -la "path/to/file" 2>/dev/null || echo "Fichier n'existe pas"
+# ou utiliser find pour recherche plus avancée
+find . -name "filename" -type f 2>/dev/null
+
+# 2. Si le fichier existe, analyser son contenu
+# 3. Décider si modification ou création d'un nouveau fichier
+# 4. Créer seulement si nécessaire
+```
+
+### Avant de créer un dossier
+```bash
+# 1. Vérifier l'existence avec les outils CachyOS
+ls -la "path/to/directory" 2>/dev/null || echo "Dossier n'existe pas"
+# ou utiliser find pour recherche plus avancée
+find . -name "dirname" -type d 2>/dev/null
+
+# 2. Si le dossier existe, analyser son contenu
+# 3. Vérifier si le contenu souhaité existe déjà
+# 4. Créer seulement si nécessaire
+```
+
+### Commandes CachyOS Spécifiques
+```bash
+# Vérifier l'existence d'un fichier avec stat
+stat "path/to/file" 2>/dev/null && echo "Fichier existe" || echo "Fichier n'existe pas"
+
+# Vérifier l'existence d'un dossier avec test
+test -d "path/to/directory" && echo "Dossier existe" || echo "Dossier n'existe pas"
+
+# Recherche récursive dans le projet
+find . -name "*.vue" -o -name "*.ts" -o -name "*.js" | grep -i "nom_du_fichier"
+
+# Vérifier les permissions et propriétaire
+ls -la "path/to/file" | awk '{print $1, $3, $4, $9}'
+```
+
+## Règles Spécifiques au Projet FEMAT
+
+### Structure du Projet
+- **app/** - Application Nuxt principale
+- **components/** - Composants Vue organisés par fonctionnalité
+- **pages/** - Routes de l'application
+- **content/** - Contenu Markdown pour Nuxt Content
+- **stores/** - Stores Pinia pour la gestion d'état
+
+### Vérifications Obligatoires
+
+#### Fichiers de Configuration
+- [nuxt.config.ts](mdc:nuxt.config.ts) - Configuration Nuxt
+- [package.json](mdc:package.json) - Dépendances du projet
+- [tsconfig.json](mdc:tsconfig.json) - Configuration TypeScript
+
+#### Fichiers de Documentation
+- [README.md](mdc:README.md) - Documentation principale
+- [TODO.md](mdc:TODO.md) - Plan de développement
+- [architecture.md](mdc:architecture.md) - Architecture du projet
+- [PROGRESS.MD](mdc:PROGRESS.MD) - Suivi de progression
+- [CHANGELOG.MD](mdc:CHANGELOG.MD) - Historique des changements
+
+#### Structure des Composants
+- **components/layout/** - Composants de mise en page
+- **components/ui/** - Composants d'interface utilisateur
+- **components/features/** - Composants métier
+
+## Exemples de Bonnes Pratiques
+
+### ✅ Vérification Correcte avec CachyOS
+```bash
+# 1. Vérifier l'existence avec les outils CachyOS
+ls -la "app/components/ui/UButton.vue" 2>/dev/null || echo "Fichier n'existe pas"
+# ou utiliser find pour recherche plus avancée
+find app/components/ui/ -name "UButton.vue" -type f 2>/dev/null
+
+# 2. Si le fichier n'existe pas, le créer
+# 3. Si le fichier existe, analyser et modifier si nécessaire
+```
+
+### ❌ Mauvaise Pratique
+```bash
+# Créer directement sans vérifier
+write file_path="app/components/ui/UButton.vue" contents="..."
+```
+
+### Commandes CachyOS Avancées
+```bash
+# Vérifier l'existence avec stat (plus détaillé)
+stat "app/components/ui/UButton.vue" 2>/dev/null && echo "Fichier existe" || echo "Fichier n'existe pas"
+
+# Vérifier l'existence avec test (plus rapide)
+test -f "app/components/ui/UButton.vue" && echo "Fichier existe" || echo "Fichier n'existe pas"
+
+# Recherche récursive dans le projet FEMAT
+find app/ -name "*.vue" -o -name "*.ts" -o -name "*.js" | grep -i "ubutton"
+
+# Vérifier les permissions et propriétaire
+ls -la "app/components/ui/UButton.vue" | awk '{print $1, $3, $4, $9}'
+```
+
+## Gestion des Conflits
+
+### Fichiers Existants
+- **Analyser le contenu** - Comprendre ce qui existe déjà
+- **Évaluer les différences** - Comparer avec ce qui est demandé
+- **Modifier si nécessaire** - Utiliser `search_replace` ou `MultiEdit`
+- **Créer seulement si différent** - Éviter les doublons
+
+### Dossiers Existants
+- **Vérifier le contenu** - Lister les fichiers existants
+- **Analyser l'organisation** - Comprendre la structure actuelle
+- **Respecter l'architecture** - Suivre les conventions du projet
+- **Créer seulement si nécessaire** - Éviter la duplication
+
+## Intégration avec l'Architecture FEMAT
+
+### Respect de la Structure
+- Suivre [architecture.md](mdc:architecture.md) pour l'organisation
+- Respecter [TODO.md](mdc:TODO.md) pour le plan de développement
+- Utiliser les composants NuxtUI v4 existants
+- Maintenir la cohérence avec le design system
+
+### Conventions du Projet
+- **Composants** : Utiliser les composants NuxtUI existants
+- **Pages** : Suivre la structure des routes Nuxt
+- **Content** : Utiliser Nuxt Content pour le contenu éditorial
+- **Stores** : Utiliser Pinia pour la gestion d'état
+
+## Avantages de la Vérification
+
+1. **Éviter les doublons** - Pas de fichiers/dossiers redondants
+2. **Maintenir la cohérence** - Structure organisée et logique
+3. **Respecter l'architecture** - Suivre les conventions établies
+4. **Optimiser le développement** - Éviter les conflits et erreurs
+5. **Améliorer la qualité** - Code plus propre et organisé
+
+## Commandes CachyOS Spécialisées
+
+### Vérification Rapide
+```bash
+# Vérifier l'existence d'un fichier (plus rapide)
+[ -f "path/to/file" ] && echo "Fichier existe" || echo "Fichier n'existe pas"
+
+# Vérifier l'existence d'un dossier (plus rapide)
+[ -d "path/to/directory" ] && echo "Dossier existe" || echo "Dossier n'existe pas"
+```
+
+### Recherche Avancée
+```bash
+# Recherche par extension dans le projet FEMAT
+find app/ -name "*.vue" -type f | head -10
+
+# Recherche par nom de fichier (insensible à la casse)
+find app/ -iname "*button*" -type f
+
+# Recherche par taille de fichier
+find app/ -name "*.vue" -size +1k -type f
+
+# Recherche par date de modification
+find app/ -name "*.vue" -mtime -7 -type f
+```
+
+## Sanctions
+
+⚠️ **ATTENTION** : Toute création de fichier/dossier sans vérification préalable est considérée comme non conforme et doit être corrigée immédiatement.
+
+## Références
+
+- [architecture.md](mdc:architecture.md) - Architecture complète du projet
+- [TODO.md](mdc:TODO.md) - Plan de développement
+- [package.json](mdc:package.json) - Dépendances du projet
+- [nuxt.config.ts](mdc:nuxt.config.ts) - Configuration Nuxt

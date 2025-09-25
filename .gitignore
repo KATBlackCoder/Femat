@@ -23,5 +23,6 @@ logs
 .env.*
 !.env.example
 
-# assets
-assets/images/
+# Femat files
+femat.txt
+mcp.json

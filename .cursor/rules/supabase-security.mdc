@@ -1,0 +1,117 @@
+---
+globs: "**/*.ts,**/*.js,**/*.vue"
+description: "Règles de sécurité pour l'utilisation de Supabase dans le projet FEMAT"
+---
+
+# Règles de Sécurité Supabase - FEMAT
+
+## Configuration Sécurisée
+
+### Variables d'environnement
+- **JAMAIS** exposer les tokens dans le code source
+- Utiliser des fichiers `.env` pour les variables sensibles
+- Utiliser des tokens avec permissions limitées
+- Renouveler régulièrement les tokens d'accès
+
+### Configuration MCP sécurisée
+```json
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "pnpm",
+      "args": [
+        "dlx",
+        "@supabase/mcp-server-supabase",
+        "--read-only",
+        "--project-ref=<project-ref>"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+## Bonnes Pratiques de Sécurité
+
+### Mode Lecture Seule
+- **Toujours** utiliser `--read-only` en développement
+- Éviter les modifications accidentelles de la base de données
+- Tester les requêtes avant de les exécuter
+
+### Scoping Projet
+- Limiter l'accès à un projet spécifique avec `--project-ref`
+- Ne pas donner accès à tous les projets de l'organisation
+- Utiliser des projets de développement séparés
+
+### Gestion des Tokens
+- Créer des tokens avec des permissions minimales
+- Utiliser des tokens temporaires pour les tests
+- Ne jamais partager les tokens d'accès
+
+## Développement Sécurisé
+
+### Base de Données
+- Activer Row Level Security (RLS) sur toutes les tables
+- Définir des politiques d'accès strictes
+- Utiliser des vues pour limiter l'accès aux données sensibles
+
+### Authentification
+- Implémenter l'authentification Supabase
+- Configurer les providers d'authentification
+- Gérer les rôles et permissions utilisateurs
+
+### API Routes
+- Valider toutes les données d'entrée
+- Utiliser des middlewares de sécurité
+- Implémenter la limitation de taux (rate limiting)
+
+## Monitoring et Surveillance
+
+### Logs et Monitoring
+- Surveiller les accès à la base de données
+- Logger toutes les opérations sensibles
+- Configurer des alertes de sécurité
+
+### Tests de Sécurité
+- Tester les politiques RLS
+- Vérifier les permissions utilisateurs
+- Tester les injections SQL
+
+## Configuration Recommandée
+
+### Environnement de Développement
+```bash
+# Variables d'environnement pour le développement
+SUPABASE_URL=your-dev-supabase-url
+SUPABASE_ANON_KEY=your-dev-anon-key
+SUPABASE_ACCESS_TOKEN=your-dev-access-token
+```
+
+### Environnement de Production
+```bash
+# Variables d'environnement pour la production
+SUPABASE_URL=your-prod-supabase-url
+SUPABASE_ANON_KEY=your-prod-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-prod-service-role-key
+```
+
+## Règles Spécifiques FEMAT
+
+### Données Sensibles
+- **Membres** : Informations personnelles protégées
+- **Clubs** : Données organisationnelles sensibles
+- **Événements** : Informations de compétition
+
+### Accès par Rôle
+- **Visiteurs** : Lecture seule des données publiques
+- **Membres** : Accès à leurs propres données
+- **Clubs** : Gestion de leurs membres
+- **Administrateurs** : Accès complet avec audit
+
+## Références
+
+- [Documentation Supabase Security](https://supabase.com/docs/guides/auth/row-level-security)
+- [Architecture FEMAT](mdc:architecture.md) - Architecture de sécurité
+- [Configuration MCP](mdc:.cursor/mcp.json) - Configuration sécurisée
