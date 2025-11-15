@@ -1,32 +1,38 @@
 <template>
   <UApp>
-    <LayoutHeader />
-    
     <UMain>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
     </UMain>
-    
-    <LayoutFooter />
   </UApp>
 </template>
 
-<script setup lang="ts">
-// Configuration globale de l'application
-useHead({
-  titleTemplate: '%s - FEMAT',
-  meta: [
-    { charset: 'utf-8' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { name: 'description', content: 'Fédération Malienne de Taekwondo - Site officiel de la FEMAT' },
-    { name: 'keywords', content: 'taekwondo, mali, fédération, sport, martial arts, FEMAT' },
-    { name: 'author', content: 'FEMAT' },
-    { name: 'robots', content: 'index, follow' }
-  ],
-  link: [
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }
-  ]
-})
-</script>
+<style>
+/* Transitions de page */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Transitions de layout */
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.3s ease;
+}
+
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+}
+</style>

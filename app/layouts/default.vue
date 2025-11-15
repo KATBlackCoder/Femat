@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <slot />
+  <div class="min-h-screen flex flex-col">
+    <Header />
+    <UMain class="flex-1">
+      <slot />
+    </UMain>
+    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
-// Configuration du layout
+// Layout principal avec Header et Footer
 </script>

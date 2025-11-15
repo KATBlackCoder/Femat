@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* Les couleurs sont configurées via app.config.ts */
+/* Si vous souhaitez les couleurs exactes du drapeau malien, décommentez et configurez ci-dessous */
+/*
+@theme {
+  --color-primary: #00853f;
+  --color-secondary: #fcd116;
+  --color-accent: #ce1126;
+}
+*/

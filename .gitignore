@@ -23,6 +23,5 @@ logs
 .env.*
 !.env.example
 
-# Femat files
-femat.txt
-mcp.json
+# Spec-kit temporary files (if any)
+.spec-kit-temp
