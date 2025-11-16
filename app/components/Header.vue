@@ -1,54 +1,55 @@
 <template>
-  <header class="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+  <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
     <UContainer>
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <NuxtImg 
-            src="/logo_femat.webp" 
-            alt="Logo FEMAT" 
-            class="h-12 w-12 object-contain"
+            src="/logo_femat.avif" 
+            alt="Logo FEMAT - Fédération Malienne de Taekwondo" 
+            class="h-12 w-12 object-contain dark:bg-white dark:rounded-full dark:p-1"
             loading="eager"
             width="48"
             height="48"
-            format="webp"
+            format="avif"
+            :fallback="'/logo_femat.webp'"
           />
-          <span class="font-bold text-xl text-gray-900 dark:text-white">FEMAT</span>
+          <span class="font-bold text-xl text-neutral-900 dark:text-neutral-100">FEMAT</span>
         </NuxtLink>
 
         <!-- Navigation Desktop -->
         <nav class="hidden md:flex items-center gap-6" aria-label="Navigation principale">
           <NuxtLink 
             to="/" 
-            class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium"
+            class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
             active-class="text-primary"
           >
             Accueil
           </NuxtLink>
           <NuxtLink 
             to="/about" 
-            class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium"
+            class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
             active-class="text-primary"
           >
             À propos
           </NuxtLink>
           <NuxtLink 
             to="/events" 
-            class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium"
+            class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
             active-class="text-primary"
           >
             Événements
           </NuxtLink>
           <NuxtLink 
             to="/calendar" 
-            class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium"
+            class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
             active-class="text-primary"
           >
             Calendrier
           </NuxtLink>
           <NuxtLink 
             to="/contact" 
-            class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium"
+            class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
             active-class="text-primary"
           >
             Contact
@@ -58,17 +59,6 @@
         <!-- Actions -->
         <div class="flex items-center gap-4">
           <UColorModeButton />
-          
-          <UButton
-            to="https://www.facebook.com/taekwondomali"
-            target="_blank"
-            external
-            color="primary"
-            variant="ghost"
-            icon="i-simple-icons-facebook"
-            aria-label="Page Facebook FEMAT"
-            class="hidden sm:flex"
-          />
           
           <!-- Menu Mobile -->
           <UButton
@@ -96,12 +86,12 @@
         <div 
           v-if="mobileMenuOpen" 
           id="mobile-menu"
-          class="md:hidden border-t border-gray-200 dark:border-gray-800 py-4"
+          class="md:hidden border-t border-neutral-200 dark:border-neutral-800 py-4"
         >
           <nav class="flex flex-col gap-4" aria-label="Navigation principale">
             <NuxtLink 
               to="/" 
-              class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium py-1"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium py-1"
               active-class="text-primary"
               @click="mobileMenuOpen = false"
             >
@@ -109,7 +99,7 @@
             </NuxtLink>
             <NuxtLink 
               to="/about" 
-              class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium py-1"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium py-1"
               active-class="text-primary"
               @click="mobileMenuOpen = false"
             >
@@ -117,7 +107,7 @@
             </NuxtLink>
             <NuxtLink 
               to="/events" 
-              class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium py-1"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium py-1"
               active-class="text-primary"
               @click="mobileMenuOpen = false"
             >
@@ -125,7 +115,7 @@
             </NuxtLink>
             <NuxtLink 
               to="/calendar" 
-              class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium py-1"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium py-1"
               active-class="text-primary"
               @click="mobileMenuOpen = false"
             >
@@ -133,24 +123,12 @@
             </NuxtLink>
             <NuxtLink 
               to="/contact" 
-              class="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors font-medium py-1"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium py-1"
               active-class="text-primary"
               @click="mobileMenuOpen = false"
             >
               Contact
             </NuxtLink>
-            <UButton
-              to="https://www.facebook.com/taekwondomali"
-              target="_blank"
-              external
-              color="primary"
-              variant="ghost"
-              icon="i-simple-icons-facebook"
-              class="justify-start"
-              @click="mobileMenuOpen = false"
-            >
-              Facebook
-            </UButton>
           </nav>
         </div>
       </Transition>

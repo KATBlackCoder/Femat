@@ -1,21 +1,22 @@
 <template>
-  <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 mt-auto">
+  <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 mt-auto">
     <UContainer>
       <div class="py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Logo et description -->
         <div class="flex flex-col gap-2">
           <div class="flex items-center gap-2 mb-2">
             <NuxtImg 
-              src="/logo_femat.webp" 
-              alt="Logo FEMAT" 
-              class="h-10 w-10 object-contain"
+              src="/logo_femat.avif" 
+              alt="Logo FEMAT - Fédération Malienne de Taekwondo" 
+              class="h-10 w-10 object-contain dark:bg-white dark:rounded-full dark:p-1"
               width="40"
               height="40"
-              format="webp"
+              format="avif"
+              :fallback="'/logo_femat.webp'"
             />
             <span class="font-bold text-lg">FEMAT</span>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
             Fédération Malienne de Taekwondo
           </p>
         </div>
@@ -26,31 +27,31 @@
           <div class="flex flex-col gap-1">
             <NuxtLink 
               to="/" 
-              class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
+              class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
             >
               Accueil
             </NuxtLink>
             <NuxtLink 
               to="/about" 
-              class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
+              class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
             >
               À propos
             </NuxtLink>
             <NuxtLink 
               to="/events" 
-              class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
+              class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
             >
               Événements
             </NuxtLink>
             <NuxtLink 
               to="/calendar" 
-              class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
+              class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
             >
               Calendrier
             </NuxtLink>
             <NuxtLink 
               to="/contact" 
-              class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
+              class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
             >
               Contact
             </NuxtLink>
@@ -60,7 +61,7 @@
         <!-- Contact -->
         <div class="flex flex-col gap-2">
           <h3 class="font-semibold text-sm mb-2">Contact</h3>
-          <address class="flex flex-col gap-1 text-sm text-gray-600 dark:text-gray-400 not-italic">
+          <address class="flex flex-col gap-1 text-sm text-neutral-600 dark:text-neutral-400 not-italic">
             <p>Bamako, Mali</p>
             <p>
               Email: 
@@ -96,7 +97,7 @@
       </div>
 
       <!-- Copyright -->
-      <div class="border-t border-gray-200 dark:border-gray-800 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+      <div class="border-t border-neutral-200 dark:border-neutral-800 py-6 text-center text-sm text-neutral-500 dark:text-neutral-400">
         © {{ currentYear }} FEMAT - Fédération Malienne de Taekwondo. Tous droits réservés.
       </div>
     </UContainer>

@@ -22,22 +22,22 @@
           À venir
         </UBadge>
       </div>
-      <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+      <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
         <UIcon name="i-heroicons-calendar" class="w-4 h-4" aria-hidden="true" />
         <time :datetime="event.date">{{ formatDate(event.date) }}</time>
       </div>
     </template>
 
-    <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+    <h3 class="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-100">
       {{ event.title }}
     </h3>
     
-    <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-4">
+    <div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 mb-4">
       <UIcon name="i-heroicons-map-pin" class="w-4 h-4 flex-shrink-0" aria-hidden="true" />
       <span>{{ event.location }}</span>
     </div>
 
-    <p class="text-sm text-gray-700 dark:text-gray-300 flex-grow mb-4 line-clamp-3">
+    <p class="text-sm text-neutral-700 dark:text-neutral-300 flex-grow mb-4 line-clamp-3">
       {{ event.description }}
     </p>
 

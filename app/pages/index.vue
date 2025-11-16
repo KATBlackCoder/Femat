@@ -20,13 +20,14 @@
           <div class="relative">
             <div class="absolute inset-0 rounded-full bg-primary-200/50 blur-xl dark:bg-primary-900/30"></div>
             <NuxtImg 
-              src="/logo_femat.webp" 
+              src="/logo_femat.avif" 
               alt="Logo FEMAT - Fédération Malienne de Taekwondo" 
-              class="relative h-32 w-32 md:h-40 md:w-40 object-contain drop-shadow-lg"
+              class="relative h-32 w-32 md:h-40 md:w-40 object-contain drop-shadow-lg dark:bg-white dark:rounded-full dark:p-2"
               loading="eager"
               width="160"
               height="160"
-              format="webp"
+              format="avif"
+              :fallback="'/logo_femat.webp'"
             />
           </div>
         </div>

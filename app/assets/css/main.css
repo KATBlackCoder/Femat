@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+/* Variable CSS pour la hauteur du header (utilisée par UError) */
+:root {
+  --ui-header-height: 4rem; /* 64px = h-16 */
+}
+
 /* Les couleurs sont configurées via app.config.ts */
 /* Si vous souhaitez les couleurs exactes du drapeau malien, décommentez et configurez ci-dessous */
 /*

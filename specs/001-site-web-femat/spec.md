@@ -2,7 +2,8 @@
 
 **Feature ID**: `001-site-web-femat`  
 **Date**: 2025-01-27  
-**Status**: Draft
+**Dernière mise à jour**: 2025-01-27  
+**Status**: ✅ Completed (v1.0)
 
 ## Overview
 
@@ -23,58 +24,78 @@ La FEMAT a besoin d'un site web pour :
 **Description**: Page d'accueil attractive présentant la FEMAT avec le logo, un message de bienvenue, et des sections clés.
 
 **Acceptance Criteria**:
-- [ ] Affichage du logo FEMAT
-- [ ] Section hero avec message d'accueil
-- [ ] Sections pour présenter les activités principales
-- [ ] Liens vers les sections importantes
-- [ ] Design responsive et moderne
+- [x] Affichage du logo FEMAT (format AVIF avec fallback WebP)
+- [x] Section hero avec message d'accueil (UPageHero)
+- [x] Sections pour présenter les activités principales (UPageSection)
+- [x] Liens vers les sections importantes
+- [x] Design responsive et moderne avec Nuxt UI
+- [x] Transitions de page fluides
 
 ### FR-2: Page À propos
 **Description**: Page présentant l'histoire, la mission, et les valeurs de la FEMAT.
 
 **Acceptance Criteria**:
-- [ ] Histoire de la fédération
-- [ ] Mission et valeurs
-- [ ] Informations sur le taekwondo
-- [ ] Photos et visuels pertinents
+- [x] Histoire de la fédération
+- [x] Mission et valeurs (avec icônes et cartes)
+- [x] Informations sur le taekwondo
+- [x] Design avec UPageHero et UPageSection
+- [ ] Photos et visuels pertinents (placeholders préparés)
 
 ### FR-3: Page Événements
 **Description**: Liste des événements, compétitions, et activités de la fédération.
 
 **Acceptance Criteria**:
-- [ ] Liste des événements à venir
-- [ ] Liste des événements passés
-- [ ] Informations détaillées pour chaque événement (date, lieu, description)
-- [ ] Design de cartes pour les événements
+- [x] Liste des événements à venir
+- [x] Liste des événements passés
+- [x] Informations détaillées pour chaque événement (date, lieu, description)
+- [x] Design de cartes pour les événements (EventCard component)
+- [x] Données centralisées via composable `useEvents`
+
+### FR-7: Page Calendrier (Bonus)
+**Description**: Calendrier interactif affichant tous les événements de la fédération.
+
+**Acceptance Criteria**:
+- [x] Calendrier mensuel interactif
+- [x] Navigation entre mois (précédent/suivant)
+- [x] Jours avec événements colorés selon le type
+- [x] Affichage des événements du jour sélectionné
+- [x] Légende des types d'événements
+- [x] Design responsive et accessible
 
 ### FR-4: Page Contact
 **Description**: Informations de contact et formulaire de contact.
 
 **Acceptance Criteria**:
-- [ ] Adresse de la fédération
-- [ ] Numéros de téléphone
-- [ ] Adresse email
-- [ ] Formulaire de contact fonctionnel
-- [ ] Carte Google Maps (optionnel)
+- [x] Adresse de la fédération (avec liens cliquables)
+- [x] Numéros de téléphone (avec liens cliquables)
+- [x] Adresse email (avec lien mailto)
+- [x] Formulaire de contact fonctionnel avec validation
+- [x] Compteur de caractères et barre de progression
+- [x] Protection honeypot anti-spam
+- [ ] Carte Google Maps (optionnel, non implémenté en v1.0)
 
 ### FR-5: Navigation et Layout
 **Description**: Navigation claire et layout cohérent sur toutes les pages.
 
 **Acceptance Criteria**:
-- [ ] Header avec logo et menu de navigation
-- [ ] Footer avec informations de contact et liens utiles
-- [ ] Menu responsive (hamburger sur mobile)
-- [ ] Navigation cohérente sur toutes les pages
-- [ ] Lien vers la page Facebook (https://www.facebook.com/taekwondomali)
+- [x] Header avec logo et menu de navigation
+- [x] Footer avec informations de contact et liens utiles
+- [x] Menu responsive (hamburger sur mobile avec transitions)
+- [x] Navigation cohérente sur toutes les pages
+- [x] Lien vers la page Facebook (https://www.facebook.com/taekwondomali)
+- [x] Bouton de changement de mode sombre/clair (UColorModeButton)
+- [x] Transitions de page et layout configurées
 
 ### FR-6: Intégration du logo
 **Description**: Utilisation appropriée du logo FEMAT dans le design.
 
 **Acceptance Criteria**:
-- [ ] Logo dans le header
-- [ ] Logo sur la page d'accueil
-- [ ] Favicon avec logo
-- [ ] Formats optimisés (WebP, AVIF) utilisés
+- [x] Logo dans le header (NuxtImg avec AVIF)
+- [x] Logo sur la page d'accueil (NuxtImg avec AVIF)
+- [x] Logo dans le footer (NuxtImg avec AVIF)
+- [x] Favicon avec logo
+- [x] Formats optimisés (AVIF avec fallback WebP) utilisés
+- [x] Alt text appropriés pour accessibilité
 
 ## Non-Functional Requirements
 
@@ -169,11 +190,11 @@ Les fonctionnalités suivantes sont planifiées pour les versions futures :
 Voir `specs/CLARIFICATIONS-NEEDED.md` pour la liste complète des points à clarifier.
 
 **Priorité pour Phase 1**:
-- [ ] Informations de contact complètes (adresse, téléphone, email)
-- [ ] Contenu des pages (À propos, message d'accueil)
-- [ ] Événements à afficher (au moins 2-3 pour démarrer)
-- [ ] Photos disponibles et sources
-- [ ] Autres réseaux sociaux à intégrer (Instagram, Twitter, etc.) ?
+- [x] Informations de contact complètes (adresse, téléphone, email) - Placeholders utilisés
+- [x] Contenu des pages (À propos, message d'accueil) - Contenu de base implémenté
+- [x] Événements à afficher (au moins 2-3 pour démarrer) - 7 événements exemple implémentés
+- [ ] Photos disponibles et sources - Placeholders préparés
+- [x] Autres réseaux sociaux à intégrer - Facebook intégré, autres peuvent être ajoutés
 
 **Reporté pour plus tard**:
 - [ ] Système de gestion de contenu pour événements (données en dur pour v1.0)

@@ -39,6 +39,8 @@ specs/001-site-web-femat/
 ├── plan.md              # This file
 ├── research.md          # Phase 0 output
 ├── quickstart.md        # Phase 1 output
+├── tests.md             # Guide de test complet
+├── tasks.md             # Tâches d'implémentation détaillées
 └── spec.md              # Original specification
 ```
 
@@ -50,18 +52,25 @@ app/
 │   ├── index.vue           # Page d'accueil (FR-1)
 │   ├── about.vue           # Page À propos (FR-2)
 │   ├── events.vue          # Page Événements (FR-3)
+│   ├── calendar.vue        # Page Calendrier (FR-7 - Bonus)
 │   └── contact.vue         # Page Contact (FR-4)
 ├── components/
 │   ├── Header.vue          # Header avec navigation (FR-5)
 │   ├── Footer.vue          # Footer avec contacts (FR-5)
 │   ├── EventCard.vue       # Carte d'événement (FR-3)
+│   ├── EventCalendar.vue   # Calendrier interactif (FR-7)
 │   └── ContactForm.vue     # Formulaire de contact (FR-4)
+├── composables/
+│   └── useEvents.ts        # Composable pour données d'événements
+├── types/
+│   └── event.ts            # Types TypeScript pour événements
 ├── layouts/
 │   └── default.vue         # Layout principal (FR-5)
 ├── assets/
 │   └── css/
 │       └── main.css        # Styles personnalisés
-└── app.vue                 # Root component
+├── app.config.ts           # Configuration Nuxt UI (couleurs)
+└── app.vue                 # Root component avec transitions
 ```
 
 ## Phases
@@ -111,16 +120,28 @@ app/
    - Carte Google Maps (optionnel, peut être ajouté plus tard)
 
 **Composants réutilisables**:
-- `Header.vue`: Navigation principale avec logo, menu responsive
+- `Header.vue`: Navigation principale avec logo, menu responsive, UColorModeButton
 - `Footer.vue`: Informations de contact, liens utiles, copyright
-- `EventCard.vue`: Carte d'événement réutilisable
-- `ContactForm.vue`: Formulaire de contact avec validation
+- `EventCard.vue`: Carte d'événement réutilisable avec badges et formatage de date
+- `ContactForm.vue`: Formulaire de contact avec validation, compteur de caractères, honeypot
+- `EventCalendar.vue`: Calendrier interactif avec navigation mensuelle et jours colorés
+
+**Composables**:
+- `useEvents.ts`: Centralise les données d'événements, prépare la migration vers Nuxt Content
+
+**Types**:
+- `event.ts`: Interface TypeScript partagée pour les événements
 
 **Design System**:
-- Couleurs: Vert (#00853F), Jaune (#FCD116), Rouge (#CE1126)
+- Couleurs: Configurées dans `app.config.ts` avec couleurs sémantiques Nuxt UI
+  - Primary: green (vert drapeau malien)
+  - Secondary: yellow (jaune drapeau malien)
+  - Error: red (rouge drapeau malien)
+  - Neutral: slate (pour textes et bordures)
 - Typographie: Système de Nuxt UI (Inter par défaut, accessible)
-- Espacements: Système de spacing de Tailwind/Nuxt UI
-- Composants: Utilisation des composants Nuxt UI (UCard, UButton, UInput, etc.)
+- Espacements: Système de spacing de Tailwind/Nuxt UI (réduit pour meilleure UX)
+- Composants: Utilisation des composants Nuxt UI (UPageHero, UPageSection, UPageCTA, UCard, UButton, UInput, etc.)
+- Transitions: Page et layout transitions configurées pour navigation fluide
 
 ### Phase 2: Implementation
 
@@ -181,16 +202,22 @@ Pour v1.0, les données (événements, informations) seront en dur dans les comp
 
 **Structure de données événement**:
 ```typescript
-interface Event {
-  id: string
+// Défini dans app/types/event.ts
+export type Event = {
+  id: number
   title: string
   date: string
   location: string
   description: string
-  type: 'competition' | 'training' | 'event'
+  type: 'competition' | 'training' | 'ceremony' | 'social'
   status: 'upcoming' | 'past'
 }
 ```
+
+**Composable useEvents**:
+- Centralise toutes les données d'événements
+- Fournit `upcomingEvents`, `pastEvents`, `allEvents`
+- Structure préparée pour migration future vers Nuxt Content (Phase 2 - Blog)
 
 ### Accessibilité
 
@@ -210,11 +237,13 @@ interface Event {
 
 ### Performance
 
-- Images optimisées (WebP/AVIF déjà disponibles)
-- Lazy loading des images
+- Images optimisées (AVIF avec fallback WebP via NuxtImg)
+- Lazy loading des images (loading="eager" pour logo critique)
 - Code splitting automatique (Nuxt)
 - Minification et compression
 - CDN ready (static site)
+- Transitions optimisées (CSS transitions)
+- Utilisation des couleurs Nuxt UI (pas de classes Tailwind directes pour gray)
 
 ## Open Questions Resolved
 
@@ -223,10 +252,43 @@ interface Event {
 - ✅ **Photos**: Placeholders préparés, intégration future possible
 - ✅ **Newsletter**: Non pour v1.0, peut être ajouté plus tard
 
+## Fonctionnalités Implémentées (v1.0)
+
+✅ **Pages**:
+- Page d'accueil avec sections hero, à propos, événements, contact
+- Page À propos avec histoire, mission, valeurs
+- Page Événements avec listes à venir et passés
+- Page Calendrier avec calendrier interactif (bonus)
+- Page Contact avec formulaire et informations
+
+✅ **Composants**:
+- Header avec navigation responsive et UColorModeButton
+- Footer avec informations et liens
+- EventCard avec badges et formatage
+- EventCalendar avec navigation et jours colorés
+- ContactForm avec validation complète
+
+✅ **Configuration**:
+- Nuxt UI avec couleurs sémantiques (app.config.ts)
+- Transitions de page et layout
+- SEO optimisé (meta tags sur toutes les pages)
+- Images optimisées (AVIF/WebP)
+
 ## Next Steps
 
-1. Générer les tâches détaillées avec `/speckit.tasks` ✅ (déjà fait)
-2. Implémenter selon l'ordre défini dans Phase 2
-3. Tester accessibilité et performance
-4. Déployer sur Vercel (voir `specs/DEPLOYMENT.md` pour le guide complet)
+1. ✅ Générer les tâches détaillées avec `/speckit.tasks` (déjà fait)
+2. ✅ Implémenter selon l'ordre défini dans Phase 2 (complété)
+3. ⚠️ Tester accessibilité et performance (voir `tests.md` pour le guide complet)
+4. ⚠️ Déployer sur Vercel (voir `specs/DEPLOYMENT.md` pour le guide complet)
+
+## Documentation de Test
+
+Un guide de test complet est disponible dans [`tests.md`](./tests.md) avec :
+- Tests fonctionnels pour toutes les pages
+- Tests responsive (mobile, tablette, desktop)
+- Tests d'accessibilité (WCAG 2.1 AA)
+- Tests de performance (Lighthouse)
+- Tests de couleurs Nuxt UI
+- Checklist finale
+- Outils recommandés
 

@@ -45,7 +45,13 @@ Le site sera accessible sur `http://localhost:3000`
 
 ### Page Contact (`/contact`)
 - Informations de contact
-- Formulaire de contact
+- Formulaire de contact avec validation
+
+### Page Calendrier (`/calendar`)
+- Calendrier interactif mensuel
+- Navigation entre mois
+- Jours colorés selon type d'événement
+- Affichage des événements du jour sélectionné
 
 ## Composants Principaux
 
@@ -66,41 +72,68 @@ Le site sera accessible sur `http://localhost:3000`
 - Type d'événement
 
 ### ContactForm
-- Champs: Nom, Email, Sujet, Message
-- Validation côté client
-- Soumission (à configurer avec service email)
+- Champs: Nom (requis), Prénom, Email (requis), Téléphone, Sujet (requis), Message (requis)
+- Validation côté client avec feedback visuel
+- Compteur de caractères avec barre de progression
+- Protection honeypot anti-spam
+- Soumission (console.log pour v1.0, intégration Formspree future)
+
+### EventCalendar
+- Calendrier mensuel interactif
+- Navigation entre mois
+- Jours colorés selon type d'événement
+- Affichage des événements du jour sélectionné
+- Légende des types d'événements
 
 ## Scénarios de Test
 
-### Test 1: Navigation
+> **Note**: Pour un guide de test complet et détaillé, voir [`tests.md`](./tests.md)
+
+### Tests Rapides
+
+**Test 1: Navigation**
 1. Ouvrir la page d'accueil
 2. Cliquer sur chaque lien du menu
 3. Vérifier que chaque page se charge correctement
 4. Tester la navigation au clavier (Tab, Enter)
 
-### Test 2: Responsive Design
+**Test 2: Responsive Design**
 1. Ouvrir le site sur mobile (Chrome DevTools)
 2. Vérifier que le menu hamburger fonctionne
 3. Vérifier que le contenu s'adapte correctement
 4. Tester sur différentes tailles d'écran (mobile, tablette, desktop)
 
-### Test 3: Accessibilité
+**Test 3: Accessibilité**
 1. Tester la navigation au clavier uniquement
 2. Vérifier les contrastes de couleurs
 3. Tester avec un lecteur d'écran (si disponible)
 4. Vérifier les alt text des images
 
-### Test 4: Performance
+**Test 4: Performance**
 1. Ouvrir Chrome DevTools > Lighthouse
 2. Lancer un audit de performance
 3. Vérifier que le score est > 90
 4. Vérifier les temps de chargement
 
-### Test 5: Formulaire de Contact
+**Test 5: Formulaire de Contact**
 1. Aller sur la page Contact
 2. Remplir le formulaire
-3. Tester la validation (champs vides, email invalide)
-4. Soumettre le formulaire (vérifier le comportement)
+3. Tester la validation (champs vides, email invalide, message trop court/long)
+4. Vérifier le compteur de caractères et la barre de progression
+5. Soumettre le formulaire (vérifier console.log)
+
+**Test 6: Calendrier**
+1. Aller sur la page Calendrier
+2. Naviguer entre les mois (boutons précédent/suivant)
+3. Cliquer sur un jour avec événement
+4. Vérifier que les événements s'affichent
+5. Vérifier les couleurs des jours (rouge=compétition, vert=entraînement, jaune=cérémonie)
+
+**Test 7: Mode Sombre/Clair**
+1. Cliquer sur le bouton de changement de mode dans le header
+2. Vérifier que les couleurs s'adaptent
+3. Vérifier le contraste dans les deux modes
+4. Vérifier que la préférence est sauvegardée
 
 ## Commandes Utiles
 
@@ -121,17 +154,22 @@ pnpm install          # Installer dépendances
 
 ### Couleurs Personnalisées
 
-Les couleurs du drapeau malien sont configurées dans `nuxt.config.ts`:
+Les couleurs du drapeau malien sont configurées dans `app.config.ts`:
 
 ```typescript
-ui: {
-  colors: {
-    primary: '#00853F',  // Vert
-    secondary: '#FCD116', // Jaune
-    accent: '#CE1126'     // Rouge
+export default defineAppConfig({
+  ui: {
+    colors: {
+      primary: 'green',    // Vert drapeau malien
+      secondary: 'yellow', // Jaune drapeau malien
+      error: 'red',        // Rouge drapeau malien
+      neutral: 'slate'     // Pour textes et bordures
+    }
   }
-}
+})
 ```
+
+**Note**: Les couleurs sont maintenant sémantiques (primary, secondary, error, neutral) au lieu de valeurs hexadécimales directes. Cela permet une meilleure intégration avec Nuxt UI et le support du mode sombre.
 
 ### Meta Tags SEO
 
@@ -167,7 +205,14 @@ useSeoMeta({
 
 ### Problème: Les images ne s'affichent pas
 - Vérifier que les images sont dans `/public/`
-- Utiliser le chemin `/logo_femat.webp` (pas `/public/logo_femat.webp`)
+- Utiliser le chemin `/logo_femat.avif` avec fallback `/logo_femat.webp`
+- Utiliser `<NuxtImg>` au lieu de `<img>` pour optimisation automatique
+- Vérifier que le module `@nuxt/image` est installé
+
+### Problème: Les couleurs ne s'appliquent pas
+- Vérifier que `app.config.ts` existe et contient la configuration `ui.colors`
+- Utiliser les couleurs sémantiques (primary, secondary, error, neutral) au lieu de gray
+- Vérifier que les classes Tailwind utilisent `neutral` au lieu de `gray`
 
 ## Ressources
 

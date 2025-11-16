@@ -2,9 +2,9 @@
   <form @submit.prevent="handleSubmit" class="space-y-8">
     <!-- Section Informations personnelles -->
     <div class="space-y-6">
-      <div class="flex items-center gap-2 pb-2 border-b border-gray-200 dark:border-gray-800">
+      <div class="flex items-center gap-2 pb-2 border-b border-neutral-200 dark:border-neutral-800">
         <UIcon name="i-heroicons-user-circle" class="w-5 h-5 text-primary" />
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Informations personnelles</h3>
+        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Informations personnelles</h3>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -74,9 +74,9 @@
 
     <!-- Section Message -->
     <div class="space-y-6">
-      <div class="flex items-center gap-2 pb-2 border-b border-gray-200 dark:border-gray-800">
+      <div class="flex items-center gap-2 pb-2 border-b border-neutral-200 dark:border-neutral-800">
         <UIcon name="i-heroicons-chat-bubble-left-right" class="w-5 h-5 text-primary" />
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Votre message</h3>
+        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Votre message</h3>
       </div>
 
       <UFormField 
@@ -123,7 +123,7 @@
                   'transition-colors',
                   form.message.length > 1000 ? 'text-error' : 
                   form.message.length > 900 ? 'text-warning' : 
-                  'text-gray-500 dark:text-gray-400'
+                  'text-neutral-500 dark:text-neutral-400'
                 ]"
               >
                 {{ form.message.length }}/1000 caractères
@@ -135,7 +135,7 @@
                 Minimum 10 caractères requis
               </span>
             </div>
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+            <div class="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-1.5 overflow-hidden">
               <div 
                 :class="[
                   'h-full transition-all duration-300 rounded-full',
@@ -177,7 +177,7 @@
         {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer le message' }}
       </UButton>
       
-      <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-3">
+      <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-3">
         En soumettant ce formulaire, vous acceptez que vos informations soient utilisées pour vous répondre.
       </p>
     </div>
@@ -191,7 +191,7 @@
       :icon="submitStatus === 'success' ? 'i-heroicons-check-circle' : 'i-heroicons-exclamation-triangle'"
       variant="subtle"
       class="mt-4"
-      :close-button="{ icon: 'i-heroicons-x-mark', color: 'gray', variant: 'link', size: 'xs' }"
+            :close-button="{ icon: 'i-heroicons-x-mark', color: 'neutral', variant: 'link', size: 'xs' }"
       @close="submitStatus = null"
     />
   </form>
