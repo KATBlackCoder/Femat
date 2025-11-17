@@ -8,9 +8,9 @@ Ce document suit la progression du développement du site web de la Fédération
 
 ## Statut Global
 
-- **Phase actuelle**: Phase 1 - Site Web de Base (v1.0)
-- **Statut**: ✅ Complété
-- **Prochaine phase**: Phase 2 - Blog et Actualités
+- **Phase actuelle**: Phase 2 - Blog et Actualités (v2.0)
+- **Statut**: 🚧 En cours (Phase 1, 2 & 3 complétées, Phase 4 en cours)
+- **Prochaine étape**: Phase 4 - Pages blog
 
 ## Phase 1: Site Web de Base (v1.0) ✅
 
@@ -141,15 +141,96 @@ Ce document suit la progression du développement du site web de la Fédération
   - Code splitting automatique
   - Transitions optimisées
 
-## Phase 2: Blog et Actualités (Planifié)
+## Phase 2: Blog et Actualités (v2.0) 🚧
 
-### Statut: ⏳ En attente
+### Statut: En cours (Phase 1 & 2 complétées, Phase 3 en cours)
 
-- [ ] Installation de Nuxt Content
-- [ ] Installation de Nuxt Studio
-- [ ] Configuration du système de blog
-- [ ] Migration des événements vers Nuxt Content
-- [ ] Interface d'administration avec Nuxt Studio
+### Phase 1: Setup & Configuration ✅
+
+- [x] **Installation des modules**
+  - `@nuxt/content` (v3.8.2) installé
+  - `nuxt-studio@alpha` (v1.0.0-alpha.1) installé
+  - `better-sqlite3` installé (remplacé par connecteur natif)
+
+- [x] **Configuration**
+  - Modules ajoutés dans `nuxt.config.ts`
+  - Configuration Nuxt Content avec connecteur SQLite natif (`sqliteConnector: 'native'`)
+  - Configuration Nuxt Studio avec route `/_studio` et repository GitHub
+  - Fichier `content.config.ts` créé avec collection `blog`
+
+- [x] **Structure de dossiers**
+  - `content/blog/` créé pour les articles Markdown
+  - `public/blog/images/` créé pour les images d'articles
+  - Fichiers `.gitkeep` ajoutés pour versionner les dossiers vides
+
+- [x] **Types TypeScript**
+  - `app/types/blog.ts` créé avec interface `BlogPost`
+  - Constantes `BLOG_CATEGORIES` et type `BlogCategory` définis
+
+### Phase 2: Composable et Utilitaires ✅
+
+- [x] **Composable `useBlog.ts`**
+  - 8 fonctions implémentées pour gérer les articles
+  - Utilise `queryContent()` de Nuxt Content
+  - Cache avec `useAsyncData()` pour performance
+  - Gestion d'erreurs complète avec try/catch
+  - Gestion des cas limites
+
+### Phase 3: Composants ✅
+
+- [x] `components/blogs/BlogCard.vue` - Carte d'article pour la liste
+  - Image de couverture avec NuxtImg (AVIF, lazy loading)
+  - Badge catégorie avec couleurs sémantiques
+  - Date formatée en français, tags, auteur
+  - Hover effects et transitions
+- [x] `components/blogs/BlogPost.vue` - Affichage d'un article complet
+  - Image de couverture responsive
+  - Métadonnées complètes (date, auteur, catégorie, tags)
+  - Contenu avec ContentRenderer de Nuxt Content
+  - Boutons de partage social (Facebook, Twitter, LinkedIn)
+  - Articles similaires en bas
+- [x] `components/blogs/BlogFilters.vue` - Filtres par catégorie/tag
+  - Filtres par catégorie avec boutons
+  - Filtres par tags avec badges cliquables
+  - Compteur d'articles par catégorie
+  - Bouton réinitialiser les filtres
+- [x] `components/blogs/BlogSearch.vue` - Barre de recherche
+  - Input de recherche avec debounce (300ms)
+  - Résultats en temps réel (dropdown, 5 résultats max)
+  - État de chargement et message "Aucun résultat"
+
+### Phase 4: Pages ⏳ En attente
+
+- [ ] `pages/blog/index.vue` - Liste des articles
+- [ ] `pages/blog/[...slug].vue` - Page d'article individuel
+
+### Phase 5: Contenu Initial ⏳ En attente
+
+- [ ] Créer 3-5 articles d'exemple dans `content/blog/`
+
+### Phase 6: SEO et Optimisations ⏳ En attente
+
+- [ ] Meta tags dynamiques par article
+- [ ] Sitemap incluant les articles
+- [ ] Images optimisées avec Nuxt Image
+
+### Phase 7: Nuxt Studio ⏳ En attente
+
+- [ ] Vérifier accès `/_studio`
+- [ ] Tester édition d'article
+- [ ] Tester upload d'images
+- [ ] Documenter utilisation pour équipe éditoriale
+
+### Phase 8: Intégration Navigation ⏳ En attente
+
+- [ ] Ajouter lien "Blog" dans Header
+- [ ] Ajouter lien "Blog" dans Footer
+
+### Phase 9: Tests et Documentation ⏳ En attente
+
+- [ ] Tests fonctionnels manuels
+- [ ] Guide de démarrage rapide
+- [ ] Guide d'utilisation Nuxt Studio
 
 Voir `specs/002-blog-actualites/spec.md` pour les détails.
 
@@ -177,7 +258,10 @@ Voir `specs/005-gestion-dojos-membres/spec.md` pour les détails.
 - Total: 6 pages (accueil, à propos, événements, calendrier, contact, erreur)
 
 ### Composants créés
-- Total: 5 composants (Header, Footer, EventCard, EventCalendar, ContactForm)
+- Phase 1: 5 composants (Header, Footer, EventCard, EventCalendar, ContactForm)
+- Phase 2: 1 composable (useBlog)
+- Phase 3: 4 composants blog (BlogCard, BlogPost, BlogFilters, BlogSearch)
+- **Total**: 9 composants + 1 composable
 
 ### Tests
 - Tests fonctionnels: ⚠️ À compléter (voir `specs/001-site-web-femat/tests.md`)
@@ -191,14 +275,20 @@ Voir `specs/005-gestion-dojos-membres/spec.md` pour les détails.
 ## Prochaines étapes
 
 1. ✅ Compléter l'implémentation v1.0
-2. ⚠️ Effectuer les tests complets (voir `specs/001-site-web-femat/tests.md`)
-3. ⚠️ Déployer sur Vercel (voir `specs/DEPLOYMENT.md`)
-4. ⏳ Démarrer Phase 2 - Blog et Actualités
+2. ✅ Démarrer Phase 2 - Blog et Actualités (Phase 1, 2 & 3 complétées)
+3. ✅ Implémenter composants blog (Phase 3)
+4. ⏳ Créer pages blog (Phase 4)
+5. ⏳ Ajouter contenu initial (Phase 5)
+6. ⚠️ Effectuer les tests complets (voir `specs/001-site-web-femat/tests.md`)
+7. ⚠️ Déployer sur Vercel (voir `specs/DEPLOYMENT.md`)
 
 ## Notes
 
 - Toutes les données d'événements sont actuellement en dur dans `useEvents.ts`
-- Structure préparée pour migration vers Nuxt Content dans Phase 2
+- Structure préparée pour migration vers Nuxt Content dans Phase 2 (futur)
 - Formulaire de contact affiche les données dans la console (v1.0)
 - Intégration avec service email (Formspree, etc.) prévue pour Phase 2
+- **Blog**: Phase 1, 2 & 3 complétées (4 composants créés), Phase 4 (pages) en cours
+- **Nuxt Content**: Configuration avec connecteur SQLite natif (évite problèmes de compilation)
+- **Nuxt Studio**: Configuration GitHub OAuth complétée, à tester au démarrage du serveur
 

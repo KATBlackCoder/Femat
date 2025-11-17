@@ -48,6 +48,13 @@
             Calendrier
           </NuxtLink>
           <NuxtLink 
+            to="/blog" 
+            class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
+            active-class="text-primary"
+          >
+            Blog
+          </NuxtLink>
+          <NuxtLink 
             to="/contact" 
             class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
             active-class="text-primary"
@@ -120,6 +127,14 @@
               @click="mobileMenuOpen = false"
             >
               Calendrier
+            </NuxtLink>
+            <NuxtLink 
+              to="/blog" 
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium py-1"
+              active-class="text-primary"
+              @click="mobileMenuOpen = false"
+            >
+              Blog
             </NuxtLink>
             <NuxtLink 
               to="/contact" 

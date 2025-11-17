@@ -1,5 +1,5 @@
 <template>
-  <UCard class="h-full flex flex-col" :id="`event-${event.id}`">
+  <UCard class="h-full flex flex-col" :id="`event-${event._path?.replace(/\//g, '-')}`">
     <template #header>
       <div class="flex items-center justify-between gap-2 mb-3">
         <UBadge :color="getEventColor(event.type)" variant="subtle">
@@ -44,11 +44,11 @@
     <template #footer>
       <div class="flex justify-end">
         <UButton 
-          v-if="event.status === 'upcoming'"
+          v-if="event.status === 'upcoming' && event._path"
           color="primary" 
           variant="ghost" 
           size="sm"
-          :to="`/events#event-${event.id}`"
+          :to="event._path"
         >
           Plus d'infos
         </UButton>

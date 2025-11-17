@@ -2,7 +2,7 @@
   <div class="min-h-screen flex flex-col">
     <Header />
     <UMain class="flex-1">
-      <slot />
+    <slot />
     </UMain>
     <Footer />
   </div>

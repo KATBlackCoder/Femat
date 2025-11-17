@@ -2,11 +2,17 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxt/image'],
+  modules: [
+    '@nuxt/ui',
+    '@nuxt/image',
+    '@nuxt/content',
+    'nuxt-studio'
+  ],
   css: ['~/assets/css/main.css'],
 
   // SSG Configuration
-  ssr: false, // Static Site Generation (SSG)
+  // ssr: false désactivé pour permettre à Nuxt Content de fonctionner
+  // Nuxt Content nécessite un serveur pour accéder aux fichiers Markdown
   nitro: {
     prerender: {
       routes: ['/']
@@ -66,4 +72,34 @@ export default defineNuxtConfig({
 
   // Nuxt UI Configuration
   // Les couleurs personnalisées sont configurées via Tailwind CSS dans app/assets/css/main.css
+
+  // Configuration Nuxt Content
+  content: {
+    experimental: {
+      // Utiliser le connecteur SQLite natif de Node.js (disponible depuis v22.5.0)
+      // Évite les problèmes de compilation avec better-sqlite3
+      sqliteConnector: 'native'
+    },
+    highlight: {
+      theme: 'github-dark',
+      preload: ['javascript', 'typescript', 'vue', 'bash']
+    },
+    markdown: {
+      toc: {
+        depth: 3,
+        searchDepth: 3
+      }
+    }
+  } as any, // Type assertion temporaire - les types seront générés au prochain démarrage
+
+  // Configuration Nuxt Studio
+  studio: {
+    route: '/_studio',
+    repository: {
+      provider: 'github',
+      owner: 'votre-username', // À remplacer avec le vrai owner GitHub
+      repo: 'femat',
+      branch: 'main'
+    }
+  }
 })

@@ -50,6 +50,12 @@
               Calendrier
             </NuxtLink>
             <NuxtLink 
+              to="/blog" 
+              class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
+            >
+              Blog
+            </NuxtLink>
+            <NuxtLink 
               to="/contact" 
               class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
             >

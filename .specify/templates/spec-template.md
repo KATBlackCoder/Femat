@@ -2,7 +2,7 @@
 
 **Feature ID**: `[###-feature-name]`  
 **Date**: [DATE]  
-**Status**: Draft
+**Status**: Draft  
 
 ## Overview
 
