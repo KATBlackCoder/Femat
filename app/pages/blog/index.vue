@@ -80,13 +80,12 @@
                 />
               </div>
 
-              <!-- Pagination -->
-              <div v-if="totalPages > 1" class="flex justify-center mt-8">
+              <!-- Pagination (affichée seulement si 6+ articles) -->
+              <div v-if="filteredPosts.length >= 6 && totalPages > 1" class="flex justify-center mt-8">
                 <UPagination
-                  v-model="currentPage"
-                  :page-count="totalPages"
+                  v-model:page="currentPage"
                   :total="filteredPosts.length"
-                  :per-page="postsPerPage"
+                  :items-per-page="postsPerPage"
                   show-first
                   show-last
                 />
@@ -125,7 +124,7 @@ const categoryCounts = ref<Record<BlogCategory, number>>({
 
 // Pagination
 const currentPage = ref(1)
-const postsPerPage = 12
+const postsPerPage = 6
 
 // Charger les articles au montage
 onMounted(async () => {

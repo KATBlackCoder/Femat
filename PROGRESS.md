@@ -406,4 +406,5 @@ Voir `specs/005-gestion-dojos-membres/spec.md` pour les détails.
 - **Nuxt Content**: Configuration avec connecteur SQLite natif (évite problèmes de compilation)
 - **Nuxt Studio**: Configuration GitHub OAuth complétée, à tester au démarrage du serveur
 - **Restructuration Content**: Phase 0, 1, 2, 3 & 4 complétées - Composable générique `useContentCollection` créé (605 lignes), `useBlog` refactorisé (réduction ~40%), `useEvents` refactorisé (réduction ~12%)
+- **Assets publics**: Structure simplifiée - `public/content/shared/` contient directement les dossiers par année (suppression du niveau `images/` intermédiaire)
 

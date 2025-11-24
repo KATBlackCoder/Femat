@@ -6,7 +6,7 @@
           {{ getEventTypeLabel(event.type) }}
         </UBadge>
         <UBadge 
-          v-if="countdown.hasEnded" 
+          v-if="eventStatus === 'past'" 
           color="neutral" 
           variant="subtle"
           aria-label="Événement passé"
@@ -14,7 +14,7 @@
           Passé
         </UBadge>
         <UBadge 
-          v-else-if="countdown.hasStarted" 
+          v-else-if="eventStatus === 'ongoing'" 
           color="warning" 
           variant="subtle"
           aria-label="Événement en cours"
@@ -79,6 +79,7 @@
 <script setup lang="ts">
 import type { Event } from '~/types/event'
 import { useEventCountdown } from '~/composables/useEventCountdown'
+import { useEvents } from '~/composables/useEvents'
 
 const props = defineProps<{
   event: Event
@@ -86,6 +87,20 @@ const props = defineProps<{
 
 // Calculer le temps restant
 const countdown = useEventCountdown(props.event)
+
+// Utiliser les fonctions de useEvents pour déterminer le statut de manière cohérente
+const { isEventPast, isEventOngoing } = useEvents()
+
+// Calculer le statut dynamiquement (cohérent avec useEvents)
+const eventStatus = computed<Event['status']>(() => {
+  if (isEventOngoing(props.event)) {
+    return 'ongoing'
+  }
+  if (isEventPast(props.event)) {
+    return 'past'
+  }
+  return 'upcoming'
+})
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString)

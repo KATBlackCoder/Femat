@@ -16,26 +16,30 @@ Ce document détaille le plan d'implémentation pour le déploiement du site sur
 - [ ] Identifier toutes les variables d'environnement nécessaires
 - [ ] Optimiser les images et assets
 
-### Phase 2: Configuration Nuxt pour Production
-- [ ] Configurer le mode SSG (`ssr: false` ou `nitro.prerender`)
-- [ ] Configurer les routes à pré-rendre
-- [ ] Activer les optimisations de build
-- [ ] Désactiver les source maps en production
-- [ ] Activer la minification
+### Phase 2: Configuration Nuxt pour Production ✅
+- [x] Configurer le mode SSG avec `nitro.prerender` (au lieu de `ssr: false` pour préserver Nuxt Content)
+- [x] Configurer `crawlLinks: true` pour pré-rendre toutes les routes automatiquement
+- [x] Activer les optimisations de build
+- [x] Désactiver les source maps en production
+- [x] Activer la minification (automatique avec Nuxt)
+
+**Note importante**: Utiliser `nitro.prerender` avec `crawlLinks: true` au lieu de `ssr: false` pour préserver les fonctionnalités de Nuxt Content qui nécessitent un serveur pour accéder aux fichiers Markdown.
 
 ### Phase 3: Création du Projet Vercel
 - [ ] Créer un compte Vercel (si nécessaire)
 - [ ] Importer le repository Git dans Vercel
-- [ ] Vérifier la détection automatique de Nuxt.js
-- [ ] Configurer le build command (si nécessaire)
-- [ ] Configurer l'output directory (si nécessaire)
+- [ ] Vérifier la détection automatique de Nuxt.js (automatique via `package.json`)
+- [x] Créer `vercel.json` avec headers de sécurité (optionnel)
+
+**Note importante**: 
+- Vercel détecte automatiquement Nuxt.js et configure Nitro - pas besoin de configurer manuellement `buildCommand` ou `outputDirectory`
+- Le fichier `vercel.json` est optionnel et ne doit être utilisé que pour des configurations spécifiques (headers de sécurité, redirects, etc.)
 
 ### Phase 4: Configuration des Variables d'Environnement
-- [ ] Lister toutes les variables nécessaires
-- [ ] Configurer GitHub OAuth pour Nuxt Studio (si utilisé)
-- [ ] Ajouter les variables dans Vercel Dashboard
-- [ ] Configurer les variables pour preview/production
-- [ ] Documenter les variables
+- [x] Lister toutes les variables nécessaires
+- [ ] Ajouter les variables dans Vercel Dashboard (si nécessaire)
+- [ ] Configurer les variables pour preview/production (si nécessaire)
+- [x] Documenter les variables
 
 ### Phase 5: Premier Déploiement
 - [ ] Déployer en preview d'abord
@@ -58,21 +62,13 @@ Ce document détaille le plan d'implémentation pour le déploiement du site sur
 - [ ] Vérifier la configuration HTTPS
 - [ ] Configurer la redirection www (si nécessaire)
 
-### Phase 8: Configuration Nuxt Studio (si utilisé)
-- [ ] Créer OAuth App sur GitHub
-- [ ] Configurer les URLs de callback
-- [ ] Ajouter les credentials dans Vercel
-- [ ] Tester l'accès à `/_studio`
-- [ ] Tester l'authentification GitHub
-- [ ] Tester l'édition en production
-
-### Phase 9: Monitoring et Analytics
+### Phase 8: Monitoring et Analytics
 - [ ] Activer Vercel Analytics (optionnel)
 - [ ] Configurer Google Analytics (si nécessaire)
 - [ ] Vérifier les métriques de performance
 - [ ] Configurer les alertes (si nécessaire)
 
-### Phase 10: Tests Finaux
+### Phase 9: Tests Finaux
 - [ ] Tester le déploiement automatique (push sur `main`)
 - [ ] Tester les preview deployments (autres branches)
 - [ ] Tester les preview deployments (Pull Requests)
@@ -83,9 +79,9 @@ Ce document détaille le plan d'implémentation pour le déploiement du site sur
 
 ### Configuration
 - [ ] Projet configuré dans Vercel
-- [ ] Build command correct
-- [ ] Output directory correct
-- [ ] Variables d'environnement configurées
+- [x] Build command détecté automatiquement (Vercel détecte `pnpm build`)
+- [x] Output directory détecté automatiquement (Vercel détecte `.output/public` pour SSG)
+- [ ] Variables d'environnement configurées (si nécessaire)
 - [ ] Domaine personnalisé configuré (si applicable)
 
 ### Fonctionnalités
@@ -95,7 +91,6 @@ Ce document détaille le plan d'implémentation pour le déploiement du site sur
 - [ ] Navigation fonctionne
 - [ ] Blog fonctionne (si applicable)
 - [ ] Événements fonctionnent (si applicable)
-- [ ] Nuxt Studio fonctionne (si configuré)
 
 ### Performance
 - [ ] Score Lighthouse > 90
@@ -117,6 +112,10 @@ Ce document détaille le plan d'implémentation pour le déploiement du site sur
 
 ## Notes
 
+- **Détection automatique**: Vercel détecte automatiquement Nuxt.js via `package.json` et configure Nitro sans configuration supplémentaire
+- **Pas besoin de `vercel.json`**: Le fichier `vercel.json` est optionnel et ne doit être utilisé que pour des configurations spécifiques (headers de sécurité, redirects, etc.)
+- **Build automatique**: Vercel utilise automatiquement `pnpm build` et détecte `.output/public` pour SSG
+- **SSG avec Nuxt Content**: Utiliser `nitro.prerender` avec `crawlLinks: true` au lieu de `ssr: false` pour préserver les fonctionnalités de Nuxt Content
 - Toujours tester en preview avant production
 - Vérifier les logs Vercel en cas d'erreur
 - Le plan gratuit Vercel est suffisant pour démarrer

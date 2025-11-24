@@ -73,12 +73,36 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - Meilleure gestion des erreurs
 - Base solide pour futures fonctionnalités
 
-## Phase 4: Déploiement avec Vercel (v2.2)
+## Phase 4: Formulaire de Contact Fonctionnel (v2.2)
+
+**Priorité**: P1 (Critique)  
+**Statut**: Planifié  
+**Spécification**: `008-contact-form`  
+**Dépendances**: Phase 1 complétée
+
+### Fonctionnalités
+
+- Migration vers `UForm` avec validation schema (Valibot)
+- API route pour recevoir les soumissions
+- Intégration service d'envoi d'email (EmailJS)
+- Protection anti-spam renforcée (honeypot, rate limiting)
+- Feedback utilisateur amélioré (Toast notifications)
+- Accessibilité et UX optimisées
+
+### Objectifs
+
+- Formulaire de contact complètement fonctionnel
+- Messages envoyés avec succès
+- Protection efficace contre le spam
+- Expérience utilisateur optimale
+- Code maintenable et robuste
+
+## Phase 5: Déploiement avec Vercel (v2.3)
 
 **Priorité**: P1 (Critique)  
 **Statut**: Planifié  
 **Spécification**: `007-deploiement-vercel`  
-**Dépendances**: Phase 1 complétée, Phase 2 complétée, Phase 3 recommandée
+**Dépendances**: Phase 1 complétée, Phase 2 complétée, Phase 3 recommandée, Phase 4 complétée
 
 ### Fonctionnalités
 
@@ -110,7 +134,12 @@ Ce document présente la roadmap de développement du site web de la Fédératio
    - Optimise les performances
    - Préparation pour la mise en production
 
-4. **Phase 4** (v2.2) - Déploiement avec Vercel
+4. **Phase 4** (v2.2) - Formulaire de Contact Fonctionnel
+   - Formulaire de contact opérationnel
+   - Nécessaire avant déploiement en production
+   - Permet aux visiteurs de contacter la fédération
+
+5. **Phase 5** (v2.3) - Déploiement avec Vercel
    - Mise en ligne du site
    - Déploiement automatisé
    - Site accessible publiquement
@@ -121,7 +150,8 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 001-site-web-femat (Phase 1)
     ├── 002-blog-actualites (Phase 2)
     │       └── 006-restructuration-content (Phase 3)
-    │               └── 007-deploiement-vercel (Phase 4)
+    ├── 008-contact-form (Phase 4)
+    │       └── 007-deploiement-vercel (Phase 5)
 ```
 
 ## Critères de Succès
@@ -145,6 +175,14 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - [ ] Documentation complète
 
 ### Phase 4 (v2.2)
+- [ ] Formulaire migré vers UForm avec validation schema
+- [ ] API route fonctionnelle pour recevoir les soumissions
+- [ ] Emails envoyés avec succès via EmailJS
+- [ ] Protection anti-spam efficace
+- [ ] Feedback utilisateur optimal
+- [ ] Accessibilité conforme
+
+### Phase 5 (v2.3)
 - [ ] Site déployé sur Vercel
 - [ ] Déploiement automatique configuré
 - [ ] Performance optimisée en production

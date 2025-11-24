@@ -83,7 +83,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
             v-for="(event, index) in upcomingEvents"
-            :key="event.id"
+            :key="event._path || index"
             class="transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
@@ -179,7 +179,7 @@
               <div class="group">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="p-2 rounded-lg bg-primary-100 dark:bg-primary-900/30 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/50 transition-colors">
-                    <UIcon name="i-simple-icons-facebook" class="w-6 h-6 text-primary" aria-hidden="true" />
+                    <UIcon name="i-heroicons-share" class="w-6 h-6 text-primary" aria-hidden="true" />
                   </div>
                   <h3 class="font-semibold text-lg text-gray-900 dark:text-white">Réseaux sociaux</h3>
                 </div>
@@ -190,7 +190,7 @@
                     external
                     color="primary"
                     variant="ghost"
-                    icon="i-simple-icons-facebook"
+                    icon="i-heroicons-share"
                     aria-label="Page Facebook FEMAT"
                     size="sm"
                   >

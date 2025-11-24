@@ -14,8 +14,20 @@ export default defineNuxtConfig({
   // Nuxt Content nécessite un serveur pour accéder aux fichiers Markdown
   nitro: {
     prerender: {
-      routes: ['/']
+      routes: ['/'],
+      crawlLinks: true // Pré-rendre toutes les routes trouvées automatiquement
     }
+  },
+
+  // Optimisations de production
+  sourcemap: {
+    server: false,
+    client: false // Désactiver les source maps en production pour réduire la taille
+  },
+
+  // Optimisations de build
+  experimental: {
+    payloadExtraction: false // Optimisation pour SSG
   },
 
   // SEO Configuration

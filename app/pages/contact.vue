@@ -79,7 +79,7 @@
               <div class="group">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="p-2 rounded-lg bg-primary-100 dark:bg-primary-900/30 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/50 transition-colors">
-                    <UIcon name="i-simple-icons-facebook" class="w-5 h-5 text-primary" aria-hidden="true" />
+                    <UIcon name="i-heroicons-share" class="w-5 h-5 text-primary" aria-hidden="true" />
                   </div>
                   <h3 class="font-semibold text-lg text-gray-900 dark:text-white">Réseaux sociaux</h3>
                 </div>
@@ -90,7 +90,7 @@
                     external
                     color="primary"
                     variant="ghost"
-                    icon="i-simple-icons-facebook"
+                    icon="i-heroicons-share"
                     aria-label="Page Facebook FEMAT"
                     size="sm"
                   >

@@ -1,7 +1,7 @@
 /**
  * Composable pour calculer le temps restant avant le début et la fin d'un événement
  */
-export const useEventCountdown = (event: { date: string; endDate?: string; startTime?: string; endTime?: string; status: 'upcoming' | 'past' }) => {
+export const useEventCountdown = (event: { date: string; endDate?: string; startTime?: string; endTime?: string; status: 'upcoming' | 'ongoing' | 'past' }) => {
   /**
    * Crée une date complète à partir d'une date et d'une heure optionnelle
    * Parse manuellement pour éviter les problèmes de fuseau horaire
@@ -32,14 +32,28 @@ export const useEventCountdown = (event: { date: string; endDate?: string; start
   // Calculer les dates de début et fin pour déterminer si l'événement est à venir
   const startDateTime = computed(() => createDateTime(event.date, event.startTime))
   const endDateTime = computed(() => {
-    if (event.endDate) {
-      return createDateTime(event.endDate, event.endTime)
-    }
-    // Si pas de date de fin, utiliser la date de début avec l'heure de fin ou la fin de journée
-    const endDate = createDateTime(event.date, event.endTime)
-    if (!event.endTime) {
+    // Utiliser la date de fin si disponible, sinon la date de début
+    const eventEndDateStr = event.endDate || event.date
+    
+    // Parser la date manuellement pour éviter les problèmes de fuseau horaire
+    const dateParts = eventEndDateStr.split('-').map(Number)
+    const year = dateParts[0] ?? 0
+    const month = dateParts[1] ?? 1
+    const day = dateParts[2] ?? 1
+    const endDate = new Date(year, month - 1, day)
+    
+    // Si l'événement a une heure de fin, l'utiliser, sinon utiliser la fin de journée
+    // Cette logique doit correspondre exactement à isEventPast() dans useEvents.ts
+    if (event.endTime) {
+      const timeParts = event.endTime.split(':').map(Number)
+      const hours = timeParts[0] ?? 23
+      const minutes = timeParts[1] ?? 59
+      endDate.setHours(hours, minutes, 59, 999)
+    } else {
+      // Sinon, utiliser la fin de journée (23:59:59)
       endDate.setHours(23, 59, 59, 999)
     }
+    
     return endDate
   })
   

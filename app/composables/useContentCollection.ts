@@ -184,9 +184,12 @@ interface CacheEntry<T> {
 
 /**
  * Classe pour gérer le cache des collections
+ * 
+ * Gère le cache des résultats avec TTL et déduplication des requêtes simultanées
  */
 class ContentCache {
   private cache = new Map<string, CacheEntry<any>>()
+  private pendingRequests = new Map<string, Promise<any>>()
   private hits = 0
   private misses = 0
 
@@ -221,8 +224,41 @@ class ContentCache {
     })
   }
 
+  /**
+   * Récupère une valeur du cache ou attend une requête en cours
+   * Évite les requêtes redondantes simultanées
+   */
+  async getOrWait<T>(key: string): Promise<T | undefined> {
+    // Vérifier le cache d'abord
+    if (this.has(key)) {
+      return this.get<T>(key)
+    }
+
+    // Vérifier si une requête est déjà en cours
+    const pendingRequest = this.pendingRequests.get(key)
+    if (pendingRequest) {
+      return pendingRequest as Promise<T | undefined>
+    }
+
+    return undefined
+  }
+
+  /**
+   * Enregistre une requête en cours pour éviter les duplications
+   */
+  setPending<T>(key: string, promise: Promise<T>): void {
+    this.pendingRequests.set(key, promise)
+    
+    // Nettoyer après résolution (succès ou erreur)
+    promise
+      .finally(() => {
+        this.pendingRequests.delete(key)
+      })
+  }
+
   clear(): void {
     this.cache.clear()
+    this.pendingRequests.clear()
     this.hits = 0
     this.misses = 0
   }
@@ -235,7 +271,8 @@ class ContentCache {
     return {
       size: this.cache.size,
       hits: this.hits,
-      misses: this.misses
+      misses: this.misses,
+      pendingRequests: this.pendingRequests.size
     }
   }
 }
@@ -291,6 +328,22 @@ function generateFallbackPaths(slug: string, prefix: string): string[] {
 
 /**
  * Gère les erreurs de manière centralisée
+ * 
+ * Cette fonction standardise la gestion des erreurs dans tous les composables de contenu.
+ * Elle fournit des logs différenciés selon l'environnement et permet un callback personnalisé.
+ * 
+ * @param error - L'erreur à gérer (peut être de n'importe quel type)
+ * @param context - Le contexte de l'erreur (ex: "getAll(blog)", "getBySlug(events, slug)")
+ * @param onError - Callback optionnel pour gestion personnalisée des erreurs
+ * 
+ * @example
+ * ```typescript
+ * try {
+ *   // Code qui peut échouer
+ * } catch (error) {
+ *   handleContentError(error, 'getAll(blog)', customErrorHandler)
+ * }
+ * ```
  */
 function handleContentError(
   error: unknown,
@@ -300,7 +353,7 @@ function handleContentError(
   const isDev = import.meta.env.DEV
   const errorObj = error instanceof Error ? error : new Error(String(error))
 
-  // Callback personnalisé si fourni
+  // Callback personnalisé si fourni (priorité)
   if (onError) {
     onError(errorObj, context)
     return
@@ -308,9 +361,13 @@ function handleContentError(
 
   // Logs différenciés dev/production
   if (isDev) {
+    // En développement : logs détaillés pour faciliter le debug
     console.error(`[ContentCollection] ${context}:`, errorObj)
+    if (errorObj.stack) {
+      console.error('Stack trace:', errorObj.stack)
+    }
   } else {
-    // En production, logger seulement les erreurs critiques
+    // En production : logs minimaux pour éviter la pollution des logs
     console.error(`[ContentCollection] Error in ${context}`)
   }
 }
@@ -390,13 +447,18 @@ export function useContentCollection<T extends ContentItem>(
   const getAll = async (options?: GetAllOptions): Promise<T[]> => {
     const cacheKey = `collection:${collection}:all:${JSON.stringify(options)}`
 
-    // Vérifier le cache
-    if (cache && !options?.skipCache && cache.has(cacheKey)) {
-      return cache.get<T[]>(cacheKey) ?? []
+    // Vérifier le cache ou attendre une requête en cours
+    if (cache && !options?.skipCache) {
+      const cached = await cache.getOrWait<T[]>(cacheKey)
+      if (cached !== undefined) {
+        return cached
+      }
     }
 
-    try {
-      let query = queryCollection<T>(collection)
+    // Créer la promesse de requête
+    const requestPromise = (async (): Promise<T[]> => {
+      try {
+        let query = queryCollection<T>(collection)
 
       // Filtre published par défaut
       if (options?.published !== false) {
@@ -422,18 +484,26 @@ export function useContentCollection<T extends ContentItem>(
         results.forEach(item => normalizeItemPath(item))
       }
 
-      const finalResults = (results || []) as T[]
+        const finalResults = (results || []) as T[]
 
-      // Mettre en cache
-      if (cache && !options?.skipCache) {
-        cache.set(cacheKey, finalResults, cacheTTL)
+        // Mettre en cache
+        if (cache && !options?.skipCache) {
+          cache.set(cacheKey, finalResults, cacheTTL)
+        }
+
+        return finalResults
+      } catch (error) {
+        handleContentError(error, `getAll(${collection})`, onError)
+        return []
       }
+    })()
 
-      return finalResults
-    } catch (error) {
-      handleContentError(error, `getAll(${collection})`, onError)
-      return []
+    // Enregistrer la requête en cours pour éviter les duplications
+    if (cache && !options?.skipCache) {
+      cache.setPending(cacheKey, requestPromise)
     }
+
+    return requestPromise
   }
 
   /**
@@ -445,14 +515,19 @@ export function useContentCollection<T extends ContentItem>(
   ): Promise<T | null> => {
     const cacheKey = `collection:${collection}:slug:${slug}`
 
-    // Vérifier le cache
-    if (cache && !options?.skipCache && cache.has(cacheKey)) {
-      return cache.get<T>(cacheKey) ?? null
+    // Vérifier le cache ou attendre une requête en cours
+    if (cache && !options?.skipCache) {
+      const cached = await cache.getOrWait<T>(cacheKey)
+      if (cached !== undefined) {
+        return cached ?? null
+      }
     }
 
-    try {
-      // Normaliser le slug
-      const normalizedSlug = normalizeSlug(slug, pathPrefix)
+    // Créer la promesse de requête
+    const requestPromise = (async (): Promise<T | null> => {
+      try {
+        // Normaliser le slug
+        const normalizedSlug = normalizeSlug(slug, pathPrefix)
 
       // Essayer avec le slug normalisé
       let query = await queryCollection<T>(collection)
@@ -472,27 +547,35 @@ export function useContentCollection<T extends ContentItem>(
         }
       }
 
-      if (query) {
-        // Normaliser le path si nécessaire
-        if (normalizePath) {
-          normalizeItemPath(query)
+        if (query) {
+          // Normaliser le path si nécessaire
+          if (normalizePath) {
+            normalizeItemPath(query)
+          }
+
+          const result = query as T
+
+          // Mettre en cache
+          if (cache && !options?.skipCache) {
+            cache.set(cacheKey, result, cacheTTL)
+          }
+
+          return result
         }
 
-        const result = query as T
-
-        // Mettre en cache
-        if (cache && !options?.skipCache) {
-          cache.set(cacheKey, result, cacheTTL)
-        }
-
-        return result
+        return null
+      } catch (error) {
+        handleContentError(error, `getBySlug(${collection}, ${slug})`, onError)
+        return null
       }
+    })()
 
-      return null
-    } catch (error) {
-      handleContentError(error, `getBySlug(${collection}, ${slug})`, onError)
-      return null
+    // Enregistrer la requête en cours pour éviter les duplications
+    if (cache && !options?.skipCache) {
+      cache.setPending(cacheKey, requestPromise)
     }
+
+    return requestPromise
   }
 
   /**
@@ -506,50 +589,63 @@ export function useContentCollection<T extends ContentItem>(
     const operator = options?.operator || '='
     const cacheKey = `collection:${collection}:field:${field}:${operator}:${JSON.stringify(value)}`
 
-    // Vérifier le cache
-    if (cache && !options?.skipCache && cache.has(cacheKey)) {
-      return cache.get<T[]>(cacheKey) ?? []
+    // Vérifier le cache ou attendre une requête en cours
+    if (cache && !options?.skipCache) {
+      const cached = await cache.getOrWait<T[]>(cacheKey)
+      if (cached !== undefined) {
+        return cached
+      }
     }
 
-    try {
-      let query = queryCollection<T>(collection)
+    // Créer la promesse de requête
+    const requestPromise = (async (): Promise<T[]> => {
+      try {
+        let query = queryCollection<T>(collection)
 
-      // Filtre published par défaut
-      if (options?.published !== false) {
-        query = query.where('published', '=', true)
+        // Filtre published par défaut
+        if (options?.published !== false) {
+          query = query.where('published', '=', true)
+        }
+
+        // Appliquer le filtre
+        query = query.where(field, operator, value)
+
+        // Tri
+        const sortField = options?.sortField || defaultSortField
+        const sortDirection = options?.sortDirection || defaultSortDirection
+        query = query.order(sortField, sortDirection)
+
+        const results = await query.all()
+
+        // Normaliser les paths si nécessaire
+        if (normalizePath && results) {
+          results.forEach(item => normalizeItemPath(item))
+        }
+
+        const finalResults = (results || []) as T[]
+
+        // Mettre en cache
+        if (cache && !options?.skipCache) {
+          cache.set(cacheKey, finalResults, cacheTTL)
+        }
+
+        return finalResults
+      } catch (error) {
+        handleContentError(
+          error,
+          `getByField(${collection}, ${field}, ${value})`,
+          onError
+        )
+        return []
       }
+    })()
 
-      // Appliquer le filtre
-      query = query.where(field, operator, value)
-
-      // Tri
-      const sortField = options?.sortField || defaultSortField
-      const sortDirection = options?.sortDirection || defaultSortDirection
-      query = query.order(sortField, sortDirection)
-
-      const results = await query.all()
-
-      // Normaliser les paths si nécessaire
-      if (normalizePath && results) {
-        results.forEach(item => normalizeItemPath(item))
-      }
-
-      const finalResults = (results || []) as T[]
-
-      // Mettre en cache
-      if (cache && !options?.skipCache) {
-        cache.set(cacheKey, finalResults, cacheTTL)
-      }
-
-      return finalResults
-    } catch (error) {
-      handleContentError(
-        error,
-        `getByField(${collection}, ${field}, ${value})`,
-        onError
-      )
-      return []
+    // Enregistrer la requête en cours pour éviter les duplications
+    if (cache && !options?.skipCache) {
+      cache.setPending(cacheKey, requestPromise)
     }
+
+    return requestPromise
   }
 
   /**

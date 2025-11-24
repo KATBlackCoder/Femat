@@ -54,7 +54,7 @@ Le site web FEMAT est prêt pour la mise en production. Vercel a été choisi co
 **Description**: Configurer les variables d'environnement nécessaires.
 
 **Acceptance Criteria**:
-- [ ] Variables identifiées (Nuxt Studio, etc.)
+- [ ] Variables identifiées
 - [ ] Variables configurées dans Vercel Dashboard
 - [ ] Variables différentes pour preview/production si nécessaire
 - [ ] Documentation des variables
@@ -78,17 +78,7 @@ Le site web FEMAT est prêt pour la mise en production. Vercel a été choisi co
 - [ ] Cache headers configurés
 - [ ] Score Lighthouse > 90
 
-### FR-7: Configuration Nuxt Studio (si utilisé)
-**Description**: Configurer Nuxt Studio pour fonctionner sur Vercel.
-
-**Acceptance Criteria**:
-- [ ] GitHub OAuth configuré
-- [ ] Variables d'environnement GitHub configurées
-- [ ] Route `/_studio` accessible
-- [ ] Authentification fonctionnelle
-- [ ] Édition en production fonctionnelle
-
-### FR-8: Monitoring et Analytics
+### FR-7: Monitoring et Analytics
 **Description**: Configurer le monitoring et les analytics.
 
 **Acceptance Criteria**:
@@ -125,12 +115,11 @@ Le site web FEMAT est prêt pour la mise en production. Vercel a été choisi co
 
 ### Configuration Vercel
 
-**Fichier `vercel.json` (optionnel)**:
+**Important**: Vercel détecte automatiquement Nuxt.js et configure Nitro. Aucune configuration spéciale n'est nécessaire dans `vercel.json` pour le fonctionnement de base.
+
+**Fichier `vercel.json` (optionnel - uniquement pour headers de sécurité)**:
 ```json
 {
-  "buildCommand": "pnpm build",
-  "outputDirectory": ".output/public",
-  "framework": "nuxtjs",
   "headers": [
     {
       "source": "/(.*)",
@@ -149,44 +138,42 @@ Le site web FEMAT est prêt pour la mise en production. Vercel a été choisi co
 }
 ```
 
+**Note**: Ne pas définir `buildCommand`, `outputDirectory` ou `framework` dans `vercel.json` car Vercel détecte automatiquement Nuxt.js et utilise les valeurs par défaut appropriées.
+
 **Configuration Nuxt** (`nuxt.config.ts`):
 ```typescript
 export default defineNuxtConfig({
-  // Mode SSG pour site statique
-  ssr: false,
-  // OU pour SSG avec certaines routes dynamiques
+  // SSG avec Nuxt Content - utiliser nitro.prerender au lieu de ssr: false
+  // ssr: false désactivé car Nuxt Content nécessite un serveur pour accéder aux fichiers Markdown
   nitro: {
     prerender: {
       routes: ['/'],
-      crawlLinks: true
+      crawlLinks: true // Pré-rendre toutes les routes trouvées automatiquement
     }
   },
   // Optimisations de production
+  sourcemap: {
+    server: false,
+    client: false // Désactiver les source maps en production
+  },
   experimental: {
-    payloadExtraction: false
+    payloadExtraction: false // Optimisation pour SSG
   }
 })
 ```
 
+**Détection automatique Vercel**:
+- Vercel détecte automatiquement Nuxt.js via `package.json`
+- Build command: `pnpm build` (détecté automatiquement)
+- Output directory: `.output/public` (détecté automatiquement pour SSG)
+- Framework: `nuxtjs` (détecté automatiquement)
+
 ### Variables d'Environnement
 
-**Pour Nuxt Studio** (si utilisé):
-- `STUDIO_GITHUB_CLIENT_ID`
-- `STUDIO_GITHUB_CLIENT_SECRET`
-- `STUDIO_GITHUB_REPO_OWNER`
-- `STUDIO_GITHUB_REPO_NAME`
-- `STUDIO_GITHUB_REPO_BRANCH`
-
-**Autres variables** (selon besoins):
+**Variables nécessaires** (selon besoins):
 - Variables d'API si nécessaire
 - Clés de service si nécessaire
-
-### GitHub OAuth pour Nuxt Studio
-
-1. Créer OAuth App sur GitHub
-2. Homepage URL: `https://votre-domaine.vercel.app`
-3. Authorization callback URL: `https://votre-domaine.vercel.app`
-4. Ajouter credentials dans Vercel Environment Variables
+- Variables pour le formulaire de contact (si API ajoutée)
 
 ### Workflow de Déploiement
 
@@ -209,10 +196,11 @@ pnpm vercel --prod
 
 ## Design Guidelines
 
-- Configuration minimale (Vercel détecte automatiquement Nuxt.js)
+- **Zero Configuration**: Vercel détecte automatiquement Nuxt.js et configure Nitro - pas besoin de `vercel.json` pour le fonctionnement de base
 - Optimisations de performance par défaut
-- Sécurité par défaut (HTTPS, headers)
+- Sécurité par défaut (HTTPS automatique, headers optionnels via `vercel.json`)
 - Documentation claire des étapes
+- Utiliser `nitro.prerender` avec `crawlLinks: true` pour SSG avec Nuxt Content (au lieu de `ssr: false`)
 
 ## Out of Scope (v1.0)
 
@@ -250,7 +238,6 @@ pnpm vercel --prod
 
 3. **Étape 3**: Configurer les variables d'environnement
    - Ajouter les variables nécessaires
-   - Configurer GitHub OAuth si Nuxt Studio utilisé
    - Tester les variables
 
 4. **Étape 4**: Premier déploiement
@@ -281,7 +268,6 @@ pnpm vercel --prod
 - [ ] HTTPS configuré automatiquement
 - [ ] Toutes les pages fonctionnent correctement
 - [ ] Images et assets chargent correctement
-- [ ] Nuxt Studio fonctionne (si configuré)
 - [ ] Domaine personnalisé configuré (si applicable)
 - [ ] Performance optimale
 
@@ -307,7 +293,6 @@ pnpm vercel --prod
 - [ ] Images et assets chargent correctement
 - [ ] Performance vérifiée (Lighthouse)
 - [ ] HTTPS fonctionne
-- [ ] Nuxt Studio accessible (si configuré)
 - [ ] Déploiement automatique testé
 
 ## Ressources
@@ -319,8 +304,11 @@ pnpm vercel --prod
 
 ## Notes
 
-- Vercel détecte automatiquement Nuxt.js et configure Nitro
-- Les déploiements sont automatiques à chaque push
+- **Détection automatique**: Vercel détecte automatiquement Nuxt.js via `package.json` et configure Nitro sans configuration supplémentaire
+- **Pas besoin de `vercel.json`**: Le fichier `vercel.json` est optionnel et ne doit être utilisé que pour des configurations spécifiques (headers de sécurité, redirects, etc.)
+- **Build automatique**: Vercel utilise automatiquement `pnpm build` et détecte `.output/public` pour SSG
+- **SSG avec Nuxt Content**: Utiliser `nitro.prerender` avec `crawlLinks: true` au lieu de `ssr: false` pour préserver les fonctionnalités de Nuxt Content
+- Les déploiements sont automatiques à chaque push sur `main`
 - Les Preview Deployments permettent de tester avant production
 - Le plan gratuit est suffisant pour démarrer
 - HTTPS est automatique et gratuit

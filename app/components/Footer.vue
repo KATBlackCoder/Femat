@@ -95,7 +95,7 @@
               external
               color="primary"
               variant="ghost"
-              icon="i-simple-icons-facebook"
+              icon="i-heroicons-share"
               aria-label="Page Facebook FEMAT"
             />
           </div>

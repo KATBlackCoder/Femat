@@ -39,11 +39,11 @@
               {{ getEventTypeLabel(event.type) }}
             </UBadge>
             <UBadge 
-              :color="event.status === 'upcoming' ? 'success' : 'neutral'" 
+              :color="computedStatus === 'upcoming' ? 'success' : computedStatus === 'ongoing' ? 'warning' : 'neutral'" 
               variant="subtle" 
               size="lg"
             >
-              {{ event.status === 'upcoming' ? 'À venir' : 'Passé' }}
+              {{ computedStatus === 'upcoming' ? 'À venir' : computedStatus === 'ongoing' ? 'En cours' : 'Passé' }}
             </UBadge>
           </div>
         </template>
@@ -89,7 +89,7 @@
             </div>
             
             <!-- Temps restant -->
-            <div v-if="event.status === 'upcoming' && !countdown.hasEnded" class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+            <div v-if="(computedStatus === 'upcoming' || computedStatus === 'ongoing') && !countdown.hasEnded" class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
               <div v-if="!countdown.hasStarted" class="flex items-center gap-3 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
                 <UIcon name="i-heroicons-clock" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 <div>
@@ -143,7 +143,7 @@ import { useEvents } from '~/composables/useEvents'
 import { useEventCountdown } from '~/composables/useEventCountdown'
 
 const route = useRoute()
-const { getEventBySlug } = useEvents()
+const { getEventBySlug, isEventPast, isEventOngoing } = useEvents()
 
 // Récupérer le slug depuis la route
 const slug = computed(() => {
@@ -174,6 +174,20 @@ onMounted(async () => {
   } finally {
     isLoading.value = false
   }
+})
+
+// Calculer le statut dynamiquement au lieu d'utiliser le statut statique du fichier Markdown
+const computedStatus = computed<Event['status']>(() => {
+  if (!event.value) return 'upcoming'
+  
+  // Calculer le statut en fonction de la date actuelle
+  if (isEventOngoing(event.value)) {
+    return 'ongoing'
+  }
+  if (isEventPast(event.value)) {
+    return 'past'
+  }
+  return 'upcoming'
 })
 
 // Calculer le temps restant (seulement si l'événement est chargé)

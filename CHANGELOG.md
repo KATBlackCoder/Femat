@@ -244,6 +244,14 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
   - Suppression des déclarations TypeScript dupliquées (`queryCollection`)
   - Suppression des blocs try/catch redondants (gestion d'erreurs centralisée)
 
+#### Modifié
+- **Réorganisation des assets publics** : Simplification de la structure `public/content/shared/`
+  - Suppression du dossier `images/` intermédiaire dans `public/content/shared/`
+  - Dossiers par année (`2024/`, `2025/`) déplacés directement dans `shared/`
+  - Structure simplifiée : `public/content/shared/{année}/` au lieu de `public/content/shared/images/{année}/`
+  - Mise à jour des guides (`content/CONTENT-GUIDE.md` et `specs/006-restructuration-content/USAGE.md`) pour refléter les nouveaux chemins
+  - Nouveau chemin pour images partagées : `/content/shared/{année}/` au lieu de `/content/shared/images/{année}/`
+
 #### Corrigé
 - Correction de l'utilisation de `process.env` remplacé par `import.meta.env.DEV` pour compatibilité Nuxt 3
 
