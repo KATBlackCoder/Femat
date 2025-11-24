@@ -58,12 +58,15 @@
         <div class="max-w-4xl mx-auto">
           <!-- Métadonnées -->
           <div class="mb-8 p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div class="flex items-center gap-3">
                 <UIcon name="i-heroicons-calendar" class="w-5 h-5 text-primary" />
                 <div>
-                  <div class="text-sm text-neutral-500 dark:text-neutral-400">Date</div>
+                  <div class="text-sm text-neutral-500 dark:text-neutral-400">Date de début</div>
                   <div class="font-semibold">{{ formatDate(event.date) }}</div>
+                  <div v-if="event.startTime" class="text-xs text-neutral-400 dark:text-neutral-500">
+                    {{ event.startTime }}
+                  </div>
                 </div>
               </div>
               <div class="flex items-center gap-3">
@@ -71,6 +74,42 @@
                 <div>
                   <div class="text-sm text-neutral-500 dark:text-neutral-400">Lieu</div>
                   <div class="font-semibold">{{ event.location }}</div>
+                </div>
+              </div>
+              <div v-if="event.endDate" class="flex items-center gap-3">
+                <UIcon name="i-heroicons-calendar-days" class="w-5 h-5 text-primary" />
+                <div>
+                  <div class="text-sm text-neutral-500 dark:text-neutral-400">Date de fin</div>
+                  <div class="font-semibold">{{ formatDate(event.endDate) }}</div>
+                  <div v-if="event.endTime" class="text-xs text-neutral-400 dark:text-neutral-500">
+                    {{ event.endTime }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Temps restant -->
+            <div v-if="event.status === 'upcoming' && !countdown.hasEnded" class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+              <div v-if="!countdown.hasStarted" class="flex items-center gap-3 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
+                <UIcon name="i-heroicons-clock" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                <div>
+                  <div class="text-sm font-medium text-primary-900 dark:text-primary-100">
+                    Début dans {{ countdown.timeUntilStartDetailed }}
+                  </div>
+                  <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">
+                    {{ countdown.timeUntilStart.days }}j {{ countdown.timeUntilStart.hours }}h {{ countdown.timeUntilStart.minutes }}m {{ countdown.timeUntilStart.seconds }}s
+                  </div>
+                </div>
+              </div>
+              <div v-else class="flex items-center gap-3 p-4 bg-warning-50 dark:bg-warning-900/20 rounded-lg">
+                <UIcon name="i-heroicons-clock" class="w-6 h-6 text-warning-600 dark:text-warning-400" />
+                <div>
+                  <div class="text-sm font-medium text-warning-900 dark:text-warning-100">
+                    Se termine dans {{ countdown.timeUntilEndDetailed }}
+                  </div>
+                  <div class="text-xs text-warning-600 dark:text-warning-400 mt-1">
+                    {{ countdown.timeUntilEnd.days }}j {{ countdown.timeUntilEnd.hours }}h {{ countdown.timeUntilEnd.minutes }}m {{ countdown.timeUntilEnd.seconds }}s
+                  </div>
                 </div>
               </div>
             </div>
@@ -101,6 +140,7 @@
 <script setup lang="ts">
 import type { Event } from '~/types/event'
 import { useEvents } from '~/composables/useEvents'
+import { useEventCountdown } from '~/composables/useEventCountdown'
 
 const route = useRoute()
 const { getEventBySlug } = useEvents()
@@ -134,6 +174,23 @@ onMounted(async () => {
   } finally {
     isLoading.value = false
   }
+})
+
+// Calculer le temps restant (seulement si l'événement est chargé)
+const countdown = computed(() => {
+  if (!event.value) {
+    return {
+      timeUntilStartFormatted: '',
+      timeUntilStartDetailed: '',
+      timeUntilEndFormatted: '',
+      timeUntilEndDetailed: '',
+      hasStarted: false,
+      hasEnded: false,
+      timeUntilStart: { days: 0, hours: 0, minutes: 0, seconds: 0, total: 0, isPast: false },
+      timeUntilEnd: { days: 0, hours: 0, minutes: 0, seconds: 0, total: 0, isPast: false }
+    }
+  }
+  return useEventCountdown(event.value)
 })
 
 // SEO dynamique

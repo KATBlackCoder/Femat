@@ -1,7 +1,7 @@
 # Roadmap FEMAT - Plan de Développement
 
 **Date de création**: 2025-01-27  
-**Dernière mise à jour**: 2025-01-27
+**Dernière mise à jour**: 2025-01-27 (Réorganisation des specs)
 
 ## Vue d'ensemble
 
@@ -51,71 +51,49 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - Améliorer le SEO avec du contenu régulier
 - Créer une communauté autour du taekwondo
 
-## Phase 3: E-commerce (v2.1)
+## Phase 3: Restructuration des Logiques de Content (v2.1)
 
-**Priorité**: P2 (Important)  
+**Priorité**: P1 (Critique)  
 **Statut**: Planifié  
-**Spécification**: `003-ecommerce`  
-**Dépendances**: Phase 1 complétée, Phase 2 recommandée
+**Spécification**: `006-restructuration-content`  
+**Dépendances**: Phase 1 complétée, Phase 2 complétée
 
 ### Fonctionnalités
 
-- Catalogue de produits
-- Panier d'achat
-- Processus de commande
-- Gestion des paiements
-- Page produit individuelle
+- Refactorisation des composables de content (useBlog, useEvents)
+- Optimisation des requêtes Nuxt Content
+- Standardisation des types et schémas
+- Amélioration de la gestion des erreurs
+- Documentation des patterns de content
 
 ### Objectifs
 
-- Vendre des équipements de taekwondo
-- Vendre des produits promotionnels
-- Générer des revenus pour la fédération
+- Code plus maintenable et performant
+- Réduction de la duplication de code
+- Meilleure gestion des erreurs
+- Base solide pour futures fonctionnalités
 
-## Phase 4: Authentification & Membres (v3.0)
+## Phase 4: Déploiement avec Vercel (v2.2)
 
-**Priorité**: P2 (Important)  
+**Priorité**: P1 (Critique)  
 **Statut**: Planifié  
-**Spécification**: `004-authentification`  
-**Dépendances**: Phase 1 complétée
+**Spécification**: `007-deploiement-vercel`  
+**Dépendances**: Phase 1 complétée, Phase 2 complétée, Phase 3 recommandée
 
 ### Fonctionnalités
 
-- Système d'inscription/connexion
-- Profils utilisateurs
-- Gestion des grades (ceintures)
-- Gestion des rôles (maître, élève, admin)
-- Récupération de mot de passe
+- Configuration Vercel pour Nuxt.js
+- Déploiement automatique via Git
+- Configuration des variables d'environnement
+- Domaine personnalisé (optionnel)
+- Optimisations de performance pour production
 
 ### Objectifs
 
-- Identifier les membres de la fédération
-- Gérer les profils avec grades
-- Sécuriser l'accès à certaines fonctionnalités
-- Base pour gestion des dojos
-
-## Phase 5: Gestion des Dojos & Membres (v3.1)
-
-**Priorité**: P2 (Important)  
-**Statut**: Planifié  
-**Spécification**: `005-gestion-dojos-membres`  
-**Dépendances**: Phase 4 complétée
-
-### Fonctionnalités
-
-- Carte interactive des dojos au Mali
-- Liste de tous les dojos
-- Page détaillée par dojo
-- Annuaire centralisé des membres
-- Gestion des grades par dojo
-- Filtrage et recherche
-
-### Objectifs
-
-- Centraliser les informations sur tous les dojos
-- Faciliter la recherche d'un dojo
-- Créer un annuaire des membres
-- Améliorer la gestion administrative
+- Site web accessible publiquement
+- Déploiement automatisé
+- Performance optimale en production
+- Base pour mise en ligne officielle
 
 ## Ordre de Développement Recommandé
 
@@ -123,30 +101,27 @@ Ce document présente la roadmap de développement du site web de la Fédératio
    - Fondation nécessaire pour tout le reste
    - Peut être déployé rapidement
 
-2. **Phase 4** (v3.0) - Authentification
-   - Nécessaire pour e-commerce et gestion des membres
-   - Peut être développée en parallèle de Phase 2
-
-3. **Phase 2** (v2.0) - Blog
+2. **Phase 2** (v2.0) - Blog & Actualités
    - Améliore le SEO et l'engagement
-   - Peut être développée en parallèle de Phase 4
+   - Contenu dynamique pour la fédération
 
-4. **Phase 5** (v3.1) - Gestion des Dojos & Membres
-   - Dépend de l'authentification
-   - Fonctionnalité importante pour la fédération
+3. **Phase 3** (v2.1) - Restructuration des Logiques de Content
+   - Améliore la maintenabilité du code
+   - Optimise les performances
+   - Préparation pour la mise en production
 
-5. **Phase 3** (v2.1) - E-commerce
-   - Peut être développée après authentification
-   - Génère des revenus
+4. **Phase 4** (v2.2) - Déploiement avec Vercel
+   - Mise en ligne du site
+   - Déploiement automatisé
+   - Site accessible publiquement
 
 ## Dépendances entre Fonctionnalités
 
 ```
 001-site-web-femat (Phase 1)
-    ├── 002-blog-actualites (Phase 2) - Optionnel
-    ├── 003-ecommerce (Phase 3) - Optionnel
-    └── 004-authentification (Phase 4)
-            └── 005-gestion-dojos-membres (Phase 5)
+    ├── 002-blog-actualites (Phase 2)
+    │       └── 006-restructuration-content (Phase 3)
+    │               └── 007-deploiement-vercel (Phase 4)
 ```
 
 ## Critères de Succès
@@ -164,19 +139,16 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - [ ] SEO optimisé pour articles
 
 ### Phase 3 (v2.1)
-- [ ] Boutique en ligne fonctionnelle
-- [ ] Paiements sécurisés
-- [ ] Gestion des commandes
+- [ ] Composables refactorisés et optimisés
+- [ ] Types et schémas standardisés
+- [ ] Gestion d'erreurs améliorée
+- [ ] Documentation complète
 
-### Phase 4 (v3.0)
-- [ ] Authentification fonctionnelle
-- [ ] Gestion des profils
-- [ ] Système de grades opérationnel
-
-### Phase 5 (v3.1)
-- [ ] Tous les dojos recensés
-- [ ] Carte interactive fonctionnelle
-- [ ] Annuaire des membres complet
+### Phase 4 (v2.2)
+- [ ] Site déployé sur Vercel
+- [ ] Déploiement automatique configuré
+- [ ] Performance optimisée en production
+- [ ] Domaine personnalisé configuré (optionnel)
 
 ## Notes
 

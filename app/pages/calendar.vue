@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import EventCalendar from '~/components/events/EventCalendar.vue'
+
 useSeoMeta({
   title: 'Calendrier - FEMAT',
   description: 'Consultez le calendrier de tous les événements, compétitions et activités organisés par la Fédération Malienne de Taekwondo.',

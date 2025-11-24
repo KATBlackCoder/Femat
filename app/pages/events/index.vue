@@ -91,6 +91,8 @@
 </template>
 
 <script setup lang="ts">
+import EventCard from '~/components/events/EventCard.vue'
+
 useSeoMeta({
   title: 'Événements - FEMAT',
   description: 'Découvrez tous les événements, compétitions et activités organisés par la Fédération Malienne de Taekwondo.',

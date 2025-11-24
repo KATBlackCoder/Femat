@@ -146,6 +146,107 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 - ⏳ Administration avec Nuxt Studio (Phase 7)
 - ⏳ Migration des événements vers Nuxt Content (Phase future)
 
+### Ajouté (Restructuration Content - En cours)
+
+#### Phase 0: Réorganisation des Composants Events ✅
+- Réorganisation de la structure des composants events
+- Création du dossier `app/components/events/`
+- Déplacement de `EventCalendar.vue` et `EventCard.vue` vers `components/events/`
+- Mise à jour des imports dans toutes les pages utilisant ces composants
+- Structure cohérente avec `components/blogs/`
+
+#### Phase 1: Analyse et Préparation ✅
+- Analyse complète de `useBlog.ts` (8 fonctions, 317 lignes)
+- Analyse complète de `useEvents.ts` (4 fonctions, 141 lignes)
+- Identification de ~150 lignes de code dupliqué (33% du code total)
+- Documentation des patterns dans `analysis-useBlog.md` et `analysis-useEvents.md`
+- Analyse comparative des duplications dans `duplications-analysis.md`
+- Définition de l'API du composable générique dans `api-useContentCollection.md`
+
+#### Phase 2: Création du Composable Générique ✅
+- **Nouveau composable**: `app/composables/useContentCollection.ts`
+  - Composable générique réutilisable pour toutes les collections Nuxt Content
+  - Méthode `getAll()` avec support filtres, tri et cache
+  - Méthode `getBySlug()` avec normalisation et fallback
+  - Méthode `getByField()` avec opérateurs avancés (=, LIKE, >, <, etc.)
+  - Méthode `invalidateCache()` pour invalidation du cache
+  - Méthode `getStats()` pour statistiques de la collection
+  - Système de cache intégré avec classe `ContentCache` et TTL
+  - Gestion d'erreurs centralisée avec logs différenciés dev/production
+  - Normalisation automatique des slugs et paths
+  - Documentation JSDoc complète avec exemples
+
+#### Types et Interfaces
+- `ContentItem`: Interface de base pour tous les éléments de contenu
+- `ContentCollectionOptions`: Options de configuration du composable
+- `GetAllOptions`, `GetBySlugOptions`, `GetByFieldOptions`: Options pour chaque méthode
+- `Filter`, `CollectionStats`: Types utilitaires
+
+#### Modifié
+- `app/components/events/EventCalendar.vue`: Import explicite de `EventCard`
+- `app/pages/index.vue`: Import explicite de `EventCard`
+- `app/pages/events/index.vue`: Import explicite de `EventCard`
+- `app/pages/calendar.vue`: Import explicite de `EventCalendar`
+
+#### Phase 3: Refactorisation de useBlog ✅
+- **Refactorisation complète** de `app/composables/useBlog.ts`
+  - Toutes les 8 fonctions utilisent maintenant `useContentCollection`
+  - Code réduit de ~40% (de 317 lignes à 191 lignes)
+  - Suppression de ~50 lignes de logs de debug excessifs
+  - Cache intégré pour toutes les requêtes (amélioration performance)
+  - Gestion d'erreurs centralisée et améliorée
+
+- **Fonctions refactorisées**:
+  - `getAllPosts()` : Réduction ~70% grâce à `blogCollection.getAll()`
+  - `getPostBySlug()` : Réduction ~85% grâce à `blogCollection.getBySlug()` avec fallback
+  - `getPostsByCategory()` : Réduction ~80% grâce à `blogCollection.getByField()`
+  - `getPostsByTag()` : Réduction ~80% grâce à `blogCollection.getByField()` avec opérateur LIKE
+  - `searchPosts()` : Simplifié avec cache intégré
+  - `getRelatedPosts()` : Simplifié avec cache intégré, logique métier conservée
+  - `getAllTags()` : Utilise cache de `getAllPosts()`
+  - `getPostsCountByCategory()` : Utilise cache de `getAllPosts()`
+
+- **Rétrocompatibilité**: API publique identique, aucun breaking change
+
+#### Modifié
+- `app/composables/useBlog.ts`: Refactorisation complète pour utiliser `useContentCollection`
+  - Import de `useContentCollection` ajouté
+  - Instance de collection créée avec options spécifiques (pathPrefix, normalizePath, cache)
+  - Toutes les fonctions simplifiées et optimisées
+  - Suppression des déclarations TypeScript dupliquées (`queryCollection`)
+
+#### Phase 4: Refactorisation de useEvents ✅
+- **Refactorisation complète** de `app/composables/useEvents.ts`
+  - Toutes les 4 fonctions utilisent maintenant `useContentCollection`
+  - Code réduit de ~12% (de 141 lignes à 124 lignes)
+  - Suppression des appels directs à `queryCollection`
+  - Cache intégré pour toutes les requêtes (amélioration performance)
+  - Gestion d'erreurs centralisée et améliorée
+
+- **Fonctions refactorisées**:
+  - `getAllEvents()` : Utilise `eventsCollection.getAll()` avec cache et filtres
+  - `getEventBySlug()` : Utilise `eventsCollection.getBySlug()` avec fallback et normalisation
+  - `getUpcomingEvents()` : Utilise `getAllEvents()` puis filtre avec `isEventPast()` (logique métier conservée)
+  - `getPastEvents()` : Utilise `getAllEvents()` puis filtre avec `isEventPast()` (logique métier conservée)
+
+- **Logique métier conservée**:
+  - `isEventPast()` conservée telle quelle (gestion événements multi-jours, heures de fin)
+  - Computed refs conservés (`upcomingEvents`, `pastEvents`, `allEvents`)
+  - Chargement automatique au montage conservé
+
+- **Rétrocompatibilité**: API publique identique, aucun breaking change
+
+#### Modifié
+- `app/composables/useEvents.ts`: Refactorisation complète pour utiliser `useContentCollection`
+  - Import de `useContentCollection` ajouté
+  - Instance de collection créée avec options spécifiques (pathPrefix, normalizePath, cache)
+  - Toutes les fonctions simplifiées et optimisées
+  - Suppression des déclarations TypeScript dupliquées (`queryCollection`)
+  - Suppression des blocs try/catch redondants (gestion d'erreurs centralisée)
+
+#### Corrigé
+- Correction de l'utilisation de `process.env` remplacé par `import.meta.env.DEV` pour compatibilité Nuxt 3
+
 ### Planifié pour v3.0.0
 
 - Système e-commerce pour équipements et produits promotionnels

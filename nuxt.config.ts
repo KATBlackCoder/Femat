@@ -5,8 +5,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
     '@nuxt/image',
-    '@nuxt/content',
-    'nuxt-studio'
+    '@nuxt/content'
   ],
   css: ['~/assets/css/main.css'],
 
@@ -91,15 +90,4 @@ export default defineNuxtConfig({
       }
     }
   } as any, // Type assertion temporaire - les types seront générés au prochain démarrage
-
-  // Configuration Nuxt Studio
-  studio: {
-    route: '/_studio',
-    repository: {
-      provider: 'github',
-      owner: 'votre-username', // À remplacer avec le vrai owner GitHub
-      repo: 'femat',
-      branch: 'main'
-    }
-  }
 })

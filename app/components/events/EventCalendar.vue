@@ -71,6 +71,12 @@
               >
                 {{ day }}
               </span>
+              <!-- Indicateur pour événements multi-jours -->
+              <div v-if="isMultiDayEventStart(day) || isMultiDayEventMiddle(day) || isMultiDayEventEnd(day)" class="mt-auto">
+                <div v-if="isMultiDayEventStart(day)" class="h-1 bg-current rounded-full"></div>
+                <div v-else-if="isMultiDayEventMiddle(day)" class="h-1 bg-current/50 rounded-full"></div>
+                <div v-else-if="isMultiDayEventEnd(day)" class="h-1 bg-current rounded-full"></div>
+              </div>
             </div>
           </button>
         </div>
@@ -103,9 +109,10 @@
       <h3 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">
         Événements du {{ selectedDay }} {{ currentMonthLabel }}
       </h3>
+      <!-- Tri par heure de début si disponible -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <EventCard
-          v-for="event in getEventsForDay(selectedDay)"
+          v-for="event in getEventsForDaySorted(selectedDay)"
           :key="event._path || event.date"
           :event="event"
         />
@@ -116,6 +123,7 @@
 
 <script setup lang="ts">
 import type { Event } from '~/types/event'
+import EventCard from '~/components/events/EventCard.vue'
 
 const props = defineProps<{
   events: Event[]
@@ -170,14 +178,25 @@ function isToday(day: number): boolean {
 function getEventsForDay(day: number): Event[] {
   const year = currentDate.value.getFullYear()
   const month = currentDate.value.getMonth()
-  const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+  const targetDate = new Date(year, month, day)
   
   return props.events.filter(event => {
-    const eventDate = new Date(event.date)
+    const eventStartDate = new Date(event.date)
+    eventStartDate.setHours(0, 0, 0, 0)
+    
+    // Si l'événement a une date de fin, vérifier si le jour cible est dans la plage
+    if (event.endDate) {
+      const eventEndDate = new Date(event.endDate)
+      eventEndDate.setHours(23, 59, 59, 999)
+      
+      return targetDate >= eventStartDate && targetDate <= eventEndDate
+    }
+    
+    // Sinon, vérifier seulement si c'est le jour de début
     return (
-      eventDate.getDate() === day &&
-      eventDate.getMonth() === month &&
-      eventDate.getFullYear() === year
+      eventStartDate.getDate() === day &&
+      eventStartDate.getMonth() === month &&
+      eventStartDate.getFullYear() === year
     )
   })
 }
@@ -271,6 +290,86 @@ function getEventColorClass(type: Event['type']): string {
     social: 'bg-primary'
   }
   return colors[type] || 'bg-primary'
+}
+
+/**
+ * Vérifie si un jour est le début d'un événement multi-jours
+ */
+function isMultiDayEventStart(day: number): boolean {
+  const events = getEventsForDay(day)
+  return events.some(event => {
+    if (!event.endDate) return false
+    const eventStartDate = new Date(event.date)
+    const year = currentDate.value.getFullYear()
+    const month = currentDate.value.getMonth()
+    return (
+      eventStartDate.getDate() === day &&
+      eventStartDate.getMonth() === month &&
+      eventStartDate.getFullYear() === year
+    )
+  })
+}
+
+/**
+ * Vérifie si un jour est au milieu d'un événement multi-jours (ni début ni fin)
+ */
+function isMultiDayEventMiddle(day: number): boolean {
+  const events = getEventsForDay(day)
+  return events.some(event => {
+    if (!event.endDate) return false
+    const eventStartDate = new Date(event.date)
+    const eventEndDate = new Date(event.endDate)
+    const targetDate = new Date(currentDate.value.getFullYear(), currentDate.value.getMonth(), day)
+    
+    return targetDate > eventStartDate && targetDate < eventEndDate
+  })
+}
+
+/**
+ * Vérifie si un jour est la fin d'un événement multi-jours
+ */
+function isMultiDayEventEnd(day: number): boolean {
+  const events = getEventsForDay(day)
+  return events.some(event => {
+    if (!event.endDate) return false
+    const eventEndDate = new Date(event.endDate)
+    const year = currentDate.value.getFullYear()
+    const month = currentDate.value.getMonth()
+    return (
+      eventEndDate.getDate() === day &&
+      eventEndDate.getMonth() === month &&
+      eventEndDate.getFullYear() === year
+    )
+  })
+}
+
+/**
+ * Récupère les événements d'un jour triés par heure de début
+ */
+function getEventsForDaySorted(day: number): Event[] {
+  const events = getEventsForDay(day)
+  
+  return events.sort((a, b) => {
+    // Si les deux ont une heure de début, trier par heure
+    if (a.startTime && b.startTime) {
+      const timeA = a.startTime.split(':').map(Number)
+      const timeB = b.startTime.split(':').map(Number)
+      const hoursA = timeA[0] ?? 0
+      const minutesA = timeA[1] ?? 0
+      const hoursB = timeB[0] ?? 0
+      const minutesB = timeB[1] ?? 0
+      const totalMinutesA = hoursA * 60 + minutesA
+      const totalMinutesB = hoursB * 60 + minutesB
+      return totalMinutesA - totalMinutesB
+    }
+    
+    // Si seulement un a une heure, le mettre en premier
+    if (a.startTime && !b.startTime) return -1
+    if (!a.startTime && b.startTime) return 1
+    
+    // Sinon, trier par date de début
+    return new Date(a.date).getTime() - new Date(b.date).getTime()
+  })
 }
 </script>
 

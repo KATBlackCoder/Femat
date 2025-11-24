@@ -7,8 +7,14 @@ export interface Event {
   _path: string
   /** Titre de l'événement */
   title: string
-  /** Date de l'événement (format: YYYY-MM-DD) */
+  /** Date de début de l'événement (format: YYYY-MM-DD) */
   date: string
+  /** Date de fin de l'événement (format: YYYY-MM-DD, optionnel) */
+  endDate?: string
+  /** Heure de début (format: HH:mm, optionnel) */
+  startTime?: string
+  /** Heure de fin (format: HH:mm, optionnel) */
+  endTime?: string
   /** Lieu de l'événement */
   location: string
   /** Description de l'événement */

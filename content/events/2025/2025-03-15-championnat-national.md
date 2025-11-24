@@ -1,6 +1,9 @@
 ---
 title: "Championnat National de Taekwondo"
 date: 2025-03-15
+endDate: 2025-03-17
+startTime: "09:00"
+endTime: "18:00"
 location: "Bamako"
 description: "Compétition nationale ouverte à tous les niveaux. Inscriptions ouvertes jusqu'au 1er mars."
 type: competition

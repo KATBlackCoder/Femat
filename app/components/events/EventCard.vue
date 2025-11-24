@@ -6,12 +6,20 @@
           {{ getEventTypeLabel(event.type) }}
         </UBadge>
         <UBadge 
-          v-if="event.status === 'past'" 
+          v-if="countdown.hasEnded" 
           color="neutral" 
           variant="subtle"
           aria-label="Événement passé"
         >
           Passé
+        </UBadge>
+        <UBadge 
+          v-else-if="countdown.hasStarted" 
+          color="warning" 
+          variant="subtle"
+          aria-label="Événement en cours"
+        >
+          En cours
         </UBadge>
         <UBadge 
           v-else 
@@ -22,9 +30,20 @@
           À venir
         </UBadge>
       </div>
-      <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
+      <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 mb-2">
         <UIcon name="i-heroicons-calendar" class="w-4 h-4" aria-hidden="true" />
         <time :datetime="event.date">{{ formatDate(event.date) }}</time>
+      </div>
+      <!-- Temps restant -->
+      <div v-if="!countdown.hasEnded" class="text-sm">
+        <div v-if="!countdown.hasStarted" class="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-medium">
+          <UIcon name="i-heroicons-clock" class="w-4 h-4" aria-hidden="true" />
+          <span>Début dans {{ countdown.timeUntilStartFormatted }}</span>
+        </div>
+        <div v-else class="flex items-center gap-2 text-warning-600 dark:text-warning-400 font-medium">
+          <UIcon name="i-heroicons-clock" class="w-4 h-4" aria-hidden="true" />
+          <span>Se termine dans {{ countdown.timeUntilEndFormatted }}</span>
+        </div>
       </div>
     </template>
 
@@ -44,7 +63,7 @@
     <template #footer>
       <div class="flex justify-end">
         <UButton 
-          v-if="event.status === 'upcoming' && event._path"
+          v-if="!countdown.hasEnded && event._path"
           color="primary" 
           variant="ghost" 
           size="sm"
@@ -59,10 +78,14 @@
 
 <script setup lang="ts">
 import type { Event } from '~/types/event'
+import { useEventCountdown } from '~/composables/useEventCountdown'
 
-defineProps<{
+const props = defineProps<{
   event: Event
 }>()
+
+// Calculer le temps restant
+const countdown = useEventCountdown(props.event)
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString)

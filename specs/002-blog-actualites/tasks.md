@@ -3,13 +3,13 @@
 **Feature**: Blog & Actualités FEMAT  
 **Branch**: `002-blog-actualites`  
 **Generated**: 2025-01-27  
-**Dernière mise à jour**: 2025-01-27 (Phase 1, 2, 3, 4 & 5 complétées)
+**Dernière mise à jour**: 2025-01-27 (Phase 1, 2, 3, 4, 5, 7, 8 complétées - Phase 6: SEO/Optimisations, Phase 9: Tests/Documentation en attente)
 
 ## Task Breakdown
 
 ### Phase 1: Setup & Configuration
 
-#### Task 1.1: Installation des modules Nuxt Content et Nuxt Studio
+#### Task 1.1: Installation des modules Nuxt Content
 **File**: `package.json`  
 **Description**: Installer les modules nécessaires pour le blog  
 **Dependencies**: None  
@@ -17,39 +17,39 @@
 
 **Commandes**:
 ```bash
-pnpm add @nuxt/content nuxt-studio@alpha
+pnpm add @nuxt/content
 ```
 
 **Détails**:
 - ✅ Installer `@nuxt/content` pour gestion de contenu Markdown (v3.8.2)
-- ✅ Installer `nuxt-studio@alpha` pour interface d'édition visuelle (v1.0.0-alpha.1)
 - ✅ Installer `better-sqlite3` (requis par Nuxt Content, puis remplacé par connecteur natif)
+- ⚠️ **Note** : `nuxt-studio@alpha` installé initialement mais supprimé. Nuxt Studio reporté pour version future.
 - ✅ Vérifier que les dépendances sont bien ajoutées dans `package.json`
 
-#### Task 1.2: Configuration Nuxt Content et Nuxt Studio
+#### Task 1.2: Configuration Nuxt Content
 **File**: `nuxt.config.ts`, `content.config.ts`  
-**Description**: Configurer les modules Nuxt Content et Nuxt Studio dans la configuration Nuxt  
+**Description**: Configurer Nuxt Content dans la configuration Nuxt  
 **Dependencies**: Task 1.1  
 **Status**: ✅ Completed
 
 **Détails**:
-- ✅ Ajouter `@nuxt/content` et `nuxt-studio` dans `modules`
+- ✅ Ajouter `@nuxt/content` dans `modules`
 - ✅ Configurer `content` avec options highlight et markdown dans `nuxt.config.ts`
 - ✅ Configurer `content.experimental.sqliteConnector: 'native'` (utilise SQLite natif Node.js v22.5.0+)
 - ✅ Créer `content.config.ts` avec collection `blog`
-- ✅ Configurer `studio` avec route `/_studio` et repository GitHub
-- ✅ GitHub OAuth configuré par l'utilisateur
+- ⏳ **À faire Phase 7** : Mettre à jour configuration pour structure par années
 
 #### Task 1.3: Créer structure de dossiers pour le contenu
 **File**: `content/blog/`, `public/blog/images/`  
 **Description**: Créer les dossiers nécessaires pour les articles et images  
 **Dependencies**: Task 1.2  
-**Status**: ✅ Completed
+**Status**: ✅ Completed (structure de base créée)
 
 **Détails**:
 - ✅ Créer dossier `content/blog/` pour les articles Markdown
 - ✅ Créer dossier `public/blog/images/` pour les images d'articles
 - ✅ Ajouter fichiers `.gitkeep` pour versionner les dossiers vides
+- ⏳ **À faire Phase 7** : Réorganiser en structure par années (`blog/2024/`, `blog/2025/`, etc.)
 
 #### Task 1.4: Créer types TypeScript pour les articles
 **File**: `app/types/blog.ts`  
@@ -243,35 +243,131 @@ pnpm add @nuxt/content nuxt-studio@alpha
 - Pagination pour limiter articles chargés
 - Code splitting automatique (vérifier)
 
-### Phase 7: Nuxt Studio
+### Phase 7: Réorganisation du Contenu par Années
 
-#### Task 7.1: Vérifier accès et configuration Nuxt Studio
-**File**: `/_studio` (généré automatiquement)  
-**Description**: Vérifier que Nuxt Studio est accessible et fonctionnel  
-**Dependencies**: Task 1.2  
-**Status**: ⏳ Pending
+#### Task 7.1: Créer structure de dossiers par années
+**File**: `content/blog/`, `content/events/`, `public/blog/images/`, `public/blog/videos/`  
+**Description**: Organiser le contenu et les médias par années pour une meilleure gestion  
+**Dependencies**: Task 5.1  
+**Status**: ✅ Completed
+
+**Structure cible** :
+```
+content/
+├── blog/
+│   ├── 2024/
+│   │   ├── medaille-bronze-jeux-africains.md
+│   │   └── resultats-championnat-2024.md
+│   └── 2025/
+│       ├── bienvenue-femat.md
+│       ├── camp-entrainement-jeunes.md
+│       ├── ceremonie-remise-ceintures-noires.md
+│       ├── championnat-national-2025.md
+│       ├── inauguration-centre-national.md
+│       ├── ouverture-nouveau-dojo-kayes.md
+│       ├── partenariat-universite.md
+│       ├── participation-championnat-afrique.md
+│       └── stage-formation-arbitres.md
+└── events/
+    ├── 2024/
+    │   ├── 2024-10-20-gala-femat.md
+    │   ├── 2024-11-15-seminaire-technique.md
+    │   └── 2024-12-10-championnat-regional.md
+    └── 2025/
+        ├── 2025-02-10-ceremonie-remise-ceintures.md
+        ├── 2025-02-20-stage-perfectionnement.md
+        ├── 2025-03-15-championnat-national.md
+        └── 2025-04-05-tournoi-inter-dojos.md
+
+public/
+└── blog/
+    ├── images/
+    │   ├── 2024/
+    │   │   └── (images 2024)
+    │   └── 2025/
+    │       └── (images 2025)
+    └── videos/
+        ├── 2024/
+        │   └── (vidéos 2024)
+        └── 2025/
+            └── (vidéos 2025)
+```
 
 **Détails**:
-- Accéder à `/_studio` en développement
-- Vérifier authentification GitHub OAuth
-- Tester édition d'article existant
-- Tester création nouvel article
-- Tester upload d'images vers `/public/blog/images/`
-- Vérifier synchronisation Git automatique
+- ✅ Créer dossiers `content/blog/2024/` et `content/blog/2025/`
+- ✅ Créer dossiers `content/events/2024/` et `content/events/2025/`
+- ✅ Créer dossiers `public/blog/images/2024/` et `public/blog/images/2025/`
+- ✅ Créer dossiers `public/blog/videos/2024/` et `public/blog/videos/2025/`
+- ✅ Ajouter fichiers `.gitkeep` dans chaque dossier vide
 
-#### Task 7.2: Documenter utilisation Nuxt Studio
-**File**: `specs/002-blog-actualites/NUXT-STUDIO-GUIDE.md`  
-**Description**: Créer guide d'utilisation pour équipe éditoriale  
+#### Task 7.2: Migrer articles de blog existants
+**File**: `content/blog/*.md` → `content/blog/YYYY/*.md`  
+**Description**: Déplacer les articles existants dans les dossiers par année selon leur date  
 **Dependencies**: Task 7.1  
-**Status**: ⏳ Pending
+**Status**: ✅ Completed
 
 **Détails**:
-- Guide d'accès à Nuxt Studio
-- Workflow de création d'article
-- Format Markdown et frontmatter
-- Gestion des images
-- Workflow de publication
-- Bonnes pratiques
+- ✅ Analyser la date de chaque article (champ `date` dans frontmatter)
+- ✅ Déplacer articles de 2024 vers `content/blog/2024/` (2 articles)
+- ✅ Déplacer articles de 2025 vers `content/blog/2025/` (9 articles)
+- ✅ Les chemins d'images restent valides (chemins relatifs depuis `/public/blog/images/`)
+- ✅ Vérifier que tous les articles sont bien déplacés
+
+**Articles migrés** :
+- Articles 2024 (2) : `medaille-bronze-jeux-africains.md` (2024-11-10), `resultats-championnat-2024.md` (2024-12-20)
+- Articles 2025 (9) : Tous les autres articles avec dates 2025
+
+#### Task 7.3: Migrer événements existants
+**File**: `content/events/*.md` → `content/events/YYYY/*.md`  
+**Description**: Déplacer les événements existants dans les dossiers par année  
+**Dependencies**: Task 7.1  
+**Status**: ✅ Completed
+
+**Détails**:
+- ✅ Analyser la date de chaque événement (année dans le nom de fichier)
+- ✅ Déplacer événements de 2024 vers `content/events/2024/` (3 événements)
+- ✅ Déplacer événements de 2025 vers `content/events/2025/` (4 événements)
+- ✅ Vérifier que tous les événements sont bien déplacés
+
+**Événements migrés** :
+- Événements 2024 (3) : `2024-10-20-gala-femat.md`, `2024-11-15-seminaire-technique.md`, `2024-12-10-championnat-regional.md`
+- Événements 2025 (4) : `2025-02-10-ceremonie-remise-ceintures.md`, `2025-02-20-stage-perfectionnement.md`, `2025-03-15-championnat-national.md`, `2025-04-05-tournoi-inter-dojos.md`
+
+#### Task 7.4: Mettre à jour configuration Nuxt Content
+**File**: `content.config.ts`  
+**Description**: Mettre à jour les sources pour prendre en compte la nouvelle structure par années  
+**Dependencies**: Task 7.2, Task 7.3  
+**Status**: ✅ Completed
+
+**Détails**:
+- ✅ La configuration utilise déjà `source: 'blog/**/*.md'` qui inclut automatiquement les sous-dossiers par année
+- ✅ La configuration utilise déjà `source: 'events/**/*.md'` qui inclut automatiquement les sous-dossiers par année
+- ✅ Nuxt Content trouve automatiquement tous les fichiers dans les sous-dossiers grâce au pattern `**/*.md`
+- ✅ Les collections fonctionnent correctement avec la nouvelle structure (pas de changement nécessaire)
+
+#### Task 7.5: Mettre à jour composables et composants
+**File**: `app/composables/useBlog.ts`, `app/composables/useEvents.ts`  
+**Description**: Vérifier que les composables fonctionnent avec la nouvelle structure  
+**Dependencies**: Task 7.4  
+**Status**: ✅ Completed
+
+**Détails**:
+- ✅ `useBlog` fonctionne avec les articles dans les sous-dossiers (utilise `queryCollection` qui gère automatiquement les sous-dossiers)
+- ✅ `useEvents` fonctionne avec les événements dans les sous-dossiers (même logique)
+- ✅ Les filtres par date fonctionnent (basés sur le champ `date` du frontmatter, pas sur le chemin)
+- ✅ La récupération des articles/événements fonctionne correctement (Nuxt Content gère automatiquement les chemins)
+
+#### Task 7.6: Documenter la nouvelle structure
+**File**: `specs/002-blog-actualites/tasks.md`, `README.md` (optionnel)  
+**Description**: Documenter l'organisation par années pour l'équipe  
+**Dependencies**: Task 7.5  
+**Status**: ✅ Completed
+
+**Détails**:
+- ✅ Structure de dossiers documentée dans tasks.md avec exemples concrets
+- ✅ Logique d'organisation par années expliquée (basée sur le champ `date` du frontmatter)
+- ✅ Conventions de nommage documentées (fichiers Markdown dans dossiers `YYYY/`)
+- ✅ Guide pour ajouter du nouveau contenu : créer les fichiers dans `content/blog/YYYY/` ou `content/events/YYYY/` selon l'année de publication
 
 ### Phase 8: Intégration Navigation
 
@@ -312,7 +408,7 @@ pnpm add @nuxt/content nuxt-studio@alpha
 - Page article individuel s'affiche
 - Navigation fonctionne
 - Partage social fonctionne
-- Nuxt Studio accessible et fonctionnel
+- Édition d'articles fonctionne (via fichiers Markdown dans structure par années)
 - Images s'affichent correctement
 - Responsive design fonctionne
 - Accessibilité (navigation clavier, lecteurs d'écran)
@@ -325,10 +421,10 @@ pnpm add @nuxt/content nuxt-studio@alpha
 
 **Détails**:
 - Structure du projet
-- Comment créer un article
-- Comment utiliser Nuxt Studio
-- Format Markdown
+- Comment créer un article (édition directe des fichiers Markdown)
+- Format Markdown et frontmatter
 - Gestion des images
+- Workflow Git pour publication
 - Bonnes pratiques
 
 ## Checkpoints
@@ -336,11 +432,12 @@ pnpm add @nuxt/content nuxt-studio@alpha
 ### Checkpoint 1: Configuration de Base ✅
 **After**: Phase 1  
 **Validation**:
-- [x] Modules installés et configurés (`@nuxt/content`, `nuxt-studio@alpha`, `better-sqlite3`)
+- [x] Modules installés et configurés (`@nuxt/content`, `better-sqlite3`)
 - [x] Structure de dossiers créée (`content/blog/`, `public/blog/images/`)
 - [x] Types TypeScript définis (`app/types/blog.ts` avec interface `BlogPost`)
-- [x] Configuration Nuxt Content et Nuxt Studio dans `nuxt.config.ts` et `content.config.ts`
-- [ ] Nuxt Studio accessible sur `/_studio` (à tester au démarrage du serveur)
+- [x] Configuration Nuxt Content dans `nuxt.config.ts` et `content.config.ts`
+- [ ] Structure de dossiers par années créée (Phase 7)
+- [x] Workflow d'édition directe des fichiers Markdown disponible
 
 ### Checkpoint 2: Composables et Composants ✅
 **After**: Phase 2 & 3  
@@ -367,14 +464,17 @@ pnpm add @nuxt/content nuxt-studio@alpha
 - [ ] Images optimisées - Phase 6
 - [ ] Performance acceptable (Lighthouse > 90) - Phase 6
 
-### Checkpoint 5: Nuxt Studio et Intégration
-**After**: Phase 7 & 8  
+### Checkpoint 5: Édition de Contenu et Intégration (En cours)
+**After**: Phase 7 & 8
 **Validation**:
-- [ ] Nuxt Studio fonctionnel
-- [ ] Édition d'articles fonctionne
-- [ ] Upload d'images fonctionne
-- [ ] Navigation intégrée (Header et Footer)
-- [ ] Documentation créée
+- [x] Structure de dossiers par années créée (blog/YYYY, events/YYYY, images/YYYY, videos/YYYY)
+- [x] Articles de blog migrés dans dossiers par années (2 articles 2024, 9 articles 2025)
+- [x] Événements migrés dans dossiers par années (3 événements 2024, 4 événements 2025)
+- [x] Configuration Nuxt Content mise à jour pour nouvelle structure (déjà compatible avec `**/*.md`)
+- [x] Composables testés avec nouvelle structure (fonctionnent automatiquement)
+- [x] Workflow d'édition directe des fichiers Markdown disponible
+- [x] Prévisualisation locale fonctionne (`pnpm dev`)
+- [x] Navigation intégrée (Header et Footer) - Phase 8 ✅
 
 ### Checkpoint 6: Tests Finaux
 **After**: Phase 9  
@@ -386,8 +486,12 @@ pnpm add @nuxt/content nuxt-studio@alpha
 
 ## Notes
 
-- Les événements seront migrés vers Nuxt Content dans une phase future (prévu dans commentaires de `useEvents.ts`)
+- ✅ Les événements sont déjà dans Nuxt Content (collection `events` dans `content.config.ts`)
 - Le système de commentaires est optionnel pour v1.0
-- Nuxt Studio nécessite GitHub OAuth (déjà configuré selon l'utilisateur)
+- ⏸️ **Nuxt Studio reporté** : Reporté pour une version future. Pour l'instant, utilisation de l'édition directe des fichiers Markdown.
+- ✅ **Organisation par années** : Contenu organisé par années dans des dossiers séparés (`blog/2024/`, `blog/2025/`, `events/2024/`, `events/2025/`). Même logique pour images et vidéos.
+- ✅ **Workflow actuel** : Édition directe des fichiers Markdown dans `content/blog/YYYY/*.md` et `content/events/YYYY/*.md`.
+- ✅ **Migration complétée** : 2 articles 2024 et 9 articles 2025 migrés dans leurs dossiers respectifs. 3 événements 2024 et 4 événements 2025 migrés.
 - Les images doivent être optimisées avant upload (formats WebP/AVIF recommandés)
+- **Prochaine étape** : Phase 6 (SEO/Optimisations) ou Phase 9 (Tests/Documentation)
 
