@@ -154,10 +154,10 @@
                   <h3 class="font-semibold text-lg text-gray-900 dark:text-white">Email</h3>
                 </div>
                 <a 
-                  href="mailto:contact@femat.ml" 
+                  href="mailto:femat3@yahoo.fr" 
                   class="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors underline-offset-2 hover:underline ml-11 block"
                 >
-                  contact@femat.ml
+                  femat3@yahoo.fr
                 </a>
               </div>
 
@@ -169,10 +169,10 @@
                   <h3 class="font-semibold text-lg text-gray-900 dark:text-white">Téléphone</h3>
                 </div>
                 <a 
-                  href="tel:+223XXXXXXXX" 
+                  href="tel:+22377551985" 
                   class="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors underline-offset-2 hover:underline ml-11 block"
                 >
-                  +223 XX XX XX XX
+                  77551985 (Secrétaire Général)
                 </a>
               </div>
 

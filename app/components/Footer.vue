@@ -72,19 +72,19 @@
             <p>
               Email: 
               <a 
-                href="mailto:contact@femat.ml" 
+                href="mailto:femat3@yahoo.fr" 
                 class="hover:text-primary transition-colors underline-offset-2 hover:underline"
               >
-                contact@femat.ml
+                femat3@yahoo.fr
               </a>
             </p>
             <p>
               Téléphone: 
               <a 
-                href="tel:+223XXXXXXXX" 
+                href="tel:+22377551985" 
                 class="hover:text-primary transition-colors underline-offset-2 hover:underline"
               >
-                +223 XX XX XX XX
+                77551985 (Secrétaire Général)
               </a>
             </p>
           </address>

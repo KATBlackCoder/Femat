@@ -1,30 +1,30 @@
 # Guide de Déploiement FEMAT
 
 **Date**: 2025-01-27  
-**Plateforme**: Vercel  
-**Documentation**: https://nuxt.com/deploy/vercel
+**Plateforme**: cPanel  
+**Domaine**: https://www.femat.ml  
+**Documentation**: Voir `specs/003-deploiement-cpanel/GUIDE-DEPLOIEMENT.md`
 
-## Plateforme de Déploiement: Vercel ✅
+## Plateforme de Déploiement: cPanel ✅
 
-**Décision**: Déploiement sur **Vercel** pour le site web FEMAT.
+**Décision**: Déploiement sur **cPanel** pour le site web FEMAT.
 
 **Justification**:
-- ✅ **Zero Configuration** - Détection automatique de Nuxt.js
-- ✅ **SSG natif** - Support parfait pour Static Site Generation
-- ✅ **Gratuit** - Plan gratuit généreux pour projets open source
-- ✅ **Performance** - CDN global pour livraison rapide
-- ✅ **Intégration Git** - Déploiement automatique à chaque push
-- ✅ **Preview Deployments** - Prévisualisation des branches/PR
-- ✅ **HTTPS automatique** - Certificats SSL gratuits
-- ✅ **Edge Functions** - Support optionnel pour fonctionnalités avancées
+- ✅ **Domaine existant** - Le domaine `femat.ml` est déjà configuré sur cPanel
+- ✅ **Contrôle total** - Accès complet aux fichiers et configuration
+- ✅ **SSG compatible** - Support parfait pour Static Site Generation
+- ✅ **Hébergement traditionnel** - Solution éprouvée et fiable
+- ✅ **HTTPS disponible** - Certificats SSL via Let's Encrypt (gratuit)
+- ✅ **Support complet** - Documentation et support cPanel disponibles
 
-## Configuration Vercel
+## Configuration cPanel
 
 ### Prérequis
 
-1. Compte Vercel (gratuit) : https://vercel.com
-2. Repository Git (GitHub, GitLab, ou Bitbucket)
-3. Code Nuxt.js prêt pour déploiement
+1. Compte cPanel avec accès FTP/SFTP ou Gestionnaire de fichiers
+2. Domaine `femat.ml` configuré dans cPanel
+3. Node.js et pnpm installés localement
+4. Accès SSH (optionnel mais recommandé)
 
 ### Étapes de Déploiement
 
@@ -34,137 +34,93 @@
 ```typescript
 export default defineNuxtConfig({
   // Configuration existante...
-  ssr: false, // Pour site statique (SSG)
-  // OU
   nitro: {
     prerender: {
-      routes: ['/'] // Routes à pré-rendre
+      routes: ['/'],
+      crawlLinks: true // Pré-rendre toutes les routes automatiquement
     }
   }
 })
 ```
 
-**Build Command** (automatique, mais peut être personnalisé):
+**Build Command**:
 ```bash
-pnpm build
-# ou
 pnpm generate  # Pour SSG complet
 ```
 
-**Output Directory**: `.output/public` (automatique avec Nuxt)
+**Output Directory**: `.output/public`
 
-#### 2. Déployer via Git
+#### 2. Générer les Fichiers Statiques
 
-1. **Push le code** vers votre repository Git (GitHub recommandé)
-2. **Importer le projet** dans Vercel :
-   - Aller sur https://vercel.com/new
-   - Connecter votre repository Git
-   - Sélectionner le projet `femat`
-3. **Configuration automatique** :
-   - Vercel détecte automatiquement Nuxt.js
-   - Configure Nitro automatiquement
-   - Configure les variables d'environnement si nécessaire
-4. **Déploiement** :
-   - Vercel build et déploie automatiquement
-   - URL de production générée automatiquement
+```bash
+# Générer les fichiers statiques
+pnpm generate
 
-#### 3. Configuration des Variables d'Environnement
+# Prévisualiser localement
+pnpm preview
+```
 
-Si nécessaire (pour Nuxt Studio, etc.), ajouter dans Vercel Dashboard :
-- `STUDIO_GITHUB_CLIENT_ID` (pour Nuxt Studio)
-- `STUDIO_GITHUB_CLIENT_SECRET` (pour Nuxt Studio)
-- Autres variables selon besoins
+#### 3. Créer le Fichier `.htaccess`
 
-#### 4. Domaine Personnalisé (Optionnel)
+Le fichier `.htaccess` est nécessaire pour le routing côté client. Voir le fichier `.htaccess` à la racine du projet.
 
-1. Aller dans **Settings > Domains**
-2. Ajouter votre domaine (ex: `femat.ml` ou `taekwondo-mali.ml`)
-3. Suivre les instructions DNS
-4. Vercel configure automatiquement HTTPS
+#### 4. Upload sur cPanel
+
+**Option A: Gestionnaire de fichiers cPanel**
+1. Accéder à cPanel → Gestionnaire de fichiers
+2. Naviguer vers `public_html` (ou `public_html/femat.ml`)
+3. Uploader tous les fichiers de `.output/public`
+
+**Option B: FTP/SFTP**
+1. Se connecter avec un client FTP (FileZilla, WinSCP, etc.)
+2. Uploader le contenu de `.output/public`
+
+**Option C: SSH + rsync** (si disponible)
+```bash
+rsync -avz --delete .output/public/ user@femat.ml:~/public_html/
+```
+
+#### 5. Configuration SSL/HTTPS
+
+1. Dans cPanel, aller dans "Let's Encrypt" ou "SSL/TLS Status"
+2. Générer/renouveler le certificat SSL pour `femat.ml`
+3. Vérifier que HTTPS fonctionne
 
 ## Workflow de Déploiement
 
-### Déploiement Automatique
+### Déploiement Manuel
 
-- **Push sur `main`** → Déploiement en production
-- **Push sur autres branches** → Preview Deployment (URL temporaire)
-- **Pull Request** → Preview Deployment automatique
+1. **Local** : Générer les fichiers avec `pnpm generate`
+2. **Upload** : Uploader les fichiers sur cPanel
+3. **Vérification** : Tester le site
 
-### Commandes Locales (Optionnel)
+### Script de Déploiement (Optionnel)
+
+Si SSH est disponible, créer un script `deploy.sh` :
 
 ```bash
-# Installer Vercel CLI
-pnpm add -D vercel
-
-# Déployer en preview
-pnpm vercel
-
-# Déployer en production
-pnpm vercel --prod
+#!/bin/bash
+pnpm generate
+rsync -avz --delete .output/public/ user@femat.ml:~/public_html/
+scp .htaccess user@femat.ml:~/public_html/
+echo "Déploiement terminé !"
 ```
 
-## Configuration Spécifique pour Nuxt Content + Studio
+## Optimisations cPanel
 
-### Pour Nuxt Studio sur Vercel
+### Configuration `.htaccess`
 
-**Configuration GitHub OAuth**:
-1. Créer OAuth App sur GitHub (voir docs Nuxt Studio)
-2. **Homepage URL**: `https://votre-domaine.vercel.app`
-3. **Authorization callback URL**: `https://votre-domaine.vercel.app`
-4. Ajouter les credentials dans Vercel Environment Variables
+Le fichier `.htaccess` configure :
+- **Routing** : Redirection vers `index.html` pour le routing côté client
+- **Cache** : Cache pour les assets statiques (1 an)
+- **Compression** : Compression GZIP pour les fichiers texte
+- **Sécurité** : Headers de sécurité (X-Content-Type-Options, X-Frame-Options, etc.)
 
-**Configuration dans `nuxt.config.ts`**:
-```typescript
-export default defineNuxtConfig({
-  studio: {
-    route: '/_studio',
-    repository: {
-      provider: 'github',
-      owner: 'votre-username',
-      repo: 'femat',
-      branch: 'main'
-    }
-  }
-})
-```
+### Performance
 
-## Optimisations Vercel
-
-### Edge Functions (Optionnel)
-
-Pour utiliser Vercel Edge Functions si besoin :
-```bash
-# Dans Vercel Dashboard ou via variable d'environnement
-SERVER_PRESET=vercel_edge
-```
-
-### Vercel KV Storage (Optionnel)
-
-Pour stockage clé-valeur si nécessaire :
-```bash
-# Installer
-pnpm add @vercel/kv
-
-# Configuration dans nuxt.config.ts
-export default defineNuxtConfig({
-  nitro: {
-    storage: {
-      data: {
-        driver: 'vercelKV'
-      }
-    }
-  }
-})
-```
-
-## Performance sur Vercel
-
-### Avantages
-
-- ✅ **CDN Global** - Contenu servi depuis le serveur le plus proche
-- ✅ **Edge Network** - Réseau de distribution mondial
-- ✅ **Automatic Optimizations** - Optimisations automatiques
-- ✅ **Image Optimization** - Via Nuxt Image (si utilisé)
+- **Cache des assets** : Configuré dans `.htaccess` pour améliorer les performances
+- **Compression GZIP** : Réduit la taille des fichiers transférés
+- **Optimisation des images** : Utiliser des formats modernes (AVIF, WebP)
 
 ### Métriques Attendues
 
@@ -173,139 +129,99 @@ export default defineNuxtConfig({
 - **Time to Interactive (TTI)**: < 3.8s
 - **Lighthouse Score**: > 90 (objectif)
 
-## Monitoring et Analytics
-
-### Vercel Analytics (Optionnel)
-
-Vercel offre des analytics intégrés :
-- Visiteurs
-- Pages vues
-- Performance
-- Core Web Vitals
-
-**Activation**: Dans Vercel Dashboard > Analytics
-
-### Intégrations Possibles
-
-- **Google Analytics** - Via module Nuxt
-- **Plausible** - Alternative privacy-friendly
-- **Vercel Analytics** - Intégré
-
 ## Sécurité
 
-### HTTPS Automatique
+### HTTPS avec Let's Encrypt
 
-- ✅ Certificats SSL automatiques
-- ✅ Renouvellement automatique
-- ✅ Support HTTP/2
+- ✅ Certificats SSL gratuits via Let's Encrypt
+- ✅ Renouvellement automatique configuré dans cPanel
+- ✅ Redirection HTTP → HTTPS dans `.htaccess`
 
 ### Headers de Sécurité
 
-Vercel configure automatiquement :
-- HTTPS enforcement
-- Security headers de base
-
-**Personnalisation** (si nécessaire) via `vercel.json`:
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        }
-      ]
-    }
-  ]
-}
-```
-
-## Coûts
-
-### Plan Gratuit (Hobby)
-
-- ✅ **100 GB bandwidth** par mois
-- ✅ **100 builds** par mois
-- ✅ **Preview Deployments** illimités
-- ✅ **HTTPS** gratuit
-- ✅ **CDN** global
-
-**Suffisant pour**:
-- Site statique avec trafic modéré
-- Blog avec Nuxt Content
-- ~1000-10000 visiteurs/mois
-
-### Plan Pro (si nécessaire)
-
-- $20/mois
-- Bandwidth illimité
-- Builds illimités
-- Analytics avancés
+Configurés dans `.htaccess` :
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `X-XSS-Protection: 1; mode=block`
+- `Referrer-Policy: strict-origin-when-cross-origin`
 
 ## Checklist de Déploiement
 
 ### Avant le Déploiement
 
-- [ ] Code pushé sur Git repository
+- [ ] Code prêt pour production
 - [ ] `nuxt.config.ts` configuré pour SSG
-- [ ] Variables d'environnement identifiées
-- [ ] Tests locaux réussis (`pnpm build`)
+- [ ] Tests locaux réussis (`pnpm generate`)
+- [ ] Fichier `.htaccess` créé
 
-### Configuration Vercel
+### Configuration cPanel
 
-- [ ] Projet importé dans Vercel
-- [ ] Build command vérifié (automatique)
-- [ ] Output directory vérifié (automatique)
-- [ ] Variables d'environnement configurées (si nécessaire)
-- [ ] Domaine personnalisé configuré (optionnel)
+- [ ] Accès à cPanel obtenu
+- [ ] Répertoire racine identifié (`public_html` ou `public_html/femat.ml`)
+- [ ] Domaine `femat.ml` configuré
+- [ ] Fichiers existants sauvegardés
+
+### Upload
+
+- [ ] Fichiers générés avec `pnpm generate`
+- [ ] Fichier `.htaccess` inclus
+- [ ] Tous les fichiers uploadés sur cPanel
+- [ ] Permissions vérifiées (644 pour fichiers, 755 pour dossiers)
 
 ### Après le Déploiement
 
-- [ ] Site accessible sur URL Vercel
+- [ ] Site accessible sur `https://www.femat.ml`
 - [ ] Toutes les pages fonctionnent
 - [ ] Images et assets chargent correctement
 - [ ] Performance vérifiée (Lighthouse)
 - [ ] HTTPS fonctionne
-- [ ] Nuxt Studio accessible (si configuré)
+- [ ] Headers de sécurité vérifiés
 
 ## Dépannage
 
-### Build Échoue
+### Routes 404
 
-1. Vérifier les logs dans Vercel Dashboard
-2. Tester localement : `pnpm build`
-3. Vérifier les dépendances dans `package.json`
-4. Vérifier la version de Node.js (Vercel utilise Node 18+)
+**Symptôme** : Les routes dynamiques retournent 404.
 
-### Variables d'Environnement
+**Solution** :
+1. Vérifier que le fichier `.htaccess` est présent et correctement configuré
+2. Vérifier les permissions du fichier `.htaccess` (644)
+3. Vérifier que `mod_rewrite` est activé sur le serveur
 
-- Vérifier qu'elles sont définies dans Vercel Dashboard
-- Redéployer après ajout de variables
-- Vérifier les noms (case-sensitive)
+### Images ne chargent pas
 
-### Performance
+**Solution** :
+1. Vérifier que les fichiers images sont uploadés dans le bon répertoire
+2. Vérifier les permissions des fichiers images (644)
+3. Vérifier les chemins dans le code
 
-- Vérifier avec Lighthouse
-- Optimiser les images
-- Vérifier le bundle size
-- Utiliser Vercel Analytics pour identifier les problèmes
+### CSS/JS ne chargent pas
+
+**Solution** :
+1. Vérifier que les fichiers dans `_nuxt/` sont uploadés
+2. Vérifier les permissions (644)
+3. Vérifier la console du navigateur pour les erreurs 404
+
+### HTTPS ne fonctionne pas
+
+**Solution** :
+1. Vérifier que le certificat SSL est généré dans cPanel
+2. Vérifier la redirection HTTP → HTTPS dans `.htaccess`
+3. Vérifier la configuration DNS
 
 ## Ressources
 
-- [Documentation Nuxt Vercel](https://nuxt.com/deploy/vercel)
-- [Documentation Vercel](https://vercel.com/docs)
-- [Vercel Dashboard](https://vercel.com/dashboard)
+- [Documentation Nuxt SSG](https://nuxt.com/docs/getting-started/deployment#static-hosting)
+- [Documentation cPanel](https://docs.cpanel.net/)
+- [Guide Apache .htaccess](https://httpd.apache.org/docs/current/howto/htaccess.html)
+- [Let's Encrypt sur cPanel](https://docs.cpanel.net/cpanel/security/lets-encrypt/)
+- Guide détaillé : `specs/003-deploiement-cpanel/GUIDE-DEPLOIEMENT.md`
 
 ## Notes
 
-- Vercel détecte automatiquement Nuxt.js et configure Nitro
-- Les déploiements sont automatiques à chaque push
-- Les Preview Deployments permettent de tester avant production
-- Le plan gratuit est suffisant pour démarrer
+- Le site est déjà accessible sur `https://www.femat.ml` avec un message "Site will launch soon"
+- Il faudra remplacer ce contenu par les fichiers générés
+- Sauvegarder toujours les fichiers existants avant de les remplacer
+- Tester en local avant chaque déploiement
+- Le fichier `.htaccess` est essentiel pour le routing côté client
 

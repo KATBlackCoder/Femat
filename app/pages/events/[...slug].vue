@@ -2,7 +2,7 @@
   <div>
     <!-- Chargement -->
     <div v-if="isLoading" class="flex items-center justify-center min-h-[400px]">
-      <UIcon name="i-heroicons-arrow-path" class="w-8 h-8 animate-spin text-primary" />
+      <UIcon name="i-heroicons-arrow-path" class="w-8 h-8 animate-spin text-primary-600 dark:text-primary-400" />
     </div>
 
     <!-- Erreur 404 -->
@@ -60,7 +60,7 @@
           <div class="mb-8 p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div class="flex items-center gap-3">
-                <UIcon name="i-heroicons-calendar" class="w-5 h-5 text-primary" />
+                <UIcon name="i-heroicons-calendar" class="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 <div>
                   <div class="text-sm text-neutral-500 dark:text-neutral-400">Date de début</div>
                   <div class="font-semibold">{{ formatDate(event.date) }}</div>
@@ -70,14 +70,14 @@
                 </div>
               </div>
               <div class="flex items-center gap-3">
-                <UIcon name="i-heroicons-map-pin" class="w-5 h-5 text-primary" />
+                <UIcon name="i-heroicons-map-pin" class="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 <div>
                   <div class="text-sm text-neutral-500 dark:text-neutral-400">Lieu</div>
                   <div class="font-semibold">{{ event.location }}</div>
                 </div>
               </div>
               <div v-if="event.endDate" class="flex items-center gap-3">
-                <UIcon name="i-heroicons-calendar-days" class="w-5 h-5 text-primary" />
+                <UIcon name="i-heroicons-calendar-days" class="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 <div>
                   <div class="text-sm text-neutral-500 dark:text-neutral-400">Date de fin</div>
                   <div class="font-semibold">{{ formatDate(event.endDate) }}</div>
@@ -260,22 +260,4 @@ function getEventTypeLabel(type: Event['type']): string {
   return labels[type] || type
 }
 </script>
-
-<style scoped>
-:deep(.prose a) {
-  @apply text-primary hover:text-primary-600 dark:hover:text-primary-400 underline;
-}
-
-:deep(.prose img) {
-  @apply rounded-lg my-6;
-}
-
-:deep(.prose code) {
-  @apply bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-sm;
-}
-
-:deep(.prose pre) {
-  @apply bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg overflow-x-auto my-4;
-}
-</style>
 

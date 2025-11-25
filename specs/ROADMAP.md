@@ -1,7 +1,7 @@
 # Roadmap FEMAT - Plan de Développement
 
 **Date de création**: 2025-01-27  
-**Dernière mise à jour**: 2025-01-27 (Réorganisation des specs)
+**Dernière mise à jour**: 2025-01-27 (Ajout Phase 5: Nuxt Content Studio)
 
 ## Vue d'ensemble
 
@@ -73,51 +73,53 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - Meilleure gestion des erreurs
 - Base solide pour futures fonctionnalités
 
-## Phase 4: Formulaire de Contact Fonctionnel (v2.2)
+## Phase 4: Déploiement avec cPanel (v2.2)
 
 **Priorité**: P1 (Critique)  
 **Statut**: Planifié  
-**Spécification**: `008-contact-form`  
-**Dépendances**: Phase 1 complétée
+**Spécification**: `003-deploiement-cpanel`  
+**Dépendances**: Phase 1 complétée, Phase 2 complétée, Phase 3 recommandée
 
 ### Fonctionnalités
 
-- Migration vers `UForm` avec validation schema (Valibot)
-- API route pour recevoir les soumissions
-- Intégration service d'envoi d'email (EmailJS)
-- Protection anti-spam renforcée (honeypot, rate limiting)
-- Feedback utilisateur amélioré (Toast notifications)
-- Accessibilité et UX optimisées
-
-### Objectifs
-
-- Formulaire de contact complètement fonctionnel
-- Messages envoyés avec succès
-- Protection efficace contre le spam
-- Expérience utilisateur optimale
-- Code maintenable et robuste
-
-## Phase 5: Déploiement avec Vercel (v2.3)
-
-**Priorité**: P1 (Critique)  
-**Statut**: Planifié  
-**Spécification**: `007-deploiement-vercel`  
-**Dépendances**: Phase 1 complétée, Phase 2 complétée, Phase 3 recommandée, Phase 4 complétée
-
-### Fonctionnalités
-
-- Configuration Vercel pour Nuxt.js
-- Déploiement automatique via Git
-- Configuration des variables d'environnement
-- Domaine personnalisé (optionnel)
+- Configuration Nuxt pour SSG (Static Site Generation)
+- Génération des fichiers statiques
+- Configuration `.htaccess` pour routing
+- Upload des fichiers sur cPanel
+- Configuration du domaine `femat.ml`
 - Optimisations de performance pour production
+- Configuration SSL/HTTPS
 
 ### Objectifs
 
-- Site web accessible publiquement
-- Déploiement automatisé
+- Site web accessible publiquement sur `https://www.femat.ml`
+- Déploiement manuel mais documenté
 - Performance optimale en production
 - Base pour mise en ligne officielle
+
+## Phase 5: Intégration Nuxt Content Studio (v2.3)
+
+**Priorité**: P2 (Important)  
+**Statut**: Planifié  
+**Spécification**: `004-nuxt-content-studio`  
+**Dépendances**: Phase 1 complétée, Phase 2 complétée, Phase 3 complétée, Phase 4 complétée
+
+### Fonctionnalités
+
+- Interface d'administration visuelle pour édition de contenu
+- Authentification GitHub OAuth
+- Édition des articles de blog via interface
+- Édition des événements via interface
+- Upload et gestion des images
+- Synchronisation automatique avec Git
+- Prévisualisation en temps réel
+
+### Objectifs
+
+- Faciliter la gestion de contenu pour l'équipe éditoriale
+- Réduire la barrière technique pour publier du contenu
+- Améliorer le workflow de publication
+- Interface moderne et intuitive
 
 ## Ordre de Développement Recommandé
 
@@ -134,15 +136,15 @@ Ce document présente la roadmap de développement du site web de la Fédératio
    - Optimise les performances
    - Préparation pour la mise en production
 
-4. **Phase 4** (v2.2) - Formulaire de Contact Fonctionnel
-   - Formulaire de contact opérationnel
-   - Nécessaire avant déploiement en production
-   - Permet aux visiteurs de contacter la fédération
-
-5. **Phase 5** (v2.3) - Déploiement avec Vercel
-   - Mise en ligne du site
-   - Déploiement automatisé
+4. **Phase 4** (v2.2) - Déploiement avec cPanel
+   - Mise en ligne du site sur `femat.ml`
+   - Déploiement manuel mais documenté
    - Site accessible publiquement
+
+5. **Phase 5** (v2.3) - Intégration Nuxt Content Studio
+   - Interface d'administration pour équipe éditoriale
+   - Édition visuelle du contenu
+   - Amélioration du workflow de publication
 
 ## Dépendances entre Fonctionnalités
 
@@ -150,8 +152,9 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 001-site-web-femat (Phase 1)
     ├── 002-blog-actualites (Phase 2)
     │       └── 006-restructuration-content (Phase 3)
-    ├── 008-contact-form (Phase 4)
-    │       └── 007-deploiement-vercel (Phase 5)
+    ├── 003-deploiement-cpanel (Phase 4)
+    └── 004-nuxt-content-studio (Phase 5)
+            └── (Dépend de Phase 1, 2, 3, 4)
 ```
 
 ## Critères de Succès
@@ -175,18 +178,24 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - [ ] Documentation complète
 
 ### Phase 4 (v2.2)
-- [ ] Formulaire migré vers UForm avec validation schema
-- [ ] API route fonctionnelle pour recevoir les soumissions
-- [ ] Emails envoyés avec succès via EmailJS
-- [ ] Protection anti-spam efficace
-- [ ] Feedback utilisateur optimal
-- [ ] Accessibilité conforme
+- [ ] Site déployé sur cPanel
+- [ ] Fichiers statiques générés et uploadés
+- [ ] Fichier `.htaccess` configuré
+- [ ] Site accessible sur `https://www.femat.ml`
+- [ ] Performance optimisée en production
+- [ ] SSL/HTTPS configuré
+- [ ] Documentation de déploiement créée
 
 ### Phase 5 (v2.3)
-- [ ] Site déployé sur Vercel
-- [ ] Déploiement automatique configuré
-- [ ] Performance optimisée en production
-- [ ] Domaine personnalisé configuré (optionnel)
+- [ ] Nuxt Content Studio installé et configuré
+- [ ] Authentification GitHub OAuth fonctionnelle
+- [ ] Édition blog fonctionnelle via Studio
+- [ ] Édition events fonctionnelle via Studio
+- [ ] Upload d'images fonctionnel
+- [ ] Synchronisation Git automatique fonctionnelle
+- [ ] Studio accessible en production (si SSR supporté)
+- [ ] Documentation pour équipe éditoriale créée
+- [ ] Équipe éditoriale formée
 
 ## Notes
 

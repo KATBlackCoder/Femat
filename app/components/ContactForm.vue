@@ -169,16 +169,16 @@
         size="xl" 
         block
         :loading="isSubmitting"
-        :disabled="!isFormValid"
+        :disabled="true"
         icon="i-heroicons-paper-airplane"
         trailing
         class="font-semibold"
       >
-        {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer le message' }}
+        Envoyer le message
       </UButton>
       
       <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-3">
-        En soumettant ce formulaire, vous acceptez que vos informations soient utilisées pour vous répondre.
+        Le formulaire est temporairement désactivé. Veuillez nous contacter directement par email à <a href="mailto:femat3@yahoo.fr" class="text-primary hover:underline">femat3@yahoo.fr</a> ou par téléphone au <a href="tel:+22377551985" class="text-primary hover:underline">77551985</a>.
       </p>
     </div>
 
@@ -249,53 +249,8 @@ function getMessageError(): string | false {
 }
 
 async function handleSubmit() {
-  hasAttemptedSubmit.value = true
-  
-  if (!isFormValid.value) {
-    // Scroll vers le premier champ en erreur
-    const firstError = document.querySelector('.text-error, [aria-invalid="true"]')
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-    return
-  }
-
-  // Vérification honeypot
-  if (form.value.honeypot !== '') {
-    return // Bot détecté, ne pas soumettre
-  }
-
-  isSubmitting.value = true
-  submitStatus.value = null
-  hasAttemptedSubmit.value = false
-
-  try {
-    // Pour v1.0, on affiche les données dans la console
-    // Plus tard, intégrer avec Formspree ou autre service
-    console.log('Formulaire soumis:', form.value)
-    
-    // Simuler l'envoi (à remplacer par vrai appel API)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    submitStatus.value = 'success'
-    submitMessage.value = 'Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.'
-    
-    // Réinitialiser le formulaire
-    form.value = {
-      nom: '',
-      prenom: '',
-      email: '',
-      telephone: '',
-      sujet: '',
-      message: '',
-      honeypot: ''
-    }
-  } catch (error) {
-    submitStatus.value = 'error'
-    submitMessage.value = 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.'
-  } finally {
-    isSubmitting.value = false
-  }
+  // Formulaire temporairement désactivé
+  return
 }
 </script>
 

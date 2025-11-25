@@ -30,7 +30,7 @@
       <template #body>
         <!-- État de chargement -->
         <div v-if="isLoading" class="flex items-center justify-center min-h-[400px]">
-          <UIcon name="i-heroicons-arrow-path" class="w-8 h-8 animate-spin text-primary" />
+          <UIcon name="i-heroicons-arrow-path" class="w-8 h-8 animate-spin text-primary-600 dark:text-primary-400" />
         </div>
 
         <!-- Liste des événements -->
