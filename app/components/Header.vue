@@ -61,6 +61,13 @@
           >
             Contact
           </NuxtLink>
+          <NuxtLink 
+            to="/rules" 
+            class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
+            active-class="text-primary"
+          >
+            Règlements
+          </NuxtLink>
         </nav>
 
         <!-- Actions -->
@@ -143,6 +150,14 @@
               @click="mobileMenuOpen = false"
             >
               Contact
+            </NuxtLink>
+            <NuxtLink 
+              to="/rules" 
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors font-medium py-1"
+              active-class="text-primary"
+              @click="mobileMenuOpen = false"
+            >
+              Règlements
             </NuxtLink>
           </nav>
         </div>

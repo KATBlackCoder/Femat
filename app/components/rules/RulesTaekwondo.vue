@@ -1,49 +1,84 @@
 <template>
-  <div v-if="pending" class="flex justify-center items-center py-12">
-    <UIcon name="i-lucide-loader-2" class="w-8 h-8 animate-spin text-primary-600" />
+  <!-- État de chargement avec Skeleton -->
+  <div v-if="pending" class="space-y-6 py-8">
+    <USkeleton class="h-8 w-3/4" />
+    <USkeleton class="h-4 w-full" />
+    <USkeleton class="h-4 w-5/6" />
+    <USkeleton class="h-4 w-4/5" />
+    <div class="space-y-4 mt-8">
+      <USkeleton class="h-6 w-2/3" />
+      <USkeleton class="h-4 w-full" />
+      <USkeleton class="h-4 w-full" />
+      <USkeleton class="h-4 w-3/4" />
+    </div>
   </div>
   
-  <div v-else-if="error" class="text-center py-12">
-    <p class="text-error-600 dark:text-error-400">Erreur lors du chargement du contenu.</p>
+  <!-- État d'erreur avec Alert -->
+  <UAlert
+    v-else-if="error"
+    color="error"
+    variant="soft"
+    title="Erreur de chargement"
+    description="Impossible de charger les règlementations Taekwondo. Veuillez réessayer plus tard."
+    icon="i-lucide-alert-circle"
+    class="my-8"
+  />
+  
+  <!-- Contenu -->
+  <div v-else-if="content">
+    <article class="prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none">
+      <ContentRenderer :value="content" />
+    </article>
   </div>
   
-  <div v-else-if="content" class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-    <!-- Table des matières - Masquée sur mobile, visible sur desktop -->
-    <aside class="hidden lg:block lg:col-span-1">
-      <div class="sticky top-24">
-        <UCard>
-          <template #header>
-            <h2 class="text-lg font-semibold">Table des matières</h2>
-          </template>
-          <UContentToc :links="content?.body?.toc?.links" />
-        </UCard>
-      </div>
-    </aside>
-    
-    <!-- Contenu principal -->
-    <main class="lg:col-span-3 lg:col-start-2">
-      <div class="prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none">
-        <ContentRenderer :value="content" />
-      </div>
-    </main>
-  </div>
+  <!-- État vide -->
+  <UEmpty
+    v-else
+    icon="i-lucide-book-open"
+    title="Aucun contenu disponible"
+    description="Les règlementations Taekwondo ne sont pas encore disponibles."
+    variant="soft"
+    size="md"
+    class="my-8"
+  />
 </template>
 
 <script setup lang="ts">
 import type { RuleContent } from '~/types/rules'
+import type { ContentTocLink } from './RulesToc.vue'
 
-// queryContent est auto-importé par Nuxt Content
-declare const queryContent: (path: string) => {
-  findOne: () => Promise<RuleContent | null>
+// queryCollection est auto-importé par Nuxt Content v3
+declare const queryCollection: <T = any>(collection: string) => {
+  path: (path: string) => any
+  where: (field: string, operator: string, value?: any) => any
+  first: () => Promise<T | null>
 }
 
-const { data: content, pending, error } = await useAsyncData<RuleContent | null>('rules-taekwondo', () => 
-  queryContent('/rules/taekwondo').findOne()
-)
+const emit = defineEmits<{
+  'toc-updated': [links: ContentTocLink[]]
+}>()
+
+const { data: content, pending, error } = await useAsyncData<RuleContent | null>('rules-taekwondo', async () => {
+  try {
+    const result = await queryCollection<RuleContent>('rules')
+      .path('/rules/taekwondo')
+      .first()
+    return result
+  } catch (err) {
+    console.error('Erreur lors du chargement des règlementations Taekwondo:', err)
+    return null
+  }
+})
+
+// Émettre les liens TOC quand le contenu est chargé
+watch(() => content.value?.body?.toc?.links, (links) => {
+  if (links && links.length > 0) {
+    emit('toc-updated', links as ContentTocLink[])
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>
 /* Styles pour améliorer la lisibilité du contenu réglementaire */
-
 </style>
 

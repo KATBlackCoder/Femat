@@ -61,6 +61,12 @@
             >
               Contact
             </NuxtLink>
+            <NuxtLink 
+              to="/rules" 
+              class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
+            >
+              Règlements
+            </NuxtLink>
           </div>
         </nav>
 

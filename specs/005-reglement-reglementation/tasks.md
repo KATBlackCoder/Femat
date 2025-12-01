@@ -230,7 +230,7 @@ app/components/
 **File**: `app/components/Header.vue`  
 **Description**: Ajouter un lien "Règlements" dans le menu de navigation principal  
 **Dependencies**: Phase 3  
-**Status**: ⏳ Pending
+**Status**: ✅ Completed
 
 **Détails**:
 - Ajouter le lien "Règlements" dans la navigation desktop
@@ -243,7 +243,7 @@ app/components/
 **File**: `app/components/Footer.vue`  
 **Description**: Ajouter le lien "Règlements" dans la navigation du footer si approprié  
 **Dependencies**: Task 4.1  
-**Status**: ⏳ Pending
+**Status**: ✅ Completed
 
 **Détails**:
 - Évaluer si le lien doit être dans le footer
@@ -256,7 +256,7 @@ app/components/
 **File**: `app/pages/rules.vue`  
 **Description**: Vérifier et améliorer l'accessibilité de la page  
 **Dependencies**: Phase 3  
-**Status**: ⏳ Pending
+**Status**: ✅ Completed
 
 **Détails**:
 - Vérifier la navigation au clavier (Tab, Enter, Espace sur les tabs)
@@ -271,7 +271,7 @@ app/components/
 **File**: `app/pages/rules.vue`  
 **Description**: Ajouter les meta tags SEO appropriés pour la page  
 **Dependencies**: Task 3.2  
-**Status**: ⏳ Pending
+**Status**: ✅ Completed
 
 **Détails**:
 - Utiliser `useSeoMeta()` pour les meta tags :
