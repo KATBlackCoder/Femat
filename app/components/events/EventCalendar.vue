@@ -99,13 +99,17 @@
         <span class="text-neutral-600 dark:text-neutral-400">Cérémonie</span>
       </div>
       <div class="flex items-center gap-2">
-        <div class="w-3 h-3 rounded-full bg-primary ring-2 ring-primary/20 shadow-sm"></div>
+        <div class="w-3 h-3 rounded-full bg-info ring-2 ring-info/20 shadow-sm"></div>
         <span class="text-neutral-600 dark:text-neutral-400">Événement social</span>
       </div>
     </div>
 
     <!-- Événements du jour sélectionné -->
-    <div v-if="selectedDay && getEventsForDay(selectedDay).length > 0">
+    <div 
+      v-if="selectedDay && getEventsForDay(selectedDay).length > 0"
+      ref="eventsSection"
+      id="events-section"
+    >
       <h3 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">
         Événements du {{ selectedDay }} {{ currentMonthLabel }}
       </h3>
@@ -131,6 +135,7 @@ const props = defineProps<{
 
 const currentDate = ref(new Date())
 const selectedDay = ref<number | null>(null)
+const eventsSection = ref<HTMLElement | null>(null)
 
 const weekDays = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim']
 
@@ -207,7 +212,25 @@ function hasEvents(day: number): boolean {
 
 function selectDay(day: number) {
   if (hasEvents(day)) {
-    selectedDay.value = selectedDay.value === day ? null : day
+    const wasSelected = selectedDay.value === day
+    selectedDay.value = wasSelected ? null : day
+    
+    // Faire défiler vers la section des événements si un jour est sélectionné
+    if (!wasSelected && selectedDay.value === day) {
+      nextTick(() => {
+        scrollToEvents()
+      })
+    }
+  }
+}
+
+function scrollToEvents() {
+  if (eventsSection.value) {
+    eventsSection.value.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start',
+      inline: 'nearest'
+    })
   }
 }
 
@@ -246,8 +269,8 @@ function getDayBackgroundClass(day: number): string {
         : 'border-secondary/50 bg-secondary-50/50 dark:bg-secondary-900/20 hover:bg-secondary-100 dark:hover:bg-secondary-900/30'
     case 'social':
       return isTodayValue
-        ? 'border-primary bg-primary-50 dark:bg-primary-900/30'
-        : 'border-primary/50 bg-primary-50/50 dark:bg-primary-900/20 hover:bg-primary-100 dark:hover:bg-primary-900/30'
+        ? 'border-info bg-info-50 dark:bg-info-900/30'
+        : 'border-info/50 bg-info-50/50 dark:bg-info-900/20 hover:bg-info-100 dark:hover:bg-info-900/30'
     default:
       return isTodayValue
         ? 'border-primary bg-primary-50 dark:bg-primary-900/30'
@@ -276,7 +299,7 @@ function getDayTextClass(day: number): string {
     case 'ceremony':
       return 'text-secondary-600 dark:text-secondary-400'
     case 'social':
-      return 'text-primary-600 dark:text-primary-400'
+      return 'text-info-600 dark:text-info-400'
     default:
       return 'text-primary-600 dark:text-primary-400'
   }
@@ -287,7 +310,7 @@ function getEventColorClass(type: Event['type']): string {
     competition: 'bg-error',
     training: 'bg-primary',
     ceremony: 'bg-secondary',
-    social: 'bg-primary'
+    social: 'bg-info'
   }
   return colors[type] || 'bg-primary'
 }

@@ -115,12 +115,12 @@ function formatDate(dateString: string): string {
   })
 }
 
-function getEventColor(type: Event['type']): 'primary' | 'secondary' | 'error' {
-  const colors: Record<Event['type'], 'primary' | 'secondary' | 'error'> = {
+function getEventColor(type: Event['type']): 'primary' | 'secondary' | 'error' | 'info' {
+  const colors: Record<Event['type'], 'primary' | 'secondary' | 'error' | 'info'> = {
     competition: 'error', // Rouge pour compétitions
     training: 'primary',   // Vert pour entraînements
     ceremony: 'secondary', // Jaune pour cérémonies
-    social: 'primary'
+    social: 'info' // Bleu pour événements sociaux
   }
   return colors[type] || 'primary'
 }
