@@ -1,7 +1,7 @@
 # Roadmap FEMAT - Plan de Développement
 
 **Date de création**: 2025-01-27  
-**Dernière mise à jour**: 2025-01-27 (Ajout Phase 5: Nuxt Content Studio)
+**Dernière mise à jour**: 2025-01-27 (Ajout Phase 6: Page Règlement/Règlementation)
 
 ## Vue d'ensemble
 
@@ -121,6 +121,31 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - Améliorer le workflow de publication
 - Interface moderne et intuitive
 
+## Phase 6: Page Règlement/Règlementation (v2.4)
+
+**Priorité**: P2 (Important)  
+**Statut**: Planifié  
+**Spécification**: `005-reglement-reglementation`  
+**Dépendances**: Phase 1 complétée, Phase 2 complétée (Nuxt Content requis)
+
+### Fonctionnalités
+
+- Page dédiée aux règlements et règlementations
+- Deux sections distinctes : Règlements FEMAT et Règlementations Taekwondo
+- Navigation par tabs (UTabs Nuxt UI)
+- Table des matières pour chaque section (UContentToc)
+- Contenu structuré en Markdown via Nuxt Content
+- Lien de téléchargement du PDF des statuts
+- Navigation interne par ancres
+- Design responsive et accessible
+
+### Objectifs
+
+- Présenter les statuts et règlements de la FEMAT de manière accessible
+- Informer sur les règlementations officielles du Taekwondo
+- Faciliter l'accès aux documents réglementaires pour membres, entraîneurs et juges
+- Améliorer la transparence et la communication sur les règles
+
 ## Ordre de Développement Recommandé
 
 1. **Phase 1** (v1.0) - Site web de base
@@ -146,6 +171,11 @@ Ce document présente la roadmap de développement du site web de la Fédératio
    - Édition visuelle du contenu
    - Amélioration du workflow de publication
 
+6. **Phase 6** (v2.4) - Page Règlement/Règlementation
+   - Page dédiée aux règlements FEMAT et Taekwondo
+   - Contenu structuré et accessible
+   - Navigation claire et intuitive
+
 ## Dépendances entre Fonctionnalités
 
 ```
@@ -153,8 +183,10 @@ Ce document présente la roadmap de développement du site web de la Fédératio
     ├── 002-blog-actualites (Phase 2)
     │       └── 006-restructuration-content (Phase 3)
     ├── 003-deploiement-cpanel (Phase 4)
-    └── 004-nuxt-content-studio (Phase 5)
-            └── (Dépend de Phase 1, 2, 3, 4)
+    ├── 004-nuxt-content-studio (Phase 5)
+    │       └── (Dépend de Phase 1, 2, 3, 4)
+    └── 005-reglement-reglementation (Phase 6)
+            └── (Dépend de Phase 1, 2 - Nuxt Content requis)
 ```
 
 ## Critères de Succès
@@ -196,6 +228,17 @@ Ce document présente la roadmap de développement du site web de la Fédératio
 - [ ] Studio accessible en production (si SSR supporté)
 - [ ] Documentation pour équipe éditoriale créée
 - [ ] Équipe éditoriale formée
+
+### Phase 6 (v2.4)
+- [ ] Page `/reglement` créée et accessible
+- [ ] Deux sections distinctes (FEMAT et Taekwondo) avec navigation par tabs
+- [ ] Contenu des statuts FEMAT structuré et affiché
+- [ ] Table des matières fonctionnelle pour chaque section
+- [ ] Lien de téléchargement du PDF fonctionnel
+- [ ] Design responsive et accessible (WCAG 2.1 AA)
+- [ ] Navigation au clavier fonctionnelle
+- [ ] Score Lighthouse > 90
+- [ ] Contenu Taekwondo ajouté (si source disponible)
 
 ## Notes
 

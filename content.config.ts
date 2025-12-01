@@ -49,7 +49,7 @@ export default defineContentConfig({
         date: dateSchema,
         author: z.string().min(1, { message: 'L\'auteur est obligatoire' }),
         category: z.enum(['competition', 'actualite', 'resultat', 'evenement'], {
-          errorMap: () => ({ message: 'La catégorie doit être: competition, actualite, resultat ou evenement' })
+          message: 'La catégorie doit être: competition, actualite, resultat ou evenement'
         }),
         tags: z.array(z.string().min(1)).optional(),
         image: z.string().url().or(z.string().startsWith('/')).optional().or(z.literal('')),
@@ -69,14 +69,32 @@ export default defineContentConfig({
         location: z.string().min(1, { message: 'Le lieu est obligatoire' }),
         description: z.string().min(1, { message: 'La description est obligatoire' }),
         type: z.enum(['competition', 'training', 'ceremony', 'social'], {
-          errorMap: () => ({ message: 'Le type doit être: competition, training, ceremony ou social' })
+          message: 'Le type doit être: competition, training, ceremony ou social'
         }),
         status: z.enum(['upcoming', 'ongoing', 'past'], {
-          errorMap: () => ({ message: 'Le statut doit être: upcoming, ongoing ou past' })
+          message: 'Le statut doit être: upcoming, ongoing ou past'
         }),
         image: z.string().url().or(z.string().startsWith('/')).optional().or(z.literal('')),
         published: z.boolean().optional().default(true)
       }).catchall(z.any()) // Permettre les champs générés automatiquement par Nuxt Content (_path, _id, _body, etc.)
+    }),
+    rules: defineCollection({
+      type: 'page',
+      source: 'rules/**/*.md',
+      schema: z.object({
+        title: z.string().min(1, { message: 'Le titre est obligatoire' }),
+        description: z.string().optional(),
+        category: z.enum(['femat', 'taekwondo', 'faq'], {
+          message: 'La catégorie doit être: femat, taekwondo ou faq'
+        }),
+        order: z.number().optional(),
+        dateApproved: z.string().optional(),
+        // Schéma pour FAQ (optionnel, seulement si category === 'faq')
+        faq: z.array(z.object({
+          question: z.string(),
+          answer: z.string()
+        })).optional(),
+      }).catchall(z.any()) // Permettre les champs générés automatiquement par Nuxt Content (_path, _id, _body, etc.)
     })
   }
-} as any)
+})

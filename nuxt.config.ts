@@ -2,22 +2,24 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: [
-    '@nuxt/ui',
-    '@nuxt/image',
-    '@nuxt/content'
-  ],
+  modules: ['@nuxt/ui', '@nuxt/image', '@nuxt/content', 'nuxt-studio'],
   css: ['~/assets/css/main.css'],
 
   // SSG Configuration
   // ssr: false désactivé pour permettre à Nuxt Content de fonctionner
   // Nuxt Content nécessite un serveur pour accéder aux fichiers Markdown
-  nitro: {
+  /*nitro: {
     prerender: {
       routes: ['/'],
-      crawlLinks: true // Pré-rendre toutes les routes trouvées automatiquement
+      crawlLinks: true, // Pré-rendre toutes les routes trouvées automatiquement
+      ignore: [
+        '/studio', 
+        '/studio/**',
+        '/_studio',
+        '/_studio/**'
+      ] // Exclure la route Studio du pré-rendu
     }
-  },
+  },*/
 
   // Optimisations de production
   sourcemap: {
@@ -91,15 +93,26 @@ export default defineNuxtConfig({
       // Évite les problèmes de compilation avec better-sqlite3
       sqliteConnector: 'native'
     },
-    highlight: {
-      theme: 'github-dark',
-      preload: ['javascript', 'typescript', 'vue', 'bash']
-    },
-    markdown: {
-      toc: {
-        depth: 3,
-        searchDepth: 3
+    build: {
+      markdown: {
+        highlight: {
+          preload: ['javascript', 'typescript', 'vue', 'bash']
+        },
+        toc: {
+          depth: 3,
+          searchDepth: 3
+        }
       }
     }
-  } as any, // Type assertion temporaire - les types seront générés au prochain démarrage
+  }
+/*
+  studio: {
+    repository: {
+      provider: 'github',
+      owner: 'KATBlackCoder',  // À vérifier
+      repo: 'Femat',           // À vérifier
+      branch: 'main'
+    }
+  },
+  */
 })

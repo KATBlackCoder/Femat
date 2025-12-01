@@ -25,3 +25,7 @@ logs
 
 # Spec-kit temporary files (if any)
 .spec-kit-temp
+
+# Files for the spec-kit
+status.txt
+STATUTS FEMAT.pdf

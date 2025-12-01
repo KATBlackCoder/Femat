@@ -233,97 +233,19 @@ async function copyLink() {
 </script>
 
 <style scoped>
-/* Styles pour le contenu Markdown */
-:deep(.prose) {
-  color: rgb(55 65 81); /* gray-700 */
-}
+/* Override minimal uniquement pour améliorer la lisibilité en dark mode */
+/* Les autres styles sont gérés par Tailwind Typography via dark:prose-invert */
 
 :deep(.dark .prose) {
-  color: rgb(209 213 219); /* gray-300 */
-}
-
-:deep(.prose h2) {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  color: rgb(23 23 23); /* neutral-900 */
-}
-
-:deep(.dark .prose h2) {
-  color: rgb(245 245 245); /* neutral-100 */
-}
-
-:deep(.prose h3) {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  color: rgb(23 23 23); /* neutral-900 */
-}
-
-:deep(.dark .prose h3) {
-  color: rgb(245 245 245); /* neutral-100 */
-}
-
-:deep(.prose p) {
-  margin-bottom: 1rem;
-  line-height: 1.625;
-}
-
-:deep(.prose ul),
-:deep(.prose ol) {
-  margin-bottom: 1rem;
-  margin-left: 1.5rem;
-}
-
-:deep(.prose li) {
-  margin-bottom: 0.5rem;
-}
-
-:deep(.prose a) {
-  color: rgb(var(--color-primary-DEFAULT));
-  text-decoration: underline;
-}
-
-:deep(.prose a:hover) {
-  color: rgb(var(--color-primary-600));
-}
-
-:deep(.dark .prose a:hover) {
-  color: rgb(var(--color-primary-400));
-}
-
-:deep(.prose img) {
-  border-radius: 0.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-:deep(.prose code) {
-  background-color: rgb(245 245 245); /* neutral-100 */
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
+  color: rgb(229 231 235); /* gray-200 - plus clair que le défaut pour meilleure lisibilité */
 }
 
 :deep(.dark .prose code) {
-  background-color: rgb(38 38 38); /* neutral-800 */
-}
-
-:deep(.prose pre) {
-  background-color: rgb(245 245 245); /* neutral-100 */
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  color: rgb(243 244 246); /* gray-100 - texte plus clair pour le code */
 }
 
 :deep(.dark .prose pre) {
-  background-color: rgb(38 38 38); /* neutral-800 */
+  color: rgb(243 244 246); /* gray-100 - texte plus clair pour les blocs de code */
 }
 </style>
 
