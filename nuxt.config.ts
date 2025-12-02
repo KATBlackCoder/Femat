@@ -8,18 +8,13 @@ export default defineNuxtConfig({
   // SSG Configuration
   // ssr: false désactivé pour permettre à Nuxt Content de fonctionner
   // Nuxt Content nécessite un serveur pour accéder aux fichiers Markdown
-  /*nitro: {
+  nitro: {
     prerender: {
       routes: ['/'],
       crawlLinks: true, // Pré-rendre toutes les routes trouvées automatiquement
-      ignore: [
-        '/studio', 
-        '/studio/**',
-        '/_studio',
-        '/_studio/**'
-      ] // Exclure la route Studio du pré-rendu
+      ignore: ['/admin', '/admin/**'], // Exclure la route /admin du pré-rendu
     }
-  },*/
+  },
 
   // Optimisations de production
   sourcemap: {
@@ -94,25 +89,28 @@ export default defineNuxtConfig({
       sqliteConnector: 'native'
     },
     build: {
-      markdown: {
-        highlight: {
-          preload: ['javascript', 'typescript', 'vue', 'bash']
-        },
-        toc: {
-          depth: 3,
-          searchDepth: 3
-        }
+    markdown: {
+    highlight: {
+      preload: ['javascript', 'typescript', 'vue', 'bash']
+    },
+      toc: {
+        depth: 3,
+        searchDepth: 3
       }
     }
-  }
-/*
+    }
+  },
+
+  // Configuration Nuxt Studio (route personnalisée: /admin)
   studio: {
+    dev: false,
+    route: '/admin',
     repository: {
       provider: 'github',
       owner: 'KATBlackCoder',  // À vérifier
       repo: 'Femat',           // À vérifier
-      branch: 'main'
+      branch: 'main',
+      private: false
     }
-  },
-  */
+  }
 })

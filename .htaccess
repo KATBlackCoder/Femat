@@ -11,6 +11,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
+# Note: Le reverse proxy pour /admin est géré automatiquement par CloudLinux Node.js Selector
+# lorsque Application URL = / dans cPanel. Aucune configuration manuelle nécessaire.
+
 # Si le fichier ou dossier existe, l'utiliser directement
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
