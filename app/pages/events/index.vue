@@ -42,7 +42,7 @@
               class="transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
               :style="{ animationDelay: `${index * 100}ms` }"
             >
-              <EventCard :event="event" />
+              <EventCard :eventData="event" />
             </div>
           </div>
 
@@ -88,7 +88,7 @@
             class="transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
-            <EventCard :event="event" />
+            <EventCard :eventData="event" />
             </div>
           </div>
 
@@ -134,7 +134,7 @@
             class="transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
-            <EventCard :event="event" />
+            <EventCard :eventData="event" />
             </div>
           </div>
 

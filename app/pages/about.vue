@@ -23,7 +23,7 @@
                 La FEMAT organise régulièrement des compétitions nationales et internationales, des stages de formation pour les instructeurs, et des événements qui rassemblent la communauté du taekwondo malien. Notre fédération est reconnue pour son engagement en faveur de l'excellence sportive et des valeurs fondamentales du taekwondo.
               </p>
               <p>
-                Aujourd'hui, la FEMAT continue de grandir et de se développer, rassemblant des dojos à travers tout le Mali et formant une nouvelle génération de pratiquants passionnés et dévoués.
+                Aujourd'hui, la FEMAT continue de grandir et de se développer, rassemblant des Dojang à travers tout le Mali et formant une nouvelle génération de pratiquants passionnés et dévoués.
               </p>
             </div>
           </div>
@@ -152,7 +152,7 @@
                 Pratiqué par des millions de personnes dans le monde, le taekwondo développe la force, la flexibilité, la coordination et la confiance en soi. Il enseigne également des valeurs importantes telles que le respect, la discipline et la persévérance.
               </p>
               <p>
-                Au Mali, le taekwondo connaît un essor croissant grâce aux efforts de la FEMAT et de ses dojos affiliés, qui offrent des programmes adaptés à tous les âges et tous les niveaux.
+                Au Mali, le taekwondo connaît un essor croissant grâce aux efforts de la FEMAT et de ses Dojang affiliés, qui offrent des programmes adaptés à tous les âges et tous les niveaux.
               </p>
             </div>
           </div>

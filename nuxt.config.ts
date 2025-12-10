@@ -2,7 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxt/image', '@nuxt/content', 'nuxt-studio'],
+  modules: ['@nuxt/ui', '@nuxt/image', '@nuxt/content'],
+
+  // Configuration Nuxt Image pour SSG
+  image: {
+    // Utiliser le provider 'none' pour les images statiques en SSG
+    // Cela désactive toutes les transformations et sert les images directement
+    provider: 'none'
+  },
   css: ['~/assets/css/main.css'],
 
   // SSG Configuration
@@ -98,19 +105,6 @@ export default defineNuxtConfig({
         searchDepth: 3
       }
     }
-    }
-  },
-
-  // Configuration Nuxt Studio (route personnalisée: /admin)
-  studio: {
-    dev: false,
-    route: '/admin',
-    repository: {
-      provider: 'github',
-      owner: 'KATBlackCoder',  // À vérifier
-      repo: 'Femat',           // À vérifier
-      branch: 'main',
-      private: false
     }
   }
 })

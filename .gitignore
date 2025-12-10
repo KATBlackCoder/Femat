@@ -29,3 +29,6 @@ logs
 # Files for the spec-kit
 status.txt
 STATUTS FEMAT.pdf
+.htaccess*
+CLAUDE.md
+SPEC-KIT-GUIDE.md

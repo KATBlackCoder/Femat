@@ -63,7 +63,7 @@
           
           <div class="p-8 sm:p-12">
             <p class="text-lg leading-8 text-gray-700 dark:text-gray-300">
-              Notre fédération rassemble des dojos à travers tout le Mali et œuvre pour l'excellence sportive, le respect mutuel et la discipline qui caractérisent le taekwondo.
+              Notre fédération rassemble des Dojang à travers tout le Mali et œuvre pour l'excellence sportive, le respect mutuel et la discipline qui caractérisent le taekwondo.
             </p>
           </div>
         </UCard>
@@ -87,7 +87,7 @@
             class="transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
-            <EventCard :event="event" />
+            <EventCard :eventData="event" />
           </div>
         </div>
       </template>

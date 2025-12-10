@@ -7,9 +7,6 @@
         :alt="post.title"
         class="w-full h-64 md:h-96 object-cover"
         loading="eager"
-        format="avif"
-        width="1200"
-        height="600"
         @error="imageError = true"
       />
     </div>

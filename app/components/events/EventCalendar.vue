@@ -118,7 +118,7 @@
         <EventCard
           v-for="event in getEventsForDaySorted(selectedDay)"
           :key="event._path || event.date"
-          :event="event"
+          :eventData="event"
         />
       </div>
     </div>

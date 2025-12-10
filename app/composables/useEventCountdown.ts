@@ -68,9 +68,12 @@ export const useEventCountdown = (event: { date: string; endDate?: string; start
     now.value = new Date()
   }, 1000)
 
-  onUnmounted(() => {
+  // Fonction de nettoyage à appeler manuellement depuis le composant
+  // On ne peut pas utiliser onUnmounted ici car useEventCountdown peut être appelé
+  // après un await dans onMounted, ce qui perd le contexte du composant
+  const cleanup = () => {
     clearInterval(interval)
-  })
+  }
 
   /**
    * Calcule le temps restant jusqu'à une date cible
@@ -186,7 +189,8 @@ export const useEventCountdown = (event: { date: string; endDate?: string; start
     hasStarted,
     hasEnded,
     startDateTime,
-    endDateTime
+    endDateTime,
+    cleanup // Exposer la fonction de nettoyage
   }
 }
 

@@ -1,9 +1,9 @@
 <template>
-  <UCard class="h-full flex flex-col" :id="`event-${event._path?.replace(/\//g, '-')}`">
+  <UCard class="h-full flex flex-col" :id="`event-${eventData._path?.replace(/\//g, '-')}`">
     <template #header>
       <div class="flex items-center justify-between gap-2 mb-3">
-        <UBadge :color="getEventColor(event.type)" variant="subtle">
-          {{ getEventTypeLabel(event.type) }}
+        <UBadge :color="getEventColor(eventData.type)" variant="subtle">
+          {{ getEventTypeLabel(eventData.type) }}
         </UBadge>
         <UBadge 
           v-if="eventStatus === 'past'" 
@@ -32,7 +32,7 @@
       </div>
       <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 mb-2">
         <UIcon name="i-heroicons-calendar" class="w-4 h-4" aria-hidden="true" />
-        <time :datetime="event.date">{{ formatDate(event.date) }}</time>
+        <time :datetime="eventData.date">{{ formatDate(eventData.date) }}</time>
       </div>
       <!-- Temps restant -->
       <div v-if="!countdown.hasEnded" class="text-sm">
@@ -48,26 +48,33 @@
     </template>
 
     <h3 class="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-100">
-      {{ event.title }}
+      <NuxtLink
+        v-if="eventData._path"
+        :to="eventData._path"
+        class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors hover:underline"
+      >
+        {{ eventData.title }}
+      </NuxtLink>
+      <span v-else>{{ eventData.title }}</span>
     </h3>
     
     <div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 mb-4">
       <UIcon name="i-heroicons-map-pin" class="w-4 h-4 flex-shrink-0" aria-hidden="true" />
-      <span>{{ event.location }}</span>
+      <span>{{ eventData.location }}</span>
     </div>
 
     <p class="text-sm text-neutral-700 dark:text-neutral-300 flex-grow mb-4 line-clamp-3">
-      {{ event.description }}
+      {{ eventData.description }}
     </p>
 
     <template #footer>
       <div class="flex justify-end">
-        <UButton 
-          v-if="!countdown.hasEnded && event._path"
-          color="primary" 
-          variant="ghost" 
+        <UButton
+          v-if="eventData._path"
+          color="primary"
+          variant="ghost"
           size="sm"
-          :to="event._path"
+          :to="eventData._path"
         >
           Plus d'infos
         </UButton>
@@ -82,21 +89,21 @@ import { useEventCountdown } from '~/composables/useEventCountdown'
 import { useEvents } from '~/composables/useEvents'
 
 const props = defineProps<{
-  event: Event
+  eventData: Event
 }>()
 
 // Calculer le temps restant
-const countdown = useEventCountdown(props.event)
+const countdown = useEventCountdown(props.eventData)
 
 // Utiliser les fonctions de useEvents pour déterminer le statut de manière cohérente
 const { isEventPast, isEventOngoing } = useEvents()
 
 // Calculer le statut dynamiquement (cohérent avec useEvents)
 const eventStatus = computed<Event['status']>(() => {
-  if (isEventOngoing(props.event)) {
+  if (isEventOngoing(props.eventData)) {
     return 'ongoing'
   }
-  if (isEventPast(props.event)) {
+  if (isEventPast(props.eventData)) {
     return 'past'
   }
   return 'upcoming'

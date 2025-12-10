@@ -89,7 +89,7 @@
             </div>
             
             <!-- Temps restant -->
-            <div v-if="(computedStatus === 'upcoming' || computedStatus === 'ongoing') && !countdown.hasEnded" class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+            <div v-if="countdown && (computedStatus === 'upcoming' || computedStatus === 'ongoing') && !countdown.hasEnded" class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
               <div v-if="!countdown.hasStarted" class="flex items-center gap-3 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
                 <UIcon name="i-heroicons-clock" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 <div>
@@ -113,10 +113,11 @@
                 </div>
               </div>
             </div>
+
           </div>
 
           <!-- Contenu Markdown -->
-          <div v-if="event._body" class="prose prose-neutral dark:prose-invert max-w-none">
+          <div v-if="event.body || event._body" class="prose prose-neutral dark:prose-invert max-w-none">
             <ContentRenderer :value="event" />
           </div>
 
@@ -168,11 +169,20 @@ onMounted(async () => {
       error.value = new Error('Événement non trouvé')
     } else {
       event.value = foundEvent
+      // Appeler useEventCountdown après le chargement
+      countdown.value = useEventCountdown(foundEvent)
     }
   } catch (e) {
     error.value = e as Error
   } finally {
     isLoading.value = false
+  }
+})
+
+// Nettoyer l'intervalle quand le composant est démonté
+onUnmounted(() => {
+  if (countdown.value?.cleanup) {
+    countdown.value.cleanup()
   }
 })
 
@@ -191,21 +201,7 @@ const computedStatus = computed<Event['status']>(() => {
 })
 
 // Calculer le temps restant (seulement si l'événement est chargé)
-const countdown = computed(() => {
-  if (!event.value) {
-    return {
-      timeUntilStartFormatted: '',
-      timeUntilStartDetailed: '',
-      timeUntilEndFormatted: '',
-      timeUntilEndDetailed: '',
-      hasStarted: false,
-      hasEnded: false,
-      timeUntilStart: { days: 0, hours: 0, minutes: 0, seconds: 0, total: 0, isPast: false },
-      timeUntilEnd: { days: 0, hours: 0, minutes: 0, seconds: 0, total: 0, isPast: false }
-    }
-  }
-  return useEventCountdown(event.value)
-})
+const countdown = ref<ReturnType<typeof useEventCountdown> | null>(null)
 
 // SEO dynamique
 watchEffect(() => {

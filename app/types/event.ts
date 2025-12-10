@@ -111,7 +111,17 @@ export interface Event {
    * Nuxt Content v3 peut utiliser `body` ou `_body`
    */
   _body?: string
-  body?: any
+  body?: {
+    toc?: {
+      links?: Array<{
+        id: string
+        text: string
+        depth: number
+        children?: Array<unknown>
+      }>
+    }
+    [key: string]: unknown
+  }
   
   /** ID unique de l'événement (généré par Nuxt Content) */
   _id?: string
